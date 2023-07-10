@@ -1,0 +1,133 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* align-items: center; */
+  /* text-align: center; */
+  font-family: 'Roboto';
+}
+
+.appContainer {
+  display: flex;
+  /* justify-content: center; */
+  /* font-size: 60px; */
+  margin: auto;
+  height: 100vh;
+}
+
+.headerContainer {
+  flex: 1;
+  height: 100%;
+}
+
+.headerContent {
+  float: right;
+  width: 259px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.headerTopContentContainer {
+  float: right;
+  width: 259px;
+  overflow-y: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.twitterLogoContainer {
+  padding-left: 12px;
+  width: 100%;
+  height: 50.25px;
+  display: flex;
+  align-items: center;
+}
+
+.twitterLogo {
+  width: 26.25px;
+  fill: #1D9BF0;
+}
+
+.headerLinkListContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.headerLink {
+  display: flex;
+  /* padding: 12px; */
+
+  justify-content: center;
+  width: 100%;
+  height: 50.25px;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.headerLinkContainer {
+  display: flex;
+  padding: 12px;
+  justify-content: left;
+  /* width: 242px; */
+  /* height: 50.25px; */
+}
+
+.headerLinkIcon {
+  width: 26.25px;
+  display: inline;
+}
+
+.headerLinkLabel {
+  padding-left: 20px;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.button {
+  width: 90%;
+  height: 52px;
+  border-radius: 26px;
+  background-color: #1D9BF0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 4px;
+}
+
+.buttonLabel {
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
+}
+
+.sidebarContainer {
+  flex: 1;
+}
+
+.sidebarContent {
+  float: left;
+  padding-left: 10px;
+}
+
+.mycon {
+  width: 20px;
+}
+
+.headerAccount {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  width: 100%;
+}
+
+.headerAccountIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(194,24,91);
+}
