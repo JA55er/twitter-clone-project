@@ -1,5 +1,19 @@
+import ContentTop from './ContentTop';
+import CreateTweet from './CreateTweet';
+import TweetsList from './TweetsList';
+
 const Content = () => {
-  return <div className="contentContainer">Content</div>;
+  console.log();
+
+  return (
+    <div className='contentContainer'>
+      <div className='homeTimelineContainer'>
+        <ContentTop />
+        <CreateTweet />
+        <TweetsList />
+      </div>
+    </div>
+  );
 };
 
 export default Content;

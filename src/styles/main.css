@@ -16,38 +16,68 @@
 }
 
 .headerContainer {
+  display: flex;
   flex: 1;
+  /* width: 594px; */
+  /* width: 32%; */
   height: 100%;
+  justify-content: end;
 }
 
 .headerContent {
   float: right;
-  width: 259px;
+  width: 275px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  position: fixed;
+  /* top: 0; */
 }
 
 .headerTopContentContainer {
   float: right;
-  width: 259px;
+  width: 275px;
   overflow-y: auto;
   padding-left: 8px;
   padding-right: 8px;
 }
 
 .twitterLogoContainer {
-  padding-left: 12px;
   width: 100%;
   height: 50.25px;
   display: flex;
   align-items: center;
+  /* justify-content: center; */
 }
 
-.twitterLogo {
+.twitterLogoHover {
+  /* justify-self: center; */
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.twitterLogoHover:hover {
+  background-color: #e7e7e8;
+  border-radius: 50%;
+}
+
+.twitterLogoIconContainer {
+  width: 50px;
+  height: 50px;
+  /* width: 100%; */
+  padding-left: 12px;
+  display: flex;
+}
+
+/* .twitterLogoContainer:hover {
+  background-color: #E7E7E8;
+} */
+
+.twitterLogoIcon {
   width: 26.25px;
-  fill: #1D9BF0;
+  fill: #1d9bf0;
 }
 
 .headerLinkListContainer {
@@ -57,33 +87,42 @@
   overflow-y: auto;
 }
 
-.headerLink {
+.headerLinkContainer {
   display: flex;
   /* padding: 12px; */
 
-  justify-content: center;
-  width: 100%;
-  height: 50.25px;
-  flex-grow: 1;
+  /* justify-content: center; */
+  /* width: 100%; */
+  /* height: 58.25px; */
+  padding-top: 4px;
+  padding-bottom: 4px;
+  /* flex-grow: 1; */
   flex-direction: column;
-  align-items: flex-start;
+  overflow: hidden;
+  /* align-items: flex-start; */
 }
 
-.headerLinkContainer {
+.headerLink {
   display: flex;
   padding: 12px;
-  justify-content: left;
-  /* width: 242px; */
-  /* height: 50.25px; */
+  /* justify-content: left; */
+  align-items: center;
+}
+
+.headerLink:hover {
+  background-color: #e7e7e8;
+  border-radius: 25.125px;
 }
 
 .headerLinkIcon {
   width: 26.25px;
-  display: inline;
+  display: flex;
+  /* display: inline; */
 }
 
 .headerLinkLabel {
-  padding-left: 20px;
+  margin-left: 20px;
+  margin-right: 16px;
   font-size: 20px;
   font-weight: 400;
 }
@@ -92,12 +131,19 @@
   width: 90%;
   height: 52px;
   border-radius: 26px;
-  background-color: #1D9BF0;
+  background-color: #1d9bf0;
   justify-content: center;
   align-items: center;
   display: flex;
   margin-top: 4px;
 }
+
+.button:hover {
+  background-color: #1a8cd8;
+  border-radius: 26px;
+}
+
+/* 1A8CD8 */
 
 .buttonLabel {
   font-size: 20px;
@@ -105,29 +151,466 @@
   font-weight: 700;
 }
 
-.sidebarContainer {
-  flex: 1;
-}
-
-.sidebarContent {
-  float: left;
-  padding-left: 10px;
-}
-
 .mycon {
   width: 20px;
 }
 
+.headerAccountContainer {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.headerAccountContainer:hover {
+  background-color: #e7e7e8;
+  border-radius: 32px;
+}
+
 .headerAccount {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   padding: 12px;
   width: 100%;
 }
 
-.headerAccountIcon {
+.accountIcon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgb(194,24,91);
+  /* background-color: rgb(194,24,91); */
+}
+
+.headerAccountName {
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.headerAccountOptionsIconContainer {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.headerAccountOptionsIcon {
+  width: 18.75px;
+}
+
+.contentContainer {
+  width: 600px;
+}
+
+.homeTimelineContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid #eff3f4;
+  border-right: 1px solid #eff3f4;
+  /* border: 1px solid #eff3f4; */
+}
+
+.contentTopContainer {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #eff3f4;
+}
+
+.homeContainer {
+  display: flex;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  height: 53px;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+}
+
+.foryouFollowingContainer {
+  display: flex;
+  justify-content: space-around;
+  height: 53px;
+}
+
+.foryouContainer {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.foryouContainer:hover {
+  background-color: #e7e7e8;
+}
+
+.foryouSpan {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.followingContainer {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.followingContainer:hover {
+  background-color: #e7e7e8;
+}
+
+.followingSpan {
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.createTweetContainer {
+  display: flex;
+  padding-top: 4px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: 1px solid #eff3f4;
+}
+
+.createTweetProfileIconContainer {
+  padding-top: 12px;
+  margin-right: 12px;
+}
+
+.createTweetRightContainer {
+  display: flex;
+  flex-direction: column;
+  padding-top: 6px;
+
+  width: 100%;
+}
+
+.writeTweetTextAreaContainer {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.writeTweetInput {
+  font-size: 20px;
+  border: none;
+  resize: none;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.writeTweetInput:focus {
+  outline: none;
+}
+
+.writeTweetOptionsContainer {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.writeTweetOptionsLeftContainer {
+  display: flex;
+  margin-top: 12px;
+}
+
+.writeTweetOptionsIconContainer {
+  display: flex;
+  height: 34px;
+  width: 34px;
+  justify-content: center;
+  align-items: center;
+}
+
+.writeTweetOptionsIconContainer:hover {
+  background-color: #e8f5fd;
+  border-radius: 50%;
+}
+
+.tweetOptionsIcon {
+  /* width: 20px; */
+  color: #1d9bf0;
+  display: flex;
+}
+
+ion-icon {
+  font-size: 64px;
+  color: #1a8cd8;
+}
+
+.writeTweetButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.writeTweetButton {
+  /* margin: auto; */
+  height: 36px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #8ecdf7;
+  border-radius: 18px;
+}
+
+.writeTweetButtonSpan {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.tweetOptionsIcon {
+  fill: #1d9bf0;
+  width: 18px;
+}
+
+.tweetContainer {
+  border-bottom: #eff3f4 solid 1px;
+  display: flex;
+  flex-direction: row;
+  padding-top: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.TweetProfileIconContainer {
+  padding-right: 12px;
+  display: flex;
+}
+
+.tweetRightContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 12px;
+}
+
+.tweetProfileNameContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 7px;
+}
+
+.tweetProfileName {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tweetUserOptionsIconContainer {
+  display: flex;
+  justify-content: center;
+  margin: -8px;
+  width: 34.75px;
+  height: 34.75px;
+}
+
+.tweetUserOptionsIconContainer:hover {
+  background-color: #e1eef6;
+  border-radius: 50%;
+}
+
+.tweetUserOptionsIconContainer:hover > .tweetUserOptionsIcon {
+  color: #35a6f1;
+}
+
+.tweetUserOptionsIcon {
+  display: flex;
+  width: 18.75px;
+}
+
+/* .tweetUserOptionsIcon:hover {
+  color: #35a6f1;
+} */
+
+.tweetText {
+  white-space: pre-wrap;
+}
+
+.tweetAttachmentContainer {
+  margin-top: 12px;
+}
+
+.tweetMediaContainer {
+  display: flex;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.tweetImage {
+  width: 100%;
+}
+
+.tweetStatsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  height: 20px;
+}
+
+.tweetStats {
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  flex-direction: row;
+}
+
+.tweetStatsIconContainer {
+  display: flex;
+  justify-content: center;
+  margin: -8px;
+  width: 34.75px;
+  height: 34.75px;
+}
+
+.tweetStatsIconContainer:hover {
+  background-color: #e1eef6;
+  border-radius: 50%;
+}
+
+.tweetStatsIconContainer:hover > .tweetStatsIcon {
+  color: #35a6f1;
+}
+
+.tweetStatsIcon {
+  width: 18.75px;
+  display: flex;
+  justify-content: center;
+  color: #5d6d79;
+}
+
+/* .tweetStatsIcon:hover {
+  color: #35a6f1;
+} */
+
+.tweetStatsNumber {
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5d6d79;
+}
+
+.sidebarContainer {
+  flex: 1;
+  /* width: 350px; */
+}
+
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  float: left;
+  padding-left: 10px;
+  width: 350px;
+}
+
+.searchBarContainer {
+  display: flex;
+  background-color: #EFF3F4;
+  border-radius: 22px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.searchBar {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  width: 100%;
+  height: 44px;
+}
+
+.searchBarIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 12px;
+  height: 44px;
+  width: 44px;
+}
+
+.searchBarIcon {
+  width: 18.75px;
+}
+
+.searchBarTextConainer {
+  padding: 12px;
+  flex: 1;
+}
+
+.followRecommendContainer {
+  background-color: #F7F9F9;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 16px;
+}
+
+
+.followRecommendLabel {
+  padding: 12px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.followRecommendAccountsListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.followRecommendAccountContainer {
+  display: flex;
+  padding: 12px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.followRecommendAccountLeftSide {
+  display: flex;
+  align-items: center;
+}
+
+.followRecommendAccountIconContainer {
+  margin-right: 12px;
+  height: 40px;
+  width: 40px;
+}
+
+.followRecommendAccountName {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.followRecommendAccountRightSide {
+
+}
+
+.followRecommendFollowButtonContainer {
+  height: 32px;
+  width: 78px;
+  background-color: #0F1419;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.followRecommendFollowButton {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 700;
 }

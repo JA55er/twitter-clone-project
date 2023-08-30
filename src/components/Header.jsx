@@ -1,42 +1,61 @@
-import icons from '../utils/icons';
+// import icons from '../utils/icons';
 import HeaderLink from './HeaderLink';
 import TwitterLogo from './TwitterLogo';
+import headerIcons from '../utils/headerIcons';
+import ProfileIcon from './ProfileIcon';
 
 const Header = () => {
+  console.log(headerIcons);
+
   const headerLinks = [
     {
       label: 'Home',
-      icon: icons.home,
+      icon: headerIcons.home,
       link: '',
     },
     {
       label: 'Explore',
-      icon: icons.explore,
+      icon: headerIcons.explore,
       link: '',
     },
     {
       label: 'Notifications',
-      icon: icons.notifications,
+      icon: headerIcons.notifications,
       link: '',
     },
     {
       label: 'Messages',
-      icon: icons.messages,
+      icon: headerIcons.messages,
+      link: '',
+    },
+    {
+      label: 'Lists',
+      icon: headerIcons.lists,
+      link: '',
+    },
+    {
+      label: 'Bookmarks',
+      icon: headerIcons.bookmarks,
+      link: '',
+    },
+    {
+      label: 'Communities',
+      icon: headerIcons.communities,
       link: '',
     },
     {
       label: 'Verified',
-      icon: icons.verified,
+      icon: headerIcons.verified,
       link: '',
     },
     {
       label: 'Profile',
-      icon: icons.profile,
+      icon: headerIcons.profile,
       link: '',
     },
     {
       label: 'More',
-      icon: icons.more,
+      icon: headerIcons.more,
       link: '',
     },
   ];
@@ -49,7 +68,7 @@ const Header = () => {
             <TwitterLogo />
             <div className='headerLinkListContainer'>
               {headerLinks.map((link) => {
-                return <HeaderLink link={link} />;
+                return <HeaderLink link={link} key={link.label} />;
               })}
             </div>
           </div>
@@ -57,10 +76,16 @@ const Header = () => {
             <span className='buttonLabel'>Tweet</span>
           </div>
         </div>
-        <div className='headerAccount'>
-          <div className='headerAccountIcon'></div>
-          <div className='headerAccountName'>JA55er</div>
-          <div className='headerAccountOptionsIcon'></div>
+        <div className='headerAccountContainer'>
+          <div className='headerAccount'>
+            <ProfileIcon />
+            <div className='headerAccountName'>JA55er</div>
+            <div className='headerAccountOptionsIconContainer'>
+              <div className='headerAccountOptionsIcon'>
+                {headerIcons.accountSettings}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

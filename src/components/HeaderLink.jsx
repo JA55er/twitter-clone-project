@@ -1,9 +1,8 @@
 const HeaderLink = ({ link }) => {
-  console.log(link);
   return (
-    <div className='headerLink'>
-      <div className='headerLinkContainer'>
-        <img className='headerLinkIcon' src={link.icon} />
+    <div className='headerLinkContainer'>
+      <div className='headerLink'>
+        <div className='headerLinkIcon'>{link.icon}</div>
         <span className='headerLinkLabel'>{link.label}</span>
       </div>
     </div>
