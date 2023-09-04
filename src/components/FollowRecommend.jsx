@@ -1,20 +1,24 @@
 import React from 'react';
 import RecommendedProfile from './RecommendedProfile';
 
+import profileIcon1 from '../assets/profileIcon1.jpg'
+import profileIcon2 from '../assets/profileIcon2.jpg'
+import profileIcon3 from '../assets/profileIcon3.jpg'
+
 const FollowRecommend = () => {
 
   const recommendedProfiles = [
     {
-      profileIcon: '',
-      profileName: 'JA55er',
+      profileIcon: profileIcon1,
+      profileName: 'Aurora',
     },
     {
-      profileIcon: '',
-      profileName: 'JA55er',
+      profileIcon: profileIcon2,
+      profileName: 'Gaia',
     },
     {
-      profileIcon: '',
-      profileName: 'JA55er',
+      profileIcon: profileIcon3,
+      profileName: 'Fuji',
     }
   ]
   

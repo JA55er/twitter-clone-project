@@ -2,7 +2,7 @@
 import HeaderLink from './HeaderLink';
 import TwitterLogo from './TwitterLogo';
 import headerIcons from '../utils/headerIcons';
-import ProfileIcon from './ProfileIcon';
+import UserProfileIcon from './UserProfileIcon';
 
 const Header = () => {
   console.log(headerIcons);
@@ -78,7 +78,7 @@ const Header = () => {
         </div>
         <div className='headerAccountContainer'>
           <div className='headerAccount'>
-            <ProfileIcon />
+            <UserProfileIcon />
             <div className='headerAccountName'>JA55er</div>
             <div className='headerAccountOptionsIconContainer'>
               <div className='headerAccountOptionsIcon'>

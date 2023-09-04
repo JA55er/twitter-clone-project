@@ -2,15 +2,11 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  /* align-items: center; */
-  /* text-align: center; */
   font-family: 'Roboto';
 }
 
 .appContainer {
   display: flex;
-  /* justify-content: center; */
-  /* font-size: 60px; */
   margin: auto;
   height: 100vh;
 }
@@ -18,8 +14,6 @@
 .headerContainer {
   display: flex;
   flex: 1;
-  /* width: 594px; */
-  /* width: 32%; */
   height: 100%;
   justify-content: end;
 }
@@ -32,7 +26,6 @@
   justify-content: space-between;
   height: 100%;
   position: fixed;
-  /* top: 0; */
 }
 
 .headerTopContentContainer {
@@ -48,32 +41,24 @@
   height: 50.25px;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .twitterLogoHover {
-  /* justify-self: center; */
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
+  transition: background-color 0.2s ease;
+  border-radius: 50%;
 }
 
 .twitterLogoHover:hover {
   background-color: #e7e7e8;
-  border-radius: 50%;
 }
 
 .twitterLogoIconContainer {
   width: 50px;
   height: 50px;
-  /* width: 100%; */
   padding-left: 12px;
   display: flex;
 }
-
-/* .twitterLogoContainer:hover {
-  background-color: #E7E7E8;
-} */
 
 .twitterLogoIcon {
   width: 26.25px;
@@ -89,35 +74,29 @@
 
 .headerLinkContainer {
   display: flex;
-  /* padding: 12px; */
-
-  /* justify-content: center; */
-  /* width: 100%; */
-  /* height: 58.25px; */
+  width: 100%;
   padding-top: 4px;
   padding-bottom: 4px;
-  /* flex-grow: 1; */
   flex-direction: column;
   overflow: hidden;
-  /* align-items: flex-start; */
 }
 
 .headerLink {
-  display: flex;
+  display: inline-flex;
   padding: 12px;
-  /* justify-content: left; */
+  justify-content: flex-start;
   align-items: center;
+  border-radius: 25.125px;
+  transition: background-color 0.2s ease;
 }
 
-.headerLink:hover {
+.headerLinkAnchor:hover > .headerLink {
   background-color: #e7e7e8;
-  border-radius: 25.125px;
 }
 
 .headerLinkIcon {
   width: 26.25px;
   display: flex;
-  /* display: inline; */
 }
 
 .headerLinkLabel {
@@ -136,14 +115,13 @@
   align-items: center;
   display: flex;
   margin-top: 4px;
+  transition: background-color 0.2s ease;
+  border-radius: 26px;
 }
 
 .button:hover {
   background-color: #1a8cd8;
-  border-radius: 26px;
 }
-
-/* 1A8CD8 */
 
 .buttonLabel {
   font-size: 20px;
@@ -158,11 +136,12 @@
 .headerAccountContainer {
   margin-top: 12px;
   margin-bottom: 12px;
+  border-radius: 32px;
+  transition: background-color 0.2s ease;
 }
 
 .headerAccountContainer:hover {
   background-color: #e7e7e8;
-  border-radius: 32px;
 }
 
 .headerAccount {
@@ -176,7 +155,11 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* background-color: rgb(194,24,91); */
+  transition: filter 0.2s ease;
+}
+
+.accountIcon:hover {
+  filter: brightness(80%);
 }
 
 .headerAccountName {
@@ -206,13 +189,17 @@
   justify-content: center;
   border-left: 1px solid #eff3f4;
   border-right: 1px solid #eff3f4;
-  /* border: 1px solid #eff3f4; */
 }
 
 .contentTopContainer {
   display: flex;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  backface-visibility: hidden;
   flex-direction: column;
   border-bottom: 1px solid #eff3f4;
+  position: sticky;
+  top: 0px;
 }
 
 .homeContainer {
@@ -237,6 +224,7 @@
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
 .foryouContainer:hover {
@@ -254,6 +242,7 @@
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease;
 }
 
 .followingContainer:hover {
@@ -323,15 +312,15 @@
   width: 34px;
   justify-content: center;
   align-items: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
 .writeTweetOptionsIconContainer:hover {
   background-color: #e8f5fd;
-  border-radius: 50%;
 }
 
 .tweetOptionsIcon {
-  /* width: 20px; */
   color: #1d9bf0;
   display: flex;
 }
@@ -349,7 +338,6 @@ ion-icon {
 }
 
 .writeTweetButton {
-  /* margin: auto; */
   height: 36px;
   padding-left: 16px;
   padding-right: 16px;
@@ -378,6 +366,11 @@ ion-icon {
   padding-top: 12px;
   padding-left: 16px;
   padding-right: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.tweetContainer:hover {
+  background-color: #F7F7F7;
 }
 
 .TweetProfileIconContainer {
@@ -413,11 +406,12 @@ ion-icon {
   margin: -8px;
   width: 34.75px;
   height: 34.75px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
 .tweetUserOptionsIconContainer:hover {
   background-color: #e1eef6;
-  border-radius: 50%;
 }
 
 .tweetUserOptionsIconContainer:hover > .tweetUserOptionsIcon {
@@ -428,10 +422,6 @@ ion-icon {
   display: flex;
   width: 18.75px;
 }
-
-/* .tweetUserOptionsIcon:hover {
-  color: #35a6f1;
-} */
 
 .tweetText {
   white-space: pre-wrap;
@@ -462,7 +452,6 @@ ion-icon {
 .tweetStats {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: row;
 }
 
@@ -472,11 +461,12 @@ ion-icon {
   margin: -8px;
   width: 34.75px;
   height: 34.75px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
 }
 
 .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
-  border-radius: 50%;
 }
 
 .tweetStatsIconContainer:hover > .tweetStatsIcon {
@@ -490,10 +480,6 @@ ion-icon {
   color: #5d6d79;
 }
 
-/* .tweetStatsIcon:hover {
-  color: #35a6f1;
-} */
-
 .tweetStatsNumber {
   padding: 0 12px;
   font-size: 13px;
@@ -503,7 +489,6 @@ ion-icon {
 
 .sidebarContainer {
   flex: 1;
-  /* width: 350px; */
 }
 
 .sidebarContent {
@@ -517,7 +502,7 @@ ion-icon {
 
 .searchBarContainer {
   display: flex;
-  background-color: #EFF3F4;
+  background-color: #eff3f4;
   border-radius: 22px;
   margin-top: 12px;
   margin-bottom: 12px;
@@ -526,7 +511,6 @@ ion-icon {
 .searchBar {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
   width: 100%;
   height: 44px;
@@ -551,17 +535,17 @@ ion-icon {
 }
 
 .followRecommendContainer {
-  background-color: #F7F9F9;
+  background-color: #f7f9f9;
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 12px 16px;
   border-radius: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
 }
 
-
 .followRecommendLabel {
-  padding: 12px;
+  padding: 12px 16px;
   font-size: 20px;
   font-weight: 800;
 }
@@ -573,7 +557,8 @@ ion-icon {
 
 .followRecommendAccountContainer {
   display: flex;
-  padding: 12px;
+
+  padding: 12px 16px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -595,14 +580,13 @@ ion-icon {
   font-weight: 700;
 }
 
-.followRecommendAccountRightSide {
-
-}
+/* .followRecommendAccountRightSide {
+} */
 
 .followRecommendFollowButtonContainer {
   height: 32px;
   width: 78px;
-  background-color: #0F1419;
+  background-color: #0f1419;
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -610,7 +594,106 @@ ion-icon {
 }
 
 .followRecommendFollowButton {
-  color: #FFF;
+  color: #fff;
   font-size: 14px;
   font-weight: 700;
+}
+
+.trendsBarContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f9f9;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.trendsBarLabelContainer {
+  padding: 12px 16px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.trendsListContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.trendsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.trendItemContainer {
+  display: flex;
+  padding: 12px 16px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.trendItemContainer:hover {
+  background-color: #eff1f1;
+}
+
+.trendItem {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.trendItemRankContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 20px;
+}
+
+.trendItemRank {
+  color: #666;
+  font-size: 13px;
+}
+
+.trendItemOptionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34.75px;
+  height: 34.75px;
+  margin: -8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.trendItemOptionsContainer:hover {
+  background-color: #e1eef6;
+}
+
+.trendItemOptionsContainer:hover > .trendItemOptions {
+  color: #35a6f1;
+}
+
+.trendItemOptions {
+  width: 18.75px;
+  height: 18.75px;
+}
+
+.trendItemTagContainer {
+  margin-top: 2px;
+  height: 20px;
+}
+
+.trendItemTag {
+  font-weight: 700;
+}
+
+.trendItemPostsCountContainer {
+  margin-top: 4px;
+  height: 16px;
+}
+
+.trendItemPostsCount {
+  color: #666;
+  font-size: 13px;
 }

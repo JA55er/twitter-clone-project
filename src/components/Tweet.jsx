@@ -1,5 +1,5 @@
 import TweetStats from './TweetStats';
-import ProfileIcon from './ProfileIcon';
+import UserProfileIcon from './UserProfileIcon';
 import TweetAttachment from './TweetAttachment';
 import TweetText from './TweetText';
 import TweetProfileName from './TweetProfileName';
@@ -13,7 +13,7 @@ const Tweet = ({ tweet }) => {
   return (
     <div className='tweetContainer'>
       <div className='TweetProfileIconContainer'>
-        <ProfileIcon />
+        <UserProfileIcon />
       </div>
       <div className='tweetRightContainer'>
         <TweetProfileName profileName={profileName} />

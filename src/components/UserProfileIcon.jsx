@@ -1,4 +1,4 @@
-const ProfileIcon = () => {
+const UserProfileIcon = () => {
   return (
     <img
       className='accountIcon'
@@ -7,4 +7,4 @@ const ProfileIcon = () => {
   );
 };
 
-export default ProfileIcon;
+export default UserProfileIcon;

@@ -2,7 +2,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 
 import TweetOptionsIcon from './TweetOptionsIcon';
 import optionIcons from '../utils/optionIcons';
-import ProfileIcon from './ProfileIcon';
+import UserProfileIcon from './UserProfileIcon';
 
 const CreateTweet = () => {
 
@@ -18,7 +18,7 @@ const CreateTweet = () => {
   return (
     <div className='createTweetContainer'>
       <div className='createTweetProfileIconContainer'>
-        <ProfileIcon />
+        <UserProfileIcon />
       </div>
       <div className='createTweetRightContainer'>
         <div className='writeTweetTextAreaContainer'>

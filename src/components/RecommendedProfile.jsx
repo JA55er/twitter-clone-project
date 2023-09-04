@@ -1,15 +1,18 @@
 import React from 'react';
 
-import ProfileIcon from './ProfileIcon';
+import OthersProfileIcon from './OthersProfileIcon';
 
-const RecommendedProfile = () => {
+const RecommendedProfile = ({profile}) => {
+
+  const profileIcon = profile.profileIcon
+
   return (
     <div className='followRecommendAccountContainer'>
     <div className='followRecommendAccountLeftSide'>
       <div className='followRecommendAccountIconContainer'>
-        <ProfileIcon />
+        <OthersProfileIcon profileIcon={profileIcon}/>
       </div>
-      <div className='followRecommendAccountName'>Name</div>
+      <div className='followRecommendAccountName'>{profile.profileName}</div>
     </div>
     <div className='followRecommendAccountRightSide'>
       <div className='followRecommendFollowButtonContainer'>
