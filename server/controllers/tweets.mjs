@@ -11,9 +11,14 @@ const getRandomArbitrary = (min, max) => {
 };
 
 tweetsRouter.get('/', async (req, res) => {
-  const tweets = await Tweet.find().populate('user', 'icon');
+  const tweets = await Tweet.find().populate('user', ['icon', 'username']);
 
   res.send(tweets);
+});
+tweetsRouter.get('/:id', async (req, res) => {
+  const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']);
+  console.log(tweet)
+  res.send(tweet);
 });
 
 tweetsRouter.post('/newtweet', async (req, res) => {

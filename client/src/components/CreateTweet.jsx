@@ -10,9 +10,10 @@ import submitTweet from '../api/submitTweet';
 
 const CreateTweet = () => {
   const userFromContext = useContext(AppContext);
-  const token = userFromContext.user?.token;
-  const userIcon = userFromContext.user?.icon;
+  const token = userFromContext?.user?.token;
+  const userIcon = userFromContext?.user?.icon;
   console.log(token);
+  // console.log(user)
 
   const userIconContainer = userIcon ? (
     // <div className='createTweetProfileIconContainer'>
@@ -33,7 +34,7 @@ const CreateTweet = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log(user.user);
+    console.log(userFromContext.user);
     submitTweet({ tweetText, token });
   };
 

@@ -2,9 +2,9 @@ import mongoose from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true, minlength: 3 },
+  username: { type: String, required: true, unique: true, minlength: 3},
   passwordHash: { type: String, required: true },
-  name: {type: String, required: true, minlength: 3},
+  // name: {type: String, required: true, minlength: 3,},
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Comment"

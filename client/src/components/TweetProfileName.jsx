@@ -1,10 +1,10 @@
 import React from 'react';
 import headerIcons from '../utils/headerIcons';
 
-const TweetProfileName = ({profileName}) => {
+const TweetProfileName = ({username}) => {
   return (
     <div className='tweetProfileNameContainer'>
-      <div className='tweetProfileName'>{profileName}</div>
+      <div className='tweetProfileName'>{username}</div>
       <div className='tweetUserOptionsIconContainer'>
         <div className='tweetUserOptionsIcon'>
           {headerIcons.accountSettings}

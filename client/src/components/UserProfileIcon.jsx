@@ -1,4 +1,4 @@
-const UserProfileIcon = ({icon}) => {
+const UserProfileIcon = ({icon, filter}) => {
   return (
     <img
       className='accountIcon'

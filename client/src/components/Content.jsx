@@ -11,6 +11,7 @@ const Content = () => {
         <ContentTop />
         <CreateTweet />
         <TweetsList />
+        <div className="contentBottomBuffer"></div>
       </div>
     </div>
   );

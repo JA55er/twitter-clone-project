@@ -7,6 +7,11 @@
 
 a:-webkit-any-link {
   text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  color: inherit;
 }
 
 button,
@@ -24,7 +29,8 @@ input[type='reset'] {
 .appContainer {
   display: flex;
   margin: auto;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
 }
 
 .headerContainer {
@@ -61,6 +67,7 @@ input[type='reset'] {
 
 .twitterLogoHover {
   display: flex;
+  cursor: pointer;
   transition: background-color 0.2s ease;
   border-radius: 50%;
 }
@@ -95,6 +102,7 @@ input[type='reset'] {
   padding-bottom: 4px;
   flex-direction: column;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .headerLink {
@@ -120,6 +128,7 @@ input[type='reset'] {
   margin-right: 16px;
   font-size: 20px;
   font-weight: 400;
+  user-select: none;
 }
 
 .button {
@@ -153,6 +162,7 @@ input[type='reset'] {
   margin-top: 12px;
   margin-bottom: 12px;
   border-radius: 32px;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
@@ -183,6 +193,7 @@ input[type='reset'] {
   margin-right: 12px;
   font-size: 15px;
   font-weight: 700;
+  user-select: none;
 }
 
 .headerAccountOptionsIconContainer {
@@ -197,6 +208,7 @@ input[type='reset'] {
 
 .contentContainer {
   width: 600px;
+  height: fit-content;
 }
 
 .homeTimelineContainer {
@@ -222,11 +234,13 @@ input[type='reset'] {
   display: flex;
   padding-left: 16px;
   padding-right: 16px;
-  width: 100%;
+  /* max-width: fit-content; */
+  flex-shrink: 1;
   height: 53px;
   font-size: 20px;
   font-weight: 700;
   align-items: center;
+  cursor: pointer;
 }
 
 .foryouFollowingContainer {
@@ -240,11 +254,14 @@ input[type='reset'] {
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  user-select: none;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .foryouContainer:hover {
-  background-color: #e7e7e8;
+  background-color: rgb(231,231,232, 0.5);
+  /* opacity: 0.85; */
 }
 
 .foryouSpan {
@@ -258,11 +275,14 @@ input[type='reset'] {
   flex-grow: 1;
   align-items: center;
   justify-content: center;
+  user-select: none;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
 .followingContainer:hover {
-  background-color: #e7e7e8;
+  background-color: rgb(231,231,232, 0.5);
+  /* opacity: 0.85; */
 }
 
 .followingSpan {
@@ -328,6 +348,7 @@ input[type='reset'] {
   width: 34px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   border-radius: 50%;
   transition: background-color 0.2s ease;
 }
@@ -379,6 +400,7 @@ ion-icon {
   border-bottom: #eff3f4 solid 1px;
   display: flex;
   flex-direction: row;
+  cursor: pointer;
   padding-top: 12px;
   padding-left: 16px;
   padding-right: 16px;
@@ -414,6 +436,10 @@ ion-icon {
   align-items: center;
   font-size: 15px;
   font-weight: 700;
+}
+
+.tweetProfileName:hover {
+  text-decoration: underline;
 }
 
 .tweetUserOptionsIconContainer {
@@ -503,13 +529,24 @@ ion-icon {
   padding: 0 12px;
   font-size: 13px;
   font-weight: 400;
+  user-select: none;
   color: #5d6d79;
+}
+
+.contentBottomBuffer {
+  height: 200px;
 }
 
 .sidebarContainer {
   display: flex;
   flex-direction: column;
   flex: 1;
+  align-self: stretch;
+}
+
+.loginButtonContainer {
+  display: flex;
+  justify-content: end;
 }
 
 .loginAreaContainer {
@@ -552,6 +589,7 @@ ion-icon {
   float: left;
   padding-left: 10px;
   width: 350px;
+  height: 100%;
 }
 
 .searchBarContainer {
@@ -611,12 +649,16 @@ ion-icon {
 
 .followRecommendAccountContainer {
   display: flex;
-
+  cursor: pointer;
   padding: 12px 16px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
+
+.followRecommendAccountContainer:hover {
+  background-color: #EFF1F1;
+} 
 
 .followRecommendAccountLeftSide {
   display: flex;
@@ -632,6 +674,11 @@ ion-icon {
 .followRecommendAccountName {
   font-size: 15px;
   font-weight: 700;
+  user-select: none;
+}
+
+.followRecommendAccountName:hover {
+  text-decoration: underline;
 }
 
 /* .followRecommendAccountRightSide {
@@ -659,7 +706,8 @@ ion-icon {
   background-color: #f7f9f9;
   width: 100%;
   border-radius: 16px;
-  overflow: hidden;
+  position: sticky;
+  top: 0;
 }
 
 .trendsBarLabelContainer {
@@ -682,6 +730,7 @@ ion-icon {
   display: flex;
   padding: 12px 16px;
   width: 100%;
+  cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
@@ -820,6 +869,7 @@ ion-icon {
   justify-content: center;
   width: 300px;
   height: 40px;
+  margin-bottom: 20px;
   border-radius: 20px;
   border: #ccc solid 1px;
 }
@@ -832,26 +882,179 @@ ion-icon {
 }
 
 .modalContainer {
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: -1;
+}
+
 .modal {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center; */
   min-height: 400px;
-  min-width: 600px;
+  min-width: 500px;
   max-width: 80vw;
   max-height: 90vh;
-  height: 650px;
+  height: 550px;
   width: 600px;
   border-radius: 16px;
   background-color: #fff;
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.modalTop {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 53px;
+  padding: 0px 16px;
+}
+
+.closeModalButton {
+}
+
+.modalLogo {
+  width: 30px;
+}
+
+.modalBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0px 118px;
+  padding: 0px 32px;
+  padding-bottom: 48px;
+}
+
+.modalTopTextContainer {
+  display: flex;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.modalTopText {
+  font-size: 31px;
+  font-weight: 700;
+}
+
+.modalButtonContainer {
+  margin: 12px 0px;
+}
+
+.loginButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  /* border: #ccc solid 1px; */
+}
+
+.loginOptionsSeperator {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.seperatorLine {
+  height: 1px;
+  background-color: #ccc;
+  width: 100%;
+  margin: 0px 4px;
+}
+
+.seperatorText {
+  font-size: 17px;
+  font-weight: 400;
+  color: #141923;
+}
+
+.modalInputContainer {
+  padding: 12px 0px;
+  width: 100%;
+}
+
+.modalInput {
+  width: 100%;
+  height: 56px;
+  font-size: 17px;
+  padding: 8px;
+  border: #ccc 1px solid;
+  border-radius: 4px;
+}
+
+.modalInput:focus {
+  outline: none;
+  border-color: #1d9bf0;
+}
+
+.modalLoginButtonContainer {
+  margin-top: 20px;
+}
+
+.transparentOverlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  /* z-index: 1; */
+}
+
+.accountModalContainer {
+  z-index: 1;
+  padding: 12px 0px;
+  border-radius: 16px;
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px,
+    rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+}
+
+.loggoutButton {
+  padding: 12px 16px;
+  cursor: pointer;
+  /* width: 100%; */
+}
+
+.loggoutButtonText {
+  font-size: 15;
+  font-weight: 700;
+  user-select: none;
+}
+
+.loggoutButton:hover {
+  background-color: #f7f9f9;
 }

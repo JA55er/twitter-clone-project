@@ -7,7 +7,9 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 import { useState, useEffect, createContext } from 'react';
 import Login from './components/Login';
-import Modal from './components/Modal';
+import SigninModal from './components/SigninModal';
+import RegisterModal from './components/RegisterModal';
+import DetailedTweet from './components/DetailedTweet';
 
 export const AppContext = createContext();
 
@@ -35,15 +37,25 @@ const App = () => {
                 <Header />
                 <Content />
                 <Sidebar />
-                <nav>
-                  <Link to='/login'>login</Link>
-                </nav>
+              </div>
+            </div>
+          }
+        ></Route>
+        <Route
+          path='/tweet/:id'
+          element={
+            <div>
+              <div className='appContainer'>
+                <Header />
+                <DetailedTweet />
+                <Sidebar />
               </div>
             </div>
           }
         ></Route>
         <Route path='/login' element={<Login />}>
-          <Route path='signin' element={<Modal />}></Route>
+          <Route path='signin' element={<SigninModal />}></Route>
+          <Route path='register' element={<RegisterModal />}></Route>
         </Route>
       </Routes>
     </AppContext.Provider>

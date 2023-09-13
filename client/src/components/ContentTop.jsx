@@ -2,7 +2,9 @@ const ContentTop = () => {
   return (
     <div className='contentTopContainer'>
       <div className='homeContainer'>
-        <span className='homeSpan'>Home</span>
+        <div className='homeButton'>
+          <span className='homeSpan'>Home</span>
+        </div>
       </div>
       <div className='foryouFollowingContainer'>
         <div className='foryouContainer'>

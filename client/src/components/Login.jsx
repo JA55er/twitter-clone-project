@@ -2,7 +2,8 @@ import React from 'react';
 import TwitterLogo from './TwitterLogo';
 import headerIcons from '../utils/headerIcons';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
-import Modal from './Modal';
+import SigninModal from './SigninModal';
+import RegisterModal from './RegisterModal';
 
 const Login = () => {
   return (
@@ -30,13 +31,19 @@ const Login = () => {
                     <span>Sign in</span>
                   </div>
                 </Link>
+                <Link to={'/'}>
+                  <div className='loginAreaSignInContainer'>
+                    <span>Maybe Later</span>
+                  </div>
+                </Link>
               </div>
             </div>
             <Outlet />
           </div>
         }
       >
-        <Route path='/signin' element={<Modal />}></Route>
+        <Route path='/register' element={<RegisterModal />}></Route>
+        <Route path='/signin' element={<SigninModal />}></Route>
       </Route>
     </Routes>
   );
