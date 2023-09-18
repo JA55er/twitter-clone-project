@@ -17,13 +17,11 @@ const TrendsBar = () => {
       rank: 3,
       tag: '#Science',
       postsCount: 250,
-      sticky: { position: 'sticky', top: '0' },
     },
     {
       rank: 4,
       tag: '#Culture',
       postsCount: 87,
-      sticky: { position: 'sticky', top: '0' },
     },
   ];
 

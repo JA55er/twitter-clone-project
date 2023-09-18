@@ -12,7 +12,6 @@ const Tweet = ({ tweet }) => {
   const stats = tweet.stats;
   const icon = tweet.user?.icon;
 
-  console.log(tweet)
 
   return (
     <>

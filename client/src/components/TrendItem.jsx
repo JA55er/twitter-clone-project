@@ -2,12 +2,9 @@ import React from 'react';
 
 import headerIcons from '../utils/headerIcons';
 const TrendItem = ({trendingItem}) => {
-  
-  console.log(trendingItem.sticky)
-
 
   return (
-    <div className='trendItemContainer' style={trendingItem.sticky}>
+    <div className='trendItemContainer'>
       <div className='trendItem'>
         <div className='trendItemRankContainer'>
           <div className='trendItemRank'>{trendingItem.rank} · Trending Worldwide</div>

@@ -11,19 +11,33 @@ const getRandomArbitrary = (min, max) => {
 };
 
 tweetsRouter.get('/', async (req, res) => {
-  const tweets = await Tweet.find().populate('user', ['icon', 'username']);
+  const tweets = await Tweet.find({ parent: null }).populate('user', [
+    'icon',
+    'username',
+  ]);
 
-  res.send(tweets);
+  if (!tweets) res.send('no tweets found');
+
+  const reverseTweets = [...tweets];
+
+  reverseTweets.reverse();
+
+  res.send(reverseTweets);
 });
 tweetsRouter.get('/:id', async (req, res) => {
-  const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']);
-  console.log(tweet)
+  // const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']).populate({path: 'comments', select: 'user', populate: 'user'});
+  const tweet = await Tweet.findById(req.params.id)
+    .populate('user', ['icon', 'username'])
+    .populate({
+      path: 'tweets',
+      populate: { path: 'user', select: 'username icon' },
+    });
+  // console.log('tweet: ', tweet);
   res.send(tweet);
 });
 
 tweetsRouter.post('/newtweet', async (req, res) => {
   const user = req.user;
-  // console.log(user)
   if (!user) {
     return res.status(404).send('token not found');
   }
@@ -31,9 +45,9 @@ tweetsRouter.post('/newtweet', async (req, res) => {
     //get random generated image
     const newImage = await axios.get('https://picsum.photos/680/510');
     const imageURL = newImage.request.res.responseUrl;
-    const comments = Math.floor(getRandomArbitrary(2, 7));
+    // const comments = Math.floor(getRandomArbitrary(2, 7));
     const retweets = Math.floor(getRandomArbitrary(2, 7));
-    const likes = Math.floor(getRandomArbitrary(comments * 5, comments * 10));
+    const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
     const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
 
     const tweetText = req.body.tweetText;
@@ -42,15 +56,16 @@ tweetsRouter.post('/newtweet', async (req, res) => {
       text: tweetText,
       attachment: imageURL,
       stats: {
-        comments,
+        comments: 0,
         retweets,
         likes,
         views,
       },
+      parent: null,
       user: user._id.valueOf(),
     });
 
-    console.log(newTweet);
+    // console.log('new tweet: Object before save: ', newTweet);
     const savedTweet = await newTweet.save();
     user.tweets = user.tweets.concat(savedTweet._id);
     await User.findByIdAndUpdate(user._id, { tweets: user.tweets });
@@ -61,47 +76,50 @@ tweetsRouter.post('/newtweet', async (req, res) => {
   }
 });
 
-tweetsRouter.post('/newautotweet', async (req, res) => {
-  const user = req.user;
-  if (!user) {
-    res.status(404).send('user not found');
-  }
-  try {
-    //get random generated tweet message
-    const newTweetText = await axios.get(
-      'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
-    );
-    const newText = newTweetText.data[0];
-    //get random generated image
-    const newImage = await axios.get('https://picsum.photos/680/510');
-    const imageURL = newImage.request.res.responseUrl;
+// tweetsRouter.delete('/deleteall', async (req, res) => {
+//   await Tweet.deleteMany({});
+//   res.send('deleted');
+// });
 
-    const comments = Math.floor(getRandomArbitrary(2, 7));
-    const retweets = Math.floor(getRandomArbitrary(2, 7));
-    const likes = Math.floor(getRandomArbitrary(comments * 5, comments * 10));
-    const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
+// tweetsRouter.post('/newautotweet', async (req, res) => {
+//   const user = req.user;
+//   if (!user) {
+//     res.status(404).send('user not found');
+//   }
+//   try {
+//     //get random generated tweet message
+//     const newTweetText = await axios.get(
+//       'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
+//     );
+//     const tweetText = newTweetText.data[0];
+//     //get random generated image
+//     const newImage = await axios.get('https://picsum.photos/680/510');
+//     const imageURL = newImage.request.res.responseUrl;
 
-    const newTweet = new Tweet({
-      text: newText,
-      attachment: imageURL,
-      stats: {
-        comments,
-        retweets,
-        likes,
-        views,
-      },
-    });
+//     const comments = Math.floor(getRandomArbitrary(2, 7));
+//     const retweets = Math.floor(getRandomArbitrary(2, 7));
+//     const likes = Math.floor(getRandomArbitrary(comments * 5, comments * 10));
+//     const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
 
-    // console.log(user)
-
-    // const savedTweet = await newTweet.save();
-    // console.log(savedTweet);
-    res.status(200);
-    // res.status(201).send(savedTweet);
-  } catch (error) {
-    console.error(error);
-    res.status(500);
-  }
-});
+//     const newTweet = new Tweet({
+//       text: tweetText,
+//       attachment: imageURL,
+//       stats: {
+//         comments,
+//         retweets,
+//         likes,
+//         views,
+//       },
+//       user: user._id.valueOf(),
+//     });
+//     const savedTweet = await newTweet.save();
+//     user.tweets = user.tweets.concat(savedTweet._id);
+//     await User.findByIdAndUpdate(user._id, { tweets: user.tweets });
+//     res.status(201).send(savedTweet);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500);
+//   }
+// });
 
 export default tweetsRouter;

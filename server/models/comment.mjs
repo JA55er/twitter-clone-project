@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const commentSchema = mongoose.Schema({
-  comment_text: {type: String, required: true, minlength: 1},
-  account: {
+  commentText: { type: String, required: true, minlength: 1 },
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
-  }
-})
+    ref: 'User',
+  },
+  tweet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tweet',
+  },
+});
 
-export default mongoose.model("Comment", commentSchema)
+export default mongoose.model('Comment', commentSchema);

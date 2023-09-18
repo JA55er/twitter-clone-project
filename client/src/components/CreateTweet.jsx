@@ -12,14 +12,12 @@ const CreateTweet = () => {
   const userFromContext = useContext(AppContext);
   const token = userFromContext?.user?.token;
   const userIcon = userFromContext?.user?.icon;
-  console.log(token);
-  // console.log(user)
 
   const userIconContainer = userIcon ? (
-    // <div className='createTweetProfileIconContainer'>
-      <UserProfileIcon icon={userIcon} />
-    // {/* </div> */}
-  ) : <div className="container" style={{width: `40px`}}></div>;
+    <UserProfileIcon icon={userIcon} />
+  ) : (
+    <div className='container' style={{ width: `40px` }}></div>
+  );
 
   const [tweetText, setTweetText] = useState('');
 
@@ -34,7 +32,6 @@ const CreateTweet = () => {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    console.log(userFromContext.user);
     submitTweet({ tweetText, token });
   };
 
@@ -44,10 +41,7 @@ const CreateTweet = () => {
 
   return (
     <div className='createTweetContainer'>
-      <div className='createTweetProfileIconContainer'>
-        {/* <UserProfileIcon icon={userIcon} /> */}
-      {userIconContainer}
-      </div>
+      <div className='createTweetProfileIconContainer'>{userIconContainer}</div>
       <div className='createTweetRightContainer'>
         <form action='submit' onSubmit={onFormSubmit}>
           <div className='writeTweetTextAreaContainer'>

@@ -3,7 +3,6 @@ import CreateTweet from './CreateTweet';
 import TweetsList from './TweetsList';
 
 const Content = () => {
-  console.log();
 
   return (
     <div className='contentContainer'>

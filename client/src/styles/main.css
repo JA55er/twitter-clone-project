@@ -1058,3 +1058,15 @@ ion-icon {
 .loggoutButton:hover {
   background-color: #f7f9f9;
 }
+
+.backArrowContainer {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 56px;
+}
+
+.backArrow {
+  display: flex;
+  width: 20px;
+}

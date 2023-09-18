@@ -19,15 +19,24 @@ const App = () => {
   useEffect(() => {
     const savedUser = sessionStorage.getItem('user');
     const retrievedUser = JSON.parse(savedUser);
-    console.log(user);
     if (user) {
-      console.log(retrievedUser);
       setUser(retrievedUser);
     }
   }, []);
 
+  const [tweets, setTweets] = useState([]);
+
+  useEffect(() => {
+    const setFunc = async () => {
+      if (tweets.length === 0) {
+        setTweets(await getTweets());
+      }
+    };
+    setFunc();
+  }, []);
+
   return (
-    <AppContext.Provider value={{ user, setUser }}>
+    <AppContext.Provider value={{ user, setUser, tweets }}>
       <Routes>
         <Route
           path='/'

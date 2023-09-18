@@ -1,18 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import Tweet from './Tweet';
 import getTweets from '../api/getTweets'
+import { AppContext } from '../App';
 
 const TweetsList = () => {
 
-  const [tweets, setTweets] = useState([]);
+  const appContext = useContext(AppContext)
 
-  useEffect(() => {
-    const setFunc = async () => {
-      setTweets(await getTweets());
-    };
-    setFunc();
-  }, []);
+  const tweets = appContext.tweets
+
+  // const [tweets, setTweets] = useState([]);
+
+  // useEffect(() => {
+  //   const setFunc = async () => {
+  //     setTweets(await getTweets());
+  //   };
+  //   setFunc();
+  // }, []);
 
   return (
     <div>
