@@ -1,21 +1,25 @@
 import SearchBar from './SearchBar';
 import FollowRecommend from './FollowRecommend';
 import TrendsBar from './TrendsBar';
-import LoginArea from './LoginArea';
+// import LoginArea from './LoginArea';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-  const loggedUser = sessionStorage.getItem('user');
+  const user = useSelector((state) => state.user.user);
 
-  if (!loggedUser) {
+  // const loggedUser = sessionStorage.getItem('user');
+
+  if (!user) {
     return (
       <div className='sidebarContainer'>
         <div className='sidebarContent'>
-          <Link to={'/login'}>
-            <div className='loginButtonContainer'>
+          <div className='loginButtonContainer'>
+            <Link to={'/login'}>
               <button className='loginButton'>Login</button>
-            </div>
-          </Link>
+            </Link>
+          </div>
           <SearchBar />
           <FollowRecommend />
           <TrendsBar />

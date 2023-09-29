@@ -14,6 +14,14 @@ const userSchema = new mongoose.Schema({
     ref: "Tweet"
   }],
   icon: String,
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Tweet'
+  }],
+  follows: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 userSchema.plugin(uniqueValidator)

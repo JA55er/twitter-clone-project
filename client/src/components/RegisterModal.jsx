@@ -1,31 +1,37 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import headerIcons from '../utils/headerIcons';
 import LoginButtons from './LoginButtons';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import utilityIcons from '../utils/utilityIcons';
-import login from '../api/login';
-import { AppContext } from '../App';
+
 import register from '../api/register';
+import { useDispatch } from 'react-redux';
+import { saveUserAction } from '../reducers/userSlice';
 
 const RegisterModal = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const appUser = useContext(AppContext);
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
-    const credentials = {
-      username,
-      password,
-    };
-    const user = await register(credentials);
-    sessionStorage.setItem('user', user);
-    appUser.setUser(user);
-    if (user) {
-      navigate('/');
+    try {
+      const credentials = {
+        username,
+        password,
+      };
+      const user = await register(credentials);
+      dispatch(saveUserAction(user));
+      console.log('user: ', user);
+      sessionStorage.setItem('user', JSON.stringify(user));
+      if (user) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

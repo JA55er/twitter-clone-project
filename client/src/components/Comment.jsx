@@ -4,18 +4,14 @@ import TweetAttachment from './TweetAttachment';
 import TweetText from './TweetText';
 import TweetProfileName from './TweetProfileName';
 import { Link } from 'react-router-dom';
+import CommentStats from './CommentStats';
 
-const Tweet = ({ tweet }) => {
-  
-  if (!tweet) return <></>;
-
+const Comment = ({ tweet }) => {
   const username = tweet.user?.username;
   const text = tweet.text;
   const attachment = tweet.attachment;
-  // const stats = tweet.stats;
+  const stats = tweet.stats;
   const icon = tweet.user?.icon;
-
-  console.log('tweet', tweet);
 
   return (
     <>
@@ -28,8 +24,7 @@ const Tweet = ({ tweet }) => {
             <TweetProfileName username={username} />
             <TweetText text={text} />
             <TweetAttachment attachment={attachment} />
-            <TweetStats tweet={tweet} />
-            {/* <TweetStats stats={stats} tweet={tweet}/> */}
+            <CommentStats stats={stats} tweet={tweet} />
           </div>
         </div>
       </Link>
@@ -37,4 +32,4 @@ const Tweet = ({ tweet }) => {
   );
 };
 
-export default Tweet;
+export default Comment;

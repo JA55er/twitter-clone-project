@@ -46,7 +46,9 @@ commentsRouter.post('/newcomment', async (req, res) => {
 
     console.log('saved comment: ', savedComment);
 
-    res.status(201).send(savedComment);
+    const newSavedComment = await Tweet.findById(savedComment._id).populate('user')
+
+    res.status(201).send(newSavedComment);
   } catch (error) {
     console.log(error);
     res.status(500).send('failed');

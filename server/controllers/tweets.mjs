@@ -67,9 +67,17 @@ tweetsRouter.post('/newtweet', async (req, res) => {
 
     // console.log('new tweet: Object before save: ', newTweet);
     const savedTweet = await newTweet.save();
+    console.log('saved tweet: ', savedTweet);
     user.tweets = user.tweets.concat(savedTweet._id);
     await User.findByIdAndUpdate(user._id, { tweets: user.tweets });
-    res.status(201).send(savedTweet);
+    const newSavedTweet = await Tweet.findById(savedTweet._id)
+      .populate('user', ['icon', 'username'])
+      .populate({
+        path: 'tweets',
+        populate: { path: 'user', select: 'username icon' },
+      });
+    console.log('important!: ', newSavedTweet);
+    res.status(201).send(newSavedTweet);
   } catch (error) {
     console.error(error);
     res.status(500);
@@ -78,6 +86,7 @@ tweetsRouter.post('/newtweet', async (req, res) => {
 
 // tweetsRouter.delete('/deleteall', async (req, res) => {
 //   await Tweet.deleteMany({});
+//   await User.deleteMany({})
 //   res.send('deleted');
 // });
 

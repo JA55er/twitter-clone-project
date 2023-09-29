@@ -1,39 +1,152 @@
-import tweetStatsIcons from "../utils/tweetStatsIcons"
+import { useLocation, useParams } from 'react-router-dom';
+import likeTweet from '../api/likeTweet';
+import tweetStatsIcons from '../utils/tweetStatsIcons';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  userDislikeTweetAction,
+  userLikeTweetAction,
+} from '../reducers/userSlice';
+import { useState } from 'react';
+import {
+  dislikeCommentAction,
+  dislikeTweetAction,
+  likeCommentAction,
+  likeTweetAction,
+} from '../reducers/detailedTweetSlice';
+import { likePostFromList } from '../reducers/tweetListSlice';
 
-const TweetStats = ({stats}) => {
-  const comments = stats.comments
-  const retweets = stats.retweets
-  const likes = stats.likes
-  const views = stats.views
+const TweetStats = ({ tweet }) => {
+  const location = useLocation();
+
+  console.log(location);
+
+  const user = useSelector((state) => state.user.user);
+
+  const detailedTweet = useSelector(
+    (state) => state.detailedTweet.detailedTweet
+  );
+
+  const dispatch = useDispatch();
+
+  const id = tweet?._id;
+  const comments = tweet.stats.comments;
+  const retweets = tweet.stats.retweets;
+  const likes = tweet.stats.likes;
+  const views = tweet.stats.views;
+
+  const isLiked = user?.likes?.find((like) => like === id);
+
+  const sessionData = JSON.parse(sessionStorage.getItem('user'));
+
+  const onLikeClick = async (e) => {
+    e.preventDefault();
+    if (user) {
+      console.log(user)
+      try {
+        likeTweet({ id, token: user.token });
+        console.log('inside try');
+        if (isLiked) {
+          console.log('inside dislike');
+          console.log('user likes before: ', user.likes);
+          dispatch(userDislikeTweetAction(tweet._id));
+          console.log('user likes after: ', user.likes);
+          sessionData.likes = sessionData.likes.filter((likedTweet) => {
+            console.log('checked tweet id: ', tweet._id);
+            console.log('tweet id: ', id);
+            return likedTweet !== id;
+          });
+          console.log(sessionData);
+          sessionStorage.setItem('user', JSON.stringify(sessionData));
+          console.log(id);
+          console.log(detailedTweet._id);
+          if (location.pathname === '/') {
+            console.log('dispatching to list');
+            dispatch(likePostFromList({ likes: likes - 1, id }));
+          } else if (id === detailedTweet._id) {
+            dispatch(likeTweetAction(likes - 1));
+          } else {
+            dispatch(likeCommentAction({ likes: likes - 1, id }));
+          }
+        } else {
+          console.log('inside like');
+          console.log('user likes before: ', user.likes);
+          dispatch(userLikeTweetAction(tweet._id));
+          console.log('user likes after: ', user.likes);
+          sessionData.likes = sessionData.likes.concat(id);
+          console.log(sessionData);
+          sessionStorage.setItem('user', JSON.stringify(sessionData));
+          console.log(id);
+          console.log(detailedTweet._id);
+          if (location.pathname === '/') {
+            console.log('dispatching to list');
+            dispatch(likePostFromList({ likes: likes + 1, id }));
+          } else if (id === detailedTweet._id) {
+            dispatch(likeTweetAction(likes + 1));
+          } else {
+            dispatch(likeCommentAction({ likes: likes + 1, id }));
+          }
+        }
+      } catch (error) {
+        console.log('couldnt like: ', error);
+      }
+    } else {
+      console.log('no user')
+    }
+  };
+
+  console.log(tweet);
+
+  const likeElement = isLiked ? (
+    <>
+      <div className='tweetStatsIconContainer' onClick={onLikeClick}>
+        <div className='tweetStatsIcon'>{tweetStatsIcons.liked}</div>
+      </div>
+      <span className='tweetStatsNumber' style={{ color: '#F44336' }}>
+        {/* {likes} */}
+        {likes}
+      </span>
+    </>
+  ) : (
+    <>
+      <div className='tweetStatsIconContainer' onClick={onLikeClick}>
+        <div className='tweetStatsIcon'>{tweetStatsIcons.notLiked}</div>
+      </div>
+      {/* <span className='tweetStatsNumber'>{likes}</span> */}
+      <span className='tweetStatsNumber'>{likes}</span>
+    </>
+  );
+
+  // console.log(likesState)
 
   return (
     <div className='tweetStatsContainer'>
-    <div className='tweetStats'>
-      <div className='tweetStatsIconContainer'>
-        <div className='tweetStatsIcon'>{tweetStatsIcons.comments}</div>
+      <div className='tweetStats commentsStats'>
+        <div className='tweetStatsIconContainer'>
+          <div className='tweetStatsIcon'>{tweetStatsIcons.comments}</div>
+        </div>
+        <span className='tweetStatsNumber'>{comments}</span>
       </div>
-      <span className='tweetStatsNumber'>{comments}</span>
-    </div>
-    <div className='tweetStats'>
-      <div className='tweetStatsIconContainer'>
-        <div className='tweetStatsIcon'>{tweetStatsIcons.retweets}</div>
+      <div className='tweetStats retweetsStats'>
+        <div className='tweetStatsIconContainer'>
+          <div className='tweetStatsIcon'>{tweetStatsIcons.retweets}</div>
+        </div>
+        <span className='tweetStatsNumber'>{retweets}</span>
       </div>
-      <span className='tweetStatsNumber'>{retweets}</span>
-    </div>
-    <div className='tweetStats'>
-      <div className='tweetStatsIconContainer'>
-        <div className='tweetStatsIcon'>{tweetStatsIcons.likes}</div>
+      <div className='tweetStats likesStats'>
+        {/* <div className='tweetStatsIconContainer' onClick={onLikeClick}>
+          <div className='tweetStatsIcon'>{tweetStatsIcons.likes}</div>
+        </div> */}
+        {likeElement}
+        {/* <span className='tweetStatsNumber'>{likes}</span> */}
       </div>
-      <span className='tweetStatsNumber'>{likes}</span>
-    </div>
-    <div className='tweetStats'>
-      <div className='tweetStatsIconContainer'>
-        <div className='tweetStatsIcon'>{tweetStatsIcons.views}</div>
+      <div className='tweetStats viewsStats'>
+        <div className='tweetStatsIconContainer'>
+          <div className='tweetStatsIcon'>{tweetStatsIcons.views}</div>
+        </div>
+        <span className='tweetStatsNumber'>{views}</span>
       </div>
-      <span className='tweetStatsNumber'>{views}</span>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default TweetStats
+export default TweetStats;

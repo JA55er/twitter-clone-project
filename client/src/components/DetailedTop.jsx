@@ -3,15 +3,22 @@ import utilityIcons from '../utils/utilityIcons';
 import { Link } from 'react-router-dom';
 
 const DetailedTop = () => {
+
+  const onPostClick = () => {
+    window.scrollTo({top: 0})
+  }
+
   return (
     <div className='contentTopContainer'>
       <div className='homeContainer'>
-        <Link to={'/'}>
-          <div className='backArrowContainer'>
-            <div className='backArrow'>{utilityIcons.backArrow}</div>
-          </div>
-        </Link>
-        <div className='homeButton'>
+        <div className='backArrowContainer'>
+          <Link to={'/'}>
+            <div className='backArrowLogoContainer'>
+              <div className='backArrow'>{utilityIcons.backArrow}</div>
+            </div>
+          </Link>
+        </div>
+        <div className='homeButton' onClick={onPostClick}>
           <span className='homeSpan'>Post</span>
         </div>
       </div>

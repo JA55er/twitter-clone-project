@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const submitTweet = async (data) => {
-  console.log(data);
-  const response = axios.post(
+  const response = await axios.post(
     'http://localhost:3000/api/tweets/newtweet',
     data,
     {
@@ -11,6 +10,8 @@ const submitTweet = async (data) => {
       },
     }
   );
+
+  console.log(response)
 
   return response.data;
 };

@@ -1,23 +1,37 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
 import TextareaAutosize from 'react-textarea-autosize';
-import { AppContext } from '../App';
 
 import UserProfileIcon from './UserProfileIcon';
 import submitComment from '../api/submitComment';
+import { useDispatch, useSelector } from 'react-redux';
+import { addComment } from '../reducers/detailedTweetSlice';
 
 const CreateComment = ({ id }) => {
   const tweet = id;
 
-  const userFromContext = useContext(AppContext);
-  const token = userFromContext?.user?.token;
-  const userIcon = userFromContext?.user?.icon;
+  const user = useSelector(state => state.user.user)
+
+  const dispatch = useDispatch();
+
+  const token = user?.token;
+  const userIcon = user?.icon;
 
   const [commentText, setCommentText] = useState('');
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-    submitComment({ commentText, token, tweet });
+    try {
+      const submittedComment = await submitComment({
+        commentText,
+        token,
+        tweet,
+      });
+      dispatch(addComment(submittedComment));
+      console.log(submittedComment);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onCommentTextChange = (e) => {

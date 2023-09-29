@@ -4,10 +4,7 @@ import TwitterLogo from './TwitterLogo';
 import headerIcons from '../utils/headerIcons';
 import HeaderAccountMenu from './HeaderAccountMenu';
 
-
 const Header = () => {
-
-
   const headerLinks = [
     {
       label: 'Home',
@@ -61,12 +58,21 @@ const Header = () => {
     },
   ];
 
+  const onTwitterLogoClick = () => {
+    console.log(window.location.href)
+    if (window.location.href === `http://localhost:5173/`) {
+      window.scrollTo({top: 0})
+    }
+  } 
+
   return (
     <div className='headerContainer'>
       <div className='headerContent'>
         <div className='headerTopContentContainer'>
           <div>
-            <TwitterLogo />
+            <div className='scrollTopTwitterLogo' onClick={onTwitterLogoClick}>
+              <TwitterLogo />
+            </div>
             <div className='headerLinkListContainer'>
               {headerLinks.map((link) => {
                 return <HeaderLink link={link} key={link.label} />;

@@ -3,6 +3,8 @@
   padding: 0px;
   box-sizing: border-box;
   font-family: 'Roboto';
+  /* user-drag: none; */
+  -webkit-user-drag: none;
 }
 
 a:-webkit-any-link {
@@ -234,13 +236,21 @@ input[type='reset'] {
   display: flex;
   padding-left: 16px;
   padding-right: 16px;
+  /* justify-content: center; */
   /* max-width: fit-content; */
   flex-shrink: 1;
   height: 53px;
   font-size: 20px;
   font-weight: 700;
-  align-items: center;
+  /* align-items: center; */
   cursor: pointer;
+}
+
+.homeButton {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .foryouFollowingContainer {
@@ -260,7 +270,7 @@ input[type='reset'] {
 }
 
 .foryouContainer:hover {
-  background-color: rgb(231,231,232, 0.5);
+  background-color: rgb(231, 231, 232, 0.5);
   /* opacity: 0.85; */
 }
 
@@ -281,7 +291,7 @@ input[type='reset'] {
 }
 
 .followingContainer:hover {
-  background-color: rgb(231,231,232, 0.5);
+  background-color: rgb(231, 231, 232, 0.5);
   /* opacity: 0.85; */
 }
 
@@ -510,13 +520,48 @@ ion-icon {
   transition: background-color 0.2s ease;
 }
 
-.tweetStatsIconContainer:hover {
+.commentsStats > .tweetStatsIconContainer:hover {
+  background-color: #e1eef6;
+}
+.retweetsStats > .tweetStatsIconContainer:hover {
+  background-color: #e6f3ef;
+}
+.likesStats > .tweetStatsIconContainer:hover {
+  background-color: #f7e2ec;
+}
+.viewsStats > .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
 }
 
-.tweetStatsIconContainer:hover > .tweetStatsIcon {
+.commentsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
   color: #35a6f1;
 }
+.retweetsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+  color: #00ba7c;
+}
+.likesStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+  color: #f84a9b;
+}
+.viewsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+  color: #35a6f1;
+}
+
+.commentsStats > .tweetStatsIconContainer:hover {
+  background-color: #e1eef6;
+}
+.retweetsStats > .tweetStatsIconContainer:hover {
+  background-color: #e6f3ef;
+}
+.likesStats > .tweetStatsIconContainer:hover {
+  background-color: #f7e2ec;
+}
+.viewsStats > .tweetStatsIconContainer:hover {
+  background-color: #e1eef6;
+}
+
+/* .likesIconHover > .tweetStatsIcon:hover {
+  color: #f44336;
+} */
 
 .tweetStatsIcon {
   width: 18.75px;
@@ -547,6 +592,7 @@ ion-icon {
 .loginButtonContainer {
   display: flex;
   justify-content: end;
+  /* width: fit-content; */
 }
 
 .loginAreaContainer {
@@ -576,6 +622,7 @@ ion-icon {
   font-size: 20px;
   color: white;
   font-weight: 700;
+  width: 170px;
 }
 
 .loginButton:hover {
@@ -657,8 +704,8 @@ ion-icon {
 }
 
 .followRecommendAccountContainer:hover {
-  background-color: #EFF1F1;
-} 
+  background-color: #eff1f1;
+}
 
 .followRecommendAccountLeftSide {
   display: flex;
@@ -937,9 +984,6 @@ ion-icon {
   padding: 0px 16px;
 }
 
-.closeModalButton {
-}
-
 .modalLogo {
   width: 30px;
 }
@@ -1060,10 +1104,32 @@ ion-icon {
 }
 
 .backArrowContainer {
+  width: 56px;
   display: flex;
   align-items: center;
-  justify-content: start;
-  width: 56px;
+  /* justify-content: start; */
+}
+
+.backArrowLogoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  height: 36px;
+  width: 36px;
+  margin-left: -9px;
+}
+
+/* .backArrowHover {
+  position: absolute;
+  border-radius: 18px;
+  height: 36px;
+  width: 36px;
+  
+} */
+
+.backArrowLogoContainer:hover {
+  background-color: #e7e7e8;
 }
 
 .backArrow {

@@ -1,17 +1,24 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import TextareaAutosize from 'react-textarea-autosize';
 
 import TweetOptionsIcon from './TweetOptionsIcon';
 import optionIcons from '../utils/optionIcons';
 import UserProfileIcon from './UserProfileIcon';
-import { AppContext } from '../App';
 import submitTweet from '../api/submitTweet';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPosted } from '../reducers/tweetListSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CreateTweet = () => {
-  const userFromContext = useContext(AppContext);
-  const token = userFromContext?.user?.token;
-  const userIcon = userFromContext?.user?.icon;
+  const user = useSelector((state) => state.user.user);
+
+  const token = user?.token;
+  const userIcon = user?.icon;
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const userIconContainer = userIcon ? (
     <UserProfileIcon icon={userIcon} />
@@ -30,9 +37,16 @@ const CreateTweet = () => {
     { icon: optionIcons.location },
   ];
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e.preventDefault();
-    submitTweet({ tweetText, token });
+    try {
+      const newTweet = await submitTweet({ tweetText, token });
+      console.log(newTweet);
+      dispatch(addPosted(newTweet));
+      navigate(`/tweet/${newTweet._id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onTweetTextChange = (e) => {

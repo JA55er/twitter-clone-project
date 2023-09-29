@@ -6,7 +6,7 @@ const TweetAttachment = ({ attachment }) => {
       <div className='tweetAttachmentContainer'>
         <div className='tweetMediaContainer'>
           <div className='tweetMediaTop'>
-            <img className='tweetImage' src={attachment} />
+            <img className='tweetImage' src={attachment}/>
           </div>
           <div className='tweetMediaBottom'></div>
         </div>

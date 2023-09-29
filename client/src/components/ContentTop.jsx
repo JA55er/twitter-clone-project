@@ -1,7 +1,12 @@
 const ContentTop = () => {
+
+  const onHomeClick = () => {
+    window.scrollTo({top: 0})
+  }
+
   return (
     <div className='contentTopContainer'>
-      <div className='homeContainer'>
+      <div className='homeContainer' onClick={onHomeClick}>
         <div className='homeButton'>
           <span className='homeSpan'>Home</span>
         </div>

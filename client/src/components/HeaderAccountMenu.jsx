@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useContext } from 'react';
-import { AppContext } from '../App';
 import headerIcons from '../utils/headerIcons';
 import UserProfileIcon from './UserProfileIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUserAction } from '../reducers/userSlice';
 
 const HeaderAccountMenu = () => {
-  const userFromContext = useContext(AppContext);
+
+  const user = useSelector(state => state.user.user)
+
+  const dispatch = useDispatch()
 
   const [showModal, setShowModal] = useState(null);
 
@@ -14,7 +17,8 @@ const HeaderAccountMenu = () => {
   };
 
   const logOut = () => {
-    userFromContext.setUser(null)
+    // userFromContext.setUser(null)
+    dispatch(logoutUserAction())
     sessionStorage.clear()
   }
 
@@ -29,7 +33,7 @@ const HeaderAccountMenu = () => {
     </>
   );
 
-  const user = userFromContext?.user;
+  // const user = userFromContext?.user;
   const userIcon = user?.icon;
 
   if (!user) return;

@@ -1,28 +1,21 @@
-import { useState, useEffect, useContext } from 'react';
-
+import { useParams } from 'react-router-dom';
 import Tweet from './Tweet';
-import getTweets from '../api/getTweets'
-import { AppContext } from '../App';
+import { useSelector } from 'react-redux';
 
 const TweetsList = () => {
 
-  const appContext = useContext(AppContext)
+  const { id } = useParams()
 
-  const tweets = appContext.tweets
+  console.log(id)
 
-  // const [tweets, setTweets] = useState([]);
+  const tweets = useSelector((state) => state.tweetsList.tweets);
 
-  // useEffect(() => {
-  //   const setFunc = async () => {
-  //     setTweets(await getTweets());
-  //   };
-  //   setFunc();
-  // }, []);
+  console.log('tweetList tweets array: ',tweets)
 
   return (
     <div>
       {tweets.map((tweet) => {
-        return <Tweet tweet={tweet} key={tweet._id}/>;
+        return <Tweet tweet={tweet} key={tweet._id} />;
       })}
     </div>
   );

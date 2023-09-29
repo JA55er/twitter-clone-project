@@ -1,40 +1,40 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import headerIcons from '../utils/headerIcons';
 import LoginButtons from './LoginButtons';
 import { Link, redirect, useNavigate } from 'react-router-dom';
 import utilityIcons from '../utils/utilityIcons';
 import login from '../api/login';
-import { AppContext } from '../App';
+import { useDispatch } from 'react-redux';
+import { saveUserAction } from '../reducers/userSlice';
 
 const SigninModal = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-  const appUser = useContext(AppContext)
+  const dispatch = useDispatch();
 
   const onFormSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const credentials = {
       username,
-      password
-    }
-    const user = await login(credentials)
-    sessionStorage.setItem('user', JSON.stringify(user))
-    appUser.setUser(user)
+      password,
+    };
+    const user = await login(credentials);
+    sessionStorage.setItem('user', JSON.stringify(user));
+    dispatch(saveUserAction(user));
     if (user) {
-      navigate('/')
+      navigate('/');
     }
-  }
+  };
 
   const onUsernameChange = (e) => {
-    setUsername(e.target.value)
-  }
+    setUsername(e.target.value);
+  };
   const onPasswordChange = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   return (
     <div className='modalContainer'>
