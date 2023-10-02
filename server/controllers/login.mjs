@@ -36,7 +36,7 @@ loginRouter.post('/', async (req, res) => {
     icon: user.icon,
     likes: user.likes,
     follows: user.follows,
-    
+    tweets: user.tweets
   });
 });
 

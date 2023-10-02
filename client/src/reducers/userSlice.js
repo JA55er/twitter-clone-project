@@ -23,12 +23,12 @@ export const userSlice = createSlice({
     userCommentAction: (state, action) => {
 
     },
-    userTweetAction: (state, action) => {
-      
+    userCreateTweetAction: (state, action) => {
+      state.user.tweets = state.user.tweets.concat(action.payload)
     }
   }
 })
 
-export const { saveUserAction, logoutUserAction, userLikeTweetAction, userDislikeTweetAction} = userSlice.actions
+export const { saveUserAction, logoutUserAction, userLikeTweetAction, userDislikeTweetAction, userCreateTweetAction} = userSlice.actions
 
 export default userSlice.reducer

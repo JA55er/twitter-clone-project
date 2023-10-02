@@ -9,6 +9,7 @@ import submitTweet from '../api/submitTweet';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPosted } from '../reducers/tweetListSlice';
 import { useNavigate } from 'react-router-dom';
+import { userCreateTweetAction } from '../reducers/userSlice';
 
 const CreateTweet = () => {
   const user = useSelector((state) => state.user.user);
@@ -41,8 +42,8 @@ const CreateTweet = () => {
     e.preventDefault();
     try {
       const newTweet = await submitTweet({ tweetText, token });
-      console.log(newTweet);
       dispatch(addPosted(newTweet));
+      dispatch(userCreateTweetAction(newTweet._id))
       navigate(`/tweet/${newTweet._id}`);
     } catch (error) {
       console.log(error);

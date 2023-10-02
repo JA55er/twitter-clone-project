@@ -26,6 +26,5 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(uniqueValidator)
 
-
 export default mongoose.model('User', userSchema)
 

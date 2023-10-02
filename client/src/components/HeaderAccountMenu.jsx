@@ -5,10 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../reducers/userSlice';
 
 const HeaderAccountMenu = () => {
+  const user = useSelector((state) => state.user.user);
 
-  const user = useSelector(state => state.user.user)
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(null);
 
@@ -17,23 +16,21 @@ const HeaderAccountMenu = () => {
   };
 
   const logOut = () => {
-    // userFromContext.setUser(null)
-    dispatch(logoutUserAction())
-    sessionStorage.clear()
-  }
+    dispatch(logoutUserAction());
+    sessionStorage.clear();
+  };
 
   const modal = !showModal ? null : (
     <>
       <div className='transparentOverlay' onClick={toggleModal}></div>
       <div className='accountModalContainer'>
-        <div className="loggoutButton" onClick={logOut}>
+        <div className='loggoutButton' onClick={logOut}>
           <span className='loggoutButtonText'>Log out JA55er</span>
         </div>
       </div>
     </>
   );
 
-  // const user = userFromContext?.user;
   const userIcon = user?.icon;
 
   if (!user) return;

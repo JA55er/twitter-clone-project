@@ -29,8 +29,6 @@ const CommentStats = ({ stats, tweet }) => {
 
   const [likesState, setLikesState] = useState(likes);
 
-  // fix!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
   const onLikeClick = async (e) => {
     e.preventDefault();
     try {

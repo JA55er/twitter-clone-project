@@ -6,6 +6,7 @@ import UserProfileIcon from './UserProfileIcon';
 import submitComment from '../api/submitComment';
 import { useDispatch, useSelector } from 'react-redux';
 import { addComment } from '../reducers/detailedTweetSlice';
+import { userCreateTweetAction } from '../reducers/userSlice';
 
 const CreateComment = ({ id }) => {
   const tweet = id;
@@ -28,6 +29,7 @@ const CreateComment = ({ id }) => {
         tweet,
       });
       dispatch(addComment(submittedComment));
+      dispatch(userCreateTweetAction(submittedComment._id))
       console.log(submittedComment);
     } catch (error) {
       console.log(error);
