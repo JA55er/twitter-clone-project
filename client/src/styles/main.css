@@ -401,6 +401,15 @@ ion-icon {
   color: #fff;
 }
 
+.tweetLinkHover {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tweetLinkHover:hover {
+  background-color: #f7f7f7;
+}
+
 .tweetOptionsIcon {
   fill: #1d9bf0;
   width: 18px;
@@ -410,19 +419,20 @@ ion-icon {
   border-bottom: #eff3f4 solid 1px;
   display: flex;
   flex-direction: row;
-  cursor: pointer;
+  /* cursor: pointer; */
   padding-top: 12px;
   padding-left: 16px;
   padding-right: 16px;
-  transition: background-color 0.2s ease;
+  /* transition: background-color 0.2s ease; */
 }
 
-.tweetContainer:hover {
+/* .tweetContainer:hover {
   background-color: #f7f7f7;
-}
+} */
 
 .TweetProfileIconContainer {
   padding-right: 12px;
+  height: fit-content;
   display: flex;
 }
 
@@ -1103,6 +1113,7 @@ ion-icon {
 
 .backArrowContainer {
   width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   /* justify-content: start; */
@@ -1118,14 +1129,6 @@ ion-icon {
   margin-left: -9px;
 }
 
-/* .backArrowHover {
-  position: absolute;
-  border-radius: 18px;
-  height: 36px;
-  width: 36px;
-  
-} */
-
 .backArrowLogoContainer:hover {
   background-color: #e7e7e8;
 }
@@ -1133,4 +1136,144 @@ ion-icon {
 .backArrow {
   display: flex;
   width: 20px;
+  height: 20px;
+}
+
+.profileContainer {
+  width: 600px;
+}
+
+.profileStickyTopNameContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.profileTopContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileCoverContainer {
+  display: flex;
+  overflow: hidden;
+  height: 200px;
+  width: 100%;
+}
+
+.profileCoverImage {
+  width: 100%;
+  object-fit: fill;
+  max-height: 100%;
+}
+
+.profileTopMainContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  padding-top: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-bottom: #eff3f4 solid 1px;
+}
+
+.profileTopMenuContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.profileTopMenuIconContainer {
+  display: flex;
+  width: 25%;
+  min-width: 48px;
+  margin-top: -15%;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: #fff solid 4px;
+}
+
+.profileTopIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.profileTopRightContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.profileTopRightButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+.profileTopRightSettingsButtonContainer {
+  height: 48px;
+  width: 44px;
+}
+
+.profileTopRightButtonCircle {
+  height: 36px;
+  width: 36px;
+  border: #cfd9de solid 1px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileTopRightButtonCircle:hover {
+  background-color: rgba(15, 20, 25, 0.1);
+  cursor: pointer;
+}
+
+.profileTopRightSettingsButton {
+  width: 18.75px;
+  height: 18.75px;
+}
+
+.profileTopRightRingButtonContainer {
+  height: 48px;
+  width: 44px;
+}
+
+.profileTopRightRingButton {
+  width: 24px;
+  height: 24px;
+}
+
+.profileTopRightFollowButtonContainer {
+  height: 48px;
+}
+
+.profileTopRightFollowButtonCircle {
+  border: #cfd9de solid 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  border-radius: 18px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.profileTopRightFollowButtonCircle:hover {
+}
+
+.profileTopRightFollowButtonText {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.profileNameContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.profileNameText {
+  font-size: 20px;
+  font-weight: 800;
 }

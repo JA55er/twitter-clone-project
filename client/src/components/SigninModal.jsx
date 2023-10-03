@@ -22,7 +22,9 @@ const SigninModal = () => {
       password,
     };
     const user = await login(credentials);
-    sessionStorage.setItem('user', JSON.stringify(user));
+    const token = user.token
+    // sessionStorage.setItem('user', JSON.stringify(user));
+    sessionStorage.setItem('token', JSON.stringify(token));
     dispatch(saveUserAction(user));
     if (user) {
       navigate('/');

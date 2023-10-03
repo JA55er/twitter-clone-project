@@ -26,7 +26,8 @@ const RegisterModal = () => {
       const user = await register(credentials);
       dispatch(saveUserAction(user));
       console.log('user: ', user);
-      sessionStorage.setItem('user', JSON.stringify(user));
+      // sessionStorage.setItem('user', JSON.stringify(user));
+      sessionStorage.setItem('token', JSON.stringify(user.token));
       if (user) {
         navigate('/');
       }

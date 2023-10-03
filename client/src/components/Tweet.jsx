@@ -6,7 +6,6 @@ import TweetProfileName from './TweetProfileName';
 import { Link } from 'react-router-dom';
 
 const Tweet = ({ tweet }) => {
-  
   if (!tweet) return <></>;
 
   const username = tweet.user?.username;
@@ -15,24 +14,28 @@ const Tweet = ({ tweet }) => {
   // const stats = tweet.stats;
   const icon = tweet.user?.icon;
 
-  console.log('tweet', tweet);
+  const onProfileIconClick = (e) => {
+    e.stopPropagation();
+  };
 
   return (
     <>
-      <Link to={`/tweet/${tweet._id}`}>
-        <div className='tweetContainer'>
-          <div className='TweetProfileIconContainer'>
-            <UserProfileIcon icon={icon} />
-          </div>
-          <div className='tweetRightContainer'>
-            <TweetProfileName username={username} />
-            <TweetText text={text} />
-            <TweetAttachment attachment={attachment} />
-            <TweetStats tweet={tweet} />
-            {/* <TweetStats stats={stats} tweet={tweet}/> */}
-          </div>
+      <div className='tweetContainer'>
+        <div className='TweetProfileIconContainer'>
+          <Link
+            to={`/profile/${tweet.user._id}`}
+            onClick={onProfileIconClick}
+          >
+            <UserProfileIcon icon={icon} userId={tweet.user._id} />
+          </Link>
         </div>
-      </Link>
+        <div className='tweetRightContainer'>
+          <TweetProfileName username={username} />
+          <TweetText text={text} />
+          <TweetAttachment attachment={attachment} />
+          <TweetStats tweet={tweet} />
+        </div>
+      </div>
     </>
   );
 };

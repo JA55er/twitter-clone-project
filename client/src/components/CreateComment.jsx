@@ -30,6 +30,7 @@ const CreateComment = ({ id }) => {
       });
       dispatch(addComment(submittedComment));
       dispatch(userCreateTweetAction(submittedComment._id))
+      setCommentText('')
       console.log(submittedComment);
     } catch (error) {
       console.log(error);
@@ -69,6 +70,8 @@ const CreateComment = ({ id }) => {
             placeholder='What is happening?!'
             rows={3}
             onChange={onCommentTextChange}
+            value={commentText}
+            spellCheck='false'
           />
         </div>
         <div

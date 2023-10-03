@@ -36,14 +36,36 @@ loginRouter.post('/', async (req, res) => {
     icon: user.icon,
     likes: user.likes,
     follows: user.follows,
-    tweets: user.tweets
+    tweets: user.tweets,
   });
+});
+
+loginRouter.get('/tokenlogin', async (req, res) => {
+  try {
+    if (req.user) {
+      const user = req.user;
+      // delete sanitizedUser.passwordHash
+      res.status(200).json({
+        token: req.headers.authorization,
+        username: user.username,
+        name: user.name,
+        id: user._id.valueOf(),
+        icon: user.icon,
+        likes: user.likes,
+        follows: user.follows,
+        tweets: user.tweets,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 loginRouter.get('/', async (req, res) => {
   const users = await User.find();
   res.send(users);
 });
+
 loginRouter.post('/authreq', async (req, res) => {
   const token = req.token;
   const user = req.user;

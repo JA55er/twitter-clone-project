@@ -19,6 +19,8 @@ import {
 import { setScroll } from './reducers/scrollSlice';
 import { saveUserAction } from './reducers/userSlice';
 import { setDetailedTweet } from './reducers/detailedTweetSlice';
+import tokenLogin from './api/tokenlogin';
+import Profile from './components/Profile';
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -59,15 +61,19 @@ const App = () => {
 
   useEffect(() => {
     dispatch(updateDetailedInList(detailedTweet));
-    console.log('detailed Tweet: ', detailedTweet);
-    console.log('tweets list: ', tweets);
   }, [detailedTweet]);
 
   useEffect(() => {
-    const savedUser = sessionStorage.getItem('user');
-    const retrievedUser = JSON.parse(savedUser);
-    console.log('user!!: ', user);
-    dispatch(saveUserAction(retrievedUser));
+    const savedToken = JSON.parse(sessionStorage.getItem('token'));
+    const loginOnrefresh = async () => {
+      console.log(savedToken)
+      const refUser = await tokenLogin(savedToken);
+      console.log(refUser)
+      dispatch(saveUserAction(refUser));
+    };
+    if (savedToken) {
+      loginOnrefresh();
+    }
   }, []);
 
   useEffect(() => {
@@ -107,6 +113,18 @@ const App = () => {
             <div className='appContainer'>
               <Header />
               <DetailedTweet />
+              <Sidebar />
+            </div>
+          </div>
+        }
+      ></Route>
+      <Route
+        path='/profile/:id'
+        element={
+          <div>
+            <div className='appContainer'>
+              <Header />
+              <Profile />
               <Sidebar />
             </div>
           </div>

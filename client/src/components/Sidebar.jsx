@@ -7,11 +7,11 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const Sidebar = () => {
-  const user = useSelector((state) => state.user.user);
+  // const user = useSelector((state) => state.user.user);
 
-  // const loggedUser = sessionStorage.getItem('user');
+  const loggedUser = sessionStorage.getItem('token');
 
-  if (!user) {
+  if (!loggedUser) {
     return (
       <div className='sidebarContainer'>
         <div className='sidebarContent'>

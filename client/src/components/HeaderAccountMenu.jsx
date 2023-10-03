@@ -20,20 +20,22 @@ const HeaderAccountMenu = () => {
     sessionStorage.clear();
   };
 
+  const userIcon = user?.icon;
+
+  console.log(user);
+
+  if (!user) return;
+
   const modal = !showModal ? null : (
     <>
       <div className='transparentOverlay' onClick={toggleModal}></div>
       <div className='accountModalContainer'>
         <div className='loggoutButton' onClick={logOut}>
-          <span className='loggoutButtonText'>Log out JA55er</span>
+          <span className='loggoutButtonText'>Log out {user.username}</span>
         </div>
       </div>
     </>
   );
-
-  const userIcon = user?.icon;
-
-  if (!user) return;
 
   return (
     <>

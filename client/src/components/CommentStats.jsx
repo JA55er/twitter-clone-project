@@ -25,7 +25,7 @@ const CommentStats = ({ stats, tweet }) => {
 
   const isLiked = user?.likes?.find((like) => like === id);
 
-  const data = JSON.parse(sessionStorage.getItem('user'));
+  // const data = JSON.parse(sessionStorage.getItem('user'));
 
   const [likesState, setLikesState] = useState(likes);
 
@@ -37,16 +37,16 @@ const CommentStats = ({ stats, tweet }) => {
       if (isLiked) {
         console.log('inside dislike');
         dispatch(userDislikeTweetAction(tweet._id));
-        data.likes = user.likes;
-        sessionStorage.setItem('user', JSON.stringify(data));
+        // data.likes = user.likes;
+        // sessionStorage.setItem('user', JSON.stringify(data));
         setLikesState(likesState - 1);
         dispatch(dislikeTweetAction(likes - 1));
       } else {
         console.log('inside like');
         // console.log(tweet._id);
         dispatch(userLikeTweetAction(tweet._id));
-        data.likes = user.likes;
-        sessionStorage.setItem('user', JSON.stringify(data));
+        // data.likes = user.likes;
+        // sessionStorage.setItem('user', JSON.stringify(data));
         setLikesState(likesState + 1);
         dispatch(likeTweetAction(likes + 1));
       }

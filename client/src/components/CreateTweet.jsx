@@ -22,7 +22,7 @@ const CreateTweet = () => {
   const navigate = useNavigate();
 
   const userIconContainer = userIcon ? (
-    <UserProfileIcon icon={userIcon} />
+    <UserProfileIcon icon={userIcon} userId={user.id}/>
   ) : (
     <div className='container' style={{ width: `40px` }}></div>
   );
@@ -43,7 +43,8 @@ const CreateTweet = () => {
     try {
       const newTweet = await submitTweet({ tweetText, token });
       dispatch(addPosted(newTweet));
-      dispatch(userCreateTweetAction(newTweet._id))
+      dispatch(userCreateTweetAction(newTweet._id));
+      setTweetText('');
       navigate(`/tweet/${newTweet._id}`);
     } catch (error) {
       console.log(error);
@@ -65,6 +66,8 @@ const CreateTweet = () => {
               placeholder='What is happening?!'
               rows={3}
               onChange={onTweetTextChange}
+              value={tweetText}
+              spellCheck='false'
             />
           </div>
           <div className='writeTweetOptionsContainer'>

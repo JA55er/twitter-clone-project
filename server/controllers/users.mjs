@@ -33,13 +33,12 @@ usersRouter.post('/newuser', async (req, res) => {
 
       const newUser = {
         token,
-        comments: savedUser.comments,
-        follow: savedUser.follows,
-        icon: savedUser.icon,
-        likes: savedUser.likes,
-        tweets: savedUser.tweets,
         username: savedUser.username,
         id: savedUser._id.valueOf(),
+        icon: savedUser.icon,
+        likes: savedUser.likes,
+        follow: savedUser.follows,
+        tweets: savedUser.tweets,
       };
 
       res.json(newUser);

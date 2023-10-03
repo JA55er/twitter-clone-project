@@ -18,8 +18,6 @@ import { likePostFromList } from '../reducers/tweetListSlice';
 const TweetStats = ({ tweet }) => {
   const location = useLocation();
 
-  console.log(location);
-
   const user = useSelector((state) => state.user.user);
 
   const detailedTweet = useSelector(
@@ -36,10 +34,11 @@ const TweetStats = ({ tweet }) => {
 
   const isLiked = user?.likes?.find((like) => like === id);
 
-  const sessionData = JSON.parse(sessionStorage.getItem('user'));
+  // const sessionData = JSON.parse(sessionStorage.getItem('user'));
 
   const onLikeClick = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (user) {
       console.log(user)
       try {
@@ -47,16 +46,14 @@ const TweetStats = ({ tweet }) => {
         console.log('inside try');
         if (isLiked) {
           console.log('inside dislike');
-          console.log('user likes before: ', user.likes);
           dispatch(userDislikeTweetAction(tweet._id));
-          console.log('user likes after: ', user.likes);
-          sessionData.likes = sessionData.likes.filter((likedTweet) => {
-            console.log('checked tweet id: ', tweet._id);
-            console.log('tweet id: ', id);
-            return likedTweet !== id;
-          });
-          console.log(sessionData);
-          sessionStorage.setItem('user', JSON.stringify(sessionData));
+          // sessionData.likes = sessionData.likes.filter((likedTweet) => {
+          //   console.log('checked tweet id: ', tweet._id);
+          //   console.log('tweet id: ', id);
+          //   return likedTweet !== id;
+          // });
+          // console.log(sessionData);
+          // sessionStorage.setItem('user', JSON.stringify(sessionData));
           console.log(id);
           console.log(detailedTweet._id);
           if (location.pathname === '/') {
@@ -69,14 +66,9 @@ const TweetStats = ({ tweet }) => {
           }
         } else {
           console.log('inside like');
-          console.log('user likes before: ', user.likes);
           dispatch(userLikeTweetAction(tweet._id));
-          console.log('user likes after: ', user.likes);
-          sessionData.likes = sessionData.likes.concat(id);
-          console.log(sessionData);
-          sessionStorage.setItem('user', JSON.stringify(sessionData));
-          console.log(id);
-          console.log(detailedTweet._id);
+          // sessionData.likes = sessionData.likes.concat(id);
+          // sessionStorage.setItem('user', JSON.stringify(sessionData));
           if (location.pathname === '/') {
             console.log('dispatching to list');
             dispatch(likePostFromList({ likes: likes + 1, id }));
@@ -94,7 +86,6 @@ const TweetStats = ({ tweet }) => {
     }
   };
 
-  console.log(tweet);
 
   const likeElement = isLiked ? (
     <>
@@ -116,7 +107,6 @@ const TweetStats = ({ tweet }) => {
     </>
   );
 
-  // console.log(likesState)
 
   return (
     <div className='tweetStatsContainer'>

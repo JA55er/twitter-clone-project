@@ -1,21 +1,29 @@
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Tweet from './Tweet';
 import { useSelector } from 'react-redux';
 
-const TweetsList = () => {
+const TweetsList = ({tweets}) => {
+  const navigate = useNavigate();
 
-  const { id } = useParams()
+  const onTweetClick = (id) => {
+    console.log(id);
+    navigate(`/tweet/${id}`);
+  };
 
-  console.log(id)
-
-  const tweets = useSelector((state) => state.tweetsList.tweets);
-
-  console.log('tweetList tweets array: ',tweets)
+  // const tweets = useSelector((state) => state.tweetsList.tweets);
 
   return (
     <div>
       {tweets.map((tweet) => {
-        return <Tweet tweet={tweet} key={tweet._id} />;
+        return (
+          <div
+            className='tweetLinkHover'
+            key={tweet._id}
+            onClick={() => onTweetClick(tweet._id)}
+          >
+            <Tweet tweet={tweet} key={tweet._id} />
+          </div>
+        );
       })}
     </div>
   );
