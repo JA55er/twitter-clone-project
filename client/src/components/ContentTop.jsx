@@ -1,8 +1,7 @@
 const ContentTop = () => {
-
   const onHomeClick = () => {
-    window.scrollTo({top: 0})
-  }
+    window.scrollTo({ top: 0 });
+  };
 
   return (
     <div className='contentTopContainer'>
@@ -13,10 +12,14 @@ const ContentTop = () => {
       </div>
       <div className='foryouFollowingContainer'>
         <div className='foryouContainer'>
+          <div></div>
           <span className='foryouSpan'>For you</span>
+          <div className='foryouContainerActive'></div>
         </div>
-        <div className='followingContainer'>
-          <span className='followingSpan'>Following</span>
+        <div className='foryouContainer'>
+          <div></div>
+          <span className='foryouSpan'>Following</span>
+          <div></div>
         </div>
       </div>
     </div>

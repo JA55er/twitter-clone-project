@@ -66,9 +66,9 @@ const App = () => {
   useEffect(() => {
     const savedToken = JSON.parse(sessionStorage.getItem('token'));
     const loginOnrefresh = async () => {
-      console.log(savedToken)
+      // console.log(savedToken)
       const refUser = await tokenLogin(savedToken);
-      console.log(refUser)
+      // console.log(refUser)
       dispatch(saveUserAction(refUser));
     };
     if (savedToken) {

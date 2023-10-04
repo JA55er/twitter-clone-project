@@ -30,7 +30,6 @@ const DetailedTweet = () => {
     navigate(`/tweet/${id}`);
   };
 
-  console.log('detailed component');
 
   if (Object.keys(tweet).length === 0) {
     return (

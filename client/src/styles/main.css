@@ -210,6 +210,7 @@ input[type='reset'] {
 
 .contentContainer {
   width: 600px;
+  margin-right: 20px;
   height: fit-content;
 }
 
@@ -240,8 +241,7 @@ input[type='reset'] {
   /* max-width: fit-content; */
   flex-shrink: 1;
   height: 53px;
-  font-size: 20px;
-  font-weight: 700;
+
   /* align-items: center; */
   cursor: pointer;
 }
@@ -253,6 +253,11 @@ input[type='reset'] {
   align-items: center;
 }
 
+.homeSpan {
+  font-size: 20px;
+  font-weight: 700;
+}
+
 .foryouFollowingContainer {
   display: flex;
   justify-content: space-around;
@@ -261,12 +266,21 @@ input[type='reset'] {
 
 .foryouContainer {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   user-select: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+.foryouContainerActive {
+  height: 4px;
+  width: 56px;
+  border-radius: 2px;
+  margin-top: -4px;
+  background-color: #1a8cd8;
 }
 
 .foryouContainer:hover {
@@ -597,6 +611,7 @@ ion-icon {
   flex-direction: column;
   flex: 1;
   align-self: stretch;
+  margin-right: 90px;
 }
 
 .loginButtonContainer {
@@ -1152,6 +1167,7 @@ ion-icon {
 .profileTopContainer {
   display: flex;
   flex-direction: column;
+  border-bottom: #eff3f4 solid 1px;
 }
 
 .profileCoverContainer {
@@ -1174,7 +1190,6 @@ ion-icon {
   padding-top: 12px;
   padding-left: 16px;
   padding-right: 16px;
-  border-bottom: #eff3f4 solid 1px;
 }
 
 .profileTopMenuContainer {
@@ -1270,10 +1285,70 @@ ion-icon {
 
 .profileNameContainer {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .profileNameText {
   font-size: 20px;
   font-weight: 800;
+}
+
+.profileBioContainer {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.profileBioText {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.profileUserInfoContainer {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 12px;
+}
+
+.profileUserInfoItemContainer {
+  display: flex;
+  flex-direction: row;
+  margin-right: 12px;
+  align-items: center;
+}
+
+.profileUserInfoItemIcon {
+  width: 18.75px;
+  height: 18.75px;
+  margin-right: 4px;
+  margin-left: -3px;
+  color: #666;
+}
+
+.profileUserInfoItemText {
+  font-size: 15px;
+  font-weight: 400;
+  color: #666;
+}
+
+.profileUserFollowInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.profileUserFollowContainer {
+  margin-right: 20px;
+}
+
+.profileUserFollowNumber {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.profileUserFollowText {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
 }

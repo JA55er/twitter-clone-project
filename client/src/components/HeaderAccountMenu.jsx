@@ -22,7 +22,7 @@ const HeaderAccountMenu = () => {
 
   const userIcon = user?.icon;
 
-  console.log(user);
+  // console.log(user);
 
   if (!user) return;
 

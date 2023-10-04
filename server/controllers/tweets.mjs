@@ -43,7 +43,12 @@ tweetsRouter.post('/newtweet', async (req, res) => {
   }
   try {
     //get random generated image
-    const newImage = await axios.get('https://picsum.photos/680/510');
+    const newImage = await axios.get(
+      `https://picsum.photos/${Math.floor(
+        getRandomArbitrary(200, 1000)
+      )}/${Math.floor(getRandomArbitrary(200, 1000))}`
+    );
+    // const newImage = await axios.get('https://picsum.photos/680/510');
     const imageURL = newImage.request.res.responseUrl;
     // const comments = Math.floor(getRandomArbitrary(2, 7));
     const retweets = Math.floor(getRandomArbitrary(2, 7));

@@ -21,13 +21,8 @@ const Tweet = ({ tweet }) => {
   return (
     <>
       <div className='tweetContainer'>
-        <div className='TweetProfileIconContainer'>
-          <Link
-            to={`/profile/${tweet.user._id}`}
-            onClick={onProfileIconClick}
-          >
-            <UserProfileIcon icon={icon} userId={tweet.user._id} />
-          </Link>
+        <div className='TweetProfileIconContainer' onClick={onProfileIconClick}>
+          <UserProfileIcon icon={icon} userId={tweet.user._id} />
         </div>
         <div className='tweetRightContainer'>
           <TweetProfileName username={username} />

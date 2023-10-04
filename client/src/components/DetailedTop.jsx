@@ -8,6 +8,8 @@ const DetailedTop = () => {
     window.scrollTo({top: 0})
   }
 
+  // fix: html naming
+
   return (
     <div className='contentTopContainer'>
       <div className='homeContainer'>

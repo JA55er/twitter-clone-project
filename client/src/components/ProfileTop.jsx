@@ -1,13 +1,17 @@
 import React from 'react';
 import headerIcons from '../utils/headerIcons';
 import optionIcons from '../utils/optionIcons';
+import utilityIcons from '../utils/utilityIcons';
 
-const ProfileTop = ({ user }) => {
+const ProfileTop = ({ userProfile }) => {
+
+  console.log(userProfile)
+
   return (
     <div className='profileTopContainer'>
       <div className='profileCoverContainer'>
         <img
-          src='https://fastly.picsum.photos/id/93/600/200.jpg?hmac=RVzFDpAfxzk_eb_vtowlnRVO6IHZE7lEt5GnTrdQJig'
+          src={userProfile.info.cover}
           alt=''
           className='profileCoverImage'
         />
@@ -17,7 +21,7 @@ const ProfileTop = ({ user }) => {
           <div className='profileTopMenuIconContainer'>
             <img
               className='profileTopIcon'
-              src='https://fastly.picsum.photos/id/826/200/200.jpg?hmac=WlCuCjxEhXh_s4IkOpulPoB-LOoGjfZwP4GjNnkzTLA'
+              src={userProfile.icon}
               alt=''
             />
           </div>
@@ -40,15 +44,71 @@ const ProfileTop = ({ user }) => {
               <div className='profileTopRightFollowButtonContainer'>
                 <div className='profileTopRightFollowButtonCircle'>
                   <div className='profileTopRightFollowButton'>
-                    <span className='profileTopRightFollowButtonText'>Following</span>
+                    <span className='profileTopRightFollowButtonText'>
+                      Following
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="profileNameContainer">
-          <span className='profileNameText'>JA55er</span>
+        <div className='profileNameContainer'>
+          <span className='profileNameText'>{userProfile.username}</span>
+        </div>
+        <div className='profileBioContainer'>
+          <div className='profileBioText'>
+            {userProfile.info.bio}
+          </div>
+        </div>
+        <div className='profileUserInfoContainer'>
+          <div className='profileUserInfoItemContainer'>
+            <div className='profileUserInfoItemIcon'>
+              {utilityIcons.birthday}
+            </div>
+            <div className='profileUserInfoItemText'>Born March 31</div>
+          </div>
+          <div className='profileUserInfoItemContainer'>
+            <div className='profileUserInfoItemIcon'>
+              {utilityIcons.calendar}
+            </div>
+            <div className='profileUserInfoItemText'>Joined April 2019</div>
+          </div>
+        </div>
+        <div className='profileUserFollowInfoContainer'>
+          <div className='profileUserFollowContainer'>
+            <span className='profileUserFollowNumber'>{userProfile.info.following} </span>
+            <span className='profileUserFollowText'>Following</span>
+          </div>
+          <div className='profileUserFollowContainer'>
+            <span className='profileUserFollowNumber'>{userProfile.info.followers} </span>
+            <span className='profileUserFollowText'>Followers</span>
+          </div>
+        </div>
+      </div>
+      {/*fix: change css naming */}
+      <div className='contentTopContainer'>
+        <div className='foryouFollowingContainer'>
+          <div className='foryouContainer'>
+            <div></div>
+            <span className='foryouSpan'>Posts</span>
+            <div className='foryouContainerActive'></div>
+          </div>
+          <div className='foryouContainer'>
+            <div></div>
+            <span className='foryouSpan'>Replies</span>
+            <div></div>
+          </div>
+          <div className='foryouContainer'>
+            <div></div>
+            <span className='foryouSpan'>Media</span>
+            <div></div>
+          </div>
+          <div className='foryouContainer'>
+            <div></div>
+            <span className='foryouSpan'>Likes</span>
+            <div></div>
+          </div>
         </div>
       </div>
     </div>
