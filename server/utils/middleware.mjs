@@ -1,29 +1,29 @@
-import jwb from 'jsonwebtoken'
-import User from '../models/user.mjs'
+import jwb from 'jsonwebtoken';
+import User from '../models/user.mjs';
 
 const tokenExtractor = (req, res, next) => {
-  const authorization = req.get('Authorization')
+  const authorization = req.get('Authorization');
   if (authorization) {
-    req.token = authorization
+    req.token = authorization;
   }
-  next()
-}
+  next();
+};
 
 const userExtractor = async (req, res, next) => {
-  const token = req.token
-  if(token) {
-    const decodedToken = jwb.verify(token, process.env.secret)
-    req.user = await User.findById(decodedToken.id)
+  const token = req.token;
+  if (token) {
+    // const SECRET = 'htrjtrjntdnjt';
+    // const decodedToken = jwb.verify(token, SECRET);
+    const decodedToken = jwb.verify(token, process.env.SECRET);
+    req.user = await User.findById(decodedToken.id);
   }
-  
-  next()
-}
+
+  next();
+};
 
 const middleware = {
   tokenExtractor,
-  userExtractor
-}
+  userExtractor,
+};
 
-export default middleware
-
-
+export default middleware;

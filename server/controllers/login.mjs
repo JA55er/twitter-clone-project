@@ -7,7 +7,7 @@ import jwb from 'jsonwebtoken';
 const loginRouter = express.Router();
 
 loginRouter.post('/', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const body = req.body;
   const user = await User.findOne({ username: body.username });
   const passwordCorrect =
@@ -26,6 +26,9 @@ loginRouter.post('/', async (req, res) => {
     id: user._id.valueOf(),
   };
 
+  // const SECRET = 'htrjtrjntdnjt'
+
+  // const token = jwb.sign(userForToken, SECRET);
   const token = jwb.sign(userForToken, process.env.SECRET);
 
   res.status(200).json({

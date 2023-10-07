@@ -1,7 +1,8 @@
 import axios from 'axios'
+import BASE_URL from '../utils/baseUrl';
 
 const register = async (credentials) => {
-  const response = await axios.post('http://localhost:3000/api/users/newuser', credentials)
+  const response = await axios.post(`${BASE_URL}/api/users/newuser`, credentials)
   const user = response.data
   console.log(user)
   return user

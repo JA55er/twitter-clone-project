@@ -1,8 +1,9 @@
 import axios from 'axios';
+import BASE_URL from '../utils/baseUrl';
 
 const submitComment = async (data) => {
   const response = await axios.post(
-    'http://localhost:3000/api/comments/newcomment',
+    `${BASE_URL}/api/comments/newcomment`,
     data,
     { headers: { Authorization: data.token } }
   );

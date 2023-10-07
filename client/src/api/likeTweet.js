@@ -1,8 +1,9 @@
 import axios from 'axios';
+import BASE_URL from '../utils/baseUrl';
 
 const likeTweet = async (data) => {
   console.log(data)
-  const response = await axios.post('http://localhost:3000/api/likes/like/', data, {
+  const response = await axios.post(`${BASE_URL}/api/likes/like/`, data, {
     headers: {
       Authorization: data.token,
     },

@@ -16,13 +16,17 @@ import {
   getTweetsFromServer,
   updateDetailedInList,
 } from './reducers/tweetListSlice';
-import { setScroll } from './reducers/scrollSlice';
+// import { setScroll } from './reducers/scrollSlice';
 import { saveUserAction } from './reducers/userSlice';
 import { setDetailedTweet } from './reducers/detailedTweetSlice';
-import tokenLogin from './api/tokenlogin';
+
+///////uncommentTokenLogin
+import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
 
 const App = () => {
+
+  console.log(process.env.NODE_ENV)
   const user = useSelector((state) => state.user.user);
 
   const url = useLocation();
@@ -53,6 +57,9 @@ const App = () => {
   //   };
   // }, []);
 
+
+
+
   const tweets = useSelector((state) => state.tweetsList.tweets);
 
   const detailedTweet = useSelector(
@@ -66,9 +73,7 @@ const App = () => {
   useEffect(() => {
     const savedToken = JSON.parse(sessionStorage.getItem('token'));
     const loginOnrefresh = async () => {
-      // console.log(savedToken)
       const refUser = await tokenLogin(savedToken);
-      // console.log(refUser)
       dispatch(saveUserAction(refUser));
     };
     if (savedToken) {

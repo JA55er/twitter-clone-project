@@ -1,17 +1,13 @@
 import axios from 'axios';
+import BASE_URL from '../utils/baseUrl';
 
 const submitTweet = async (data) => {
-  const response = await axios.post(
-    'http://localhost:3000/api/tweets/newtweet',
-    data,
-    {
-      headers: {
-        Authorization: data.token,
-      },
-    }
-  );
+  console.log(data);
+  const response = await axios.post(`${BASE_URL}/api/tweets/newtweet`, data, {
+    headers: { Authorization: data.token, 'Content-Type': 'application/json' },
+  });
 
-  console.log(response)
+  console.log(response);
 
   return response.data;
 };

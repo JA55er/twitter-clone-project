@@ -12,10 +12,10 @@ likesRouter.post('/like', async (req, res) => {
       // res.sendStatus(200);
       // const dataBaseUser = await User.findById(user._id);
       const likes = user.likes;
-      console.log('tweet id: ', req.body.id);
-      console.log('list of initial likes: ', likes);
+      // console.log('tweet id: ', req.body.id);
+      // console.log('list of initial likes: ', likes);
       if (likes.includes(req.body.id)) {
-        console.log('disliking');
+        // console.log('disliking');
         // console.log('first like: ', likes[0]);
         const filteredLikes = likes.filter(
           (likes) => likes.valueOf() !== req.body.id
@@ -27,16 +27,16 @@ likesRouter.post('/like', async (req, res) => {
           },
           { new: true }
         );
-        console.log('aaaaaaaa');
+        // console.log('aaaaaaaa');
         const dislikedTweet = await Tweet.findByIdAndUpdate(
           req.body.id,
           { $inc: { 'stats.likes': -1 } },
           { new: true }
         );
-        console.log('aa', dislikedTweet);
+        // console.log('aa', dislikedTweet);
         res.sendStatus(200);
       } else {
-        console.log('liking');
+        // console.log('liking');
         const addedLikes = likes.concat(req.body.id);
         await User.findByIdAndUpdate(
           user._id,
@@ -45,13 +45,13 @@ likesRouter.post('/like', async (req, res) => {
           },
           { new: true }
         );
-        console.log('aaaaaaaa');
+        // console.log('aaaaaaaa');
         const likedTweet = await Tweet.findByIdAndUpdate(
           req.body.id,
           { $inc: { 'stats.likes': 1 } },
           { new: true }
         );
-        console.log(likedTweet);
+        // console.log(likedTweet);
         res.sendStatus(200);
       }
     } catch (error) {

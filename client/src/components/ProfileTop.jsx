@@ -5,7 +5,7 @@ import utilityIcons from '../utils/utilityIcons';
 
 const ProfileTop = ({ userProfile }) => {
 
-  console.log(userProfile)
+  if (!userProfile.info) return
 
   return (
     <div className='profileTopContainer'>

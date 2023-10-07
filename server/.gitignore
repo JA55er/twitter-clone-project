@@ -155,3 +155,7 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/react,node
+
+env_variables.yaml
+
+.env

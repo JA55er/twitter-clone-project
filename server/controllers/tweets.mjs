@@ -32,7 +32,6 @@ tweetsRouter.get('/:id', async (req, res) => {
       path: 'tweets',
       populate: { path: 'user', select: 'username icon' },
     });
-  // console.log('tweet: ', tweet);
   res.send(tweet);
 });
 
@@ -43,18 +42,12 @@ tweetsRouter.post('/newtweet', async (req, res) => {
   }
   try {
     //get random generated image
-    const newImage = await axios.get(
-      `https://picsum.photos/${Math.floor(
-        getRandomArbitrary(200, 1000)
-      )}/${Math.floor(getRandomArbitrary(200, 1000))}`
-    );
-    // const newImage = await axios.get('https://picsum.photos/680/510');
+    const newImage = await axios.get('https://picsum.photos/680/510');
     const imageURL = newImage.request.res.responseUrl;
     // const comments = Math.floor(getRandomArbitrary(2, 7));
     const retweets = Math.floor(getRandomArbitrary(2, 7));
     const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
     const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
-
     const tweetText = req.body.tweetText;
 
     const newTweet = new Tweet({
@@ -72,16 +65,17 @@ tweetsRouter.post('/newtweet', async (req, res) => {
 
     // console.log('new tweet: Object before save: ', newTweet);
     const savedTweet = await newTweet.save();
-    console.log('saved tweet: ', savedTweet);
+
     user.tweets = user.tweets.concat(savedTweet._id);
     await User.findByIdAndUpdate(user._id, { tweets: user.tweets });
+
     const newSavedTweet = await Tweet.findById(savedTweet._id)
       .populate('user', ['icon', 'username'])
       .populate({
         path: 'tweets',
         populate: { path: 'user', select: 'username icon' },
       });
-    console.log('important!: ', newSavedTweet);
+
     res.status(201).send(newSavedTweet);
   } catch (error) {
     console.error(error);

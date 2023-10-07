@@ -31,20 +31,20 @@ commentsRouter.post('/newcomment', async (req, res) => {
     const savedComment = await newComment.save();
     user.tweets = user.tweets.concat(savedComment._id);
     tweet.tweets = tweet.tweets.concat(savedComment._id);
-    console.log('found tweet: ', tweet);
+    // console.log('found tweet: ', tweet);
     await User.findByIdAndUpdate(user._id, { tweets: user.tweets });
     const updatedTweet = await Tweet.findByIdAndUpdate(tweet._id, {
       tweets: tweet.tweets,
       stats: { ...tweet.stats, comments: tweet.stats.comments + 1},
     });
 
-    console.log('typeof comments: ', typeof(tweet.stats.comments))
-    console.log('typeof updatedTweet: ', typeof(updatedTweet.stats.comments))
+    // console.log('typeof comments: ', typeof(tweet.stats.comments))
+    // console.log('typeof updatedTweet: ', typeof(updatedTweet.stats.comments))
     // console.log('typeof comments: ', typeof(newComment.stats.comments))
 
-    console.log('updated tweet: ', updatedTweet);
+    // console.log('updated tweet: ', updatedTweet);
 
-    console.log('saved comment: ', savedComment);
+    // console.log('saved comment: ', savedComment);
 
     const newSavedComment = await Tweet.findById(savedComment._id).populate('user')
 

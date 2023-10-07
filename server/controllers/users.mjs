@@ -53,6 +53,9 @@ usersRouter.post('/newuser', async (req, res) => {
         id: savedUser._id.valueOf(),
       };
 
+      // const SECRET = 'htrjtrjntdnjt'
+
+      // const token = jwb.sign(userForToken, SECRET);
       const token = jwb.sign(userForToken, process.env.SECRET);
 
       const newUser = {
