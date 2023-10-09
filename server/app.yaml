@@ -7,8 +7,9 @@ handlers:
     script: auto
     secure: always
 
+  - url: /.*
+    static_files: dist/index.html
+    upload: dist/index.html
+
 includes:
   - env_variables.yaml
-
-# env_variables:
-#   SECRET: 

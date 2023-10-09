@@ -26,7 +26,9 @@ import Profile from './components/Profile';
 
 const App = () => {
 
-  console.log(process.env.NODE_ENV)
+  const [peng, setPeng] = useState()
+
+  console.log(process.env.NODE_ENV);
   const user = useSelector((state) => state.user.user);
 
   const url = useLocation();
@@ -56,9 +58,6 @@ const App = () => {
   //     window.removeEventListener('scroll', handleScroll);
   //   };
   // }, []);
-
-
-
 
   const tweets = useSelector((state) => state.tweetsList.tweets);
 
@@ -106,7 +105,9 @@ const App = () => {
             <div className='appContainer'>
               <Header />
               <Content />
-              <Sidebar />
+              <div onClick={onSidebarClick}>
+                <Sidebar />
+              </div>
             </div>
           </div>
         }
