@@ -337,6 +337,7 @@ input[type='reset'] {
 }
 
 .writeTweetTextAreaContainer {
+  margin-left: 10px;
   padding-top: 12px;
   padding-bottom: 12px;
 }
@@ -353,6 +354,15 @@ input[type='reset'] {
 
 .writeTweetInput:focus {
   outline: none;
+}
+
+.writeTweetAttachmentContainer {
+  margin-left: 10px;
+}
+
+.createTweetAttachmentImage {
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .writeTweetOptionsContainer {
@@ -431,6 +441,7 @@ ion-icon {
 
 .tweetContainer {
   border-bottom: #eff3f4 solid 1px;
+  /* max-width: 566px; */
   display: flex;
   flex-direction: row;
   /* cursor: pointer; */
@@ -452,6 +463,7 @@ ion-icon {
 
 .tweetRightContainer {
   display: flex;
+  max-width: 514px;
   flex-direction: column;
   width: 100%;
   padding-bottom: 12px;
@@ -501,6 +513,7 @@ ion-icon {
 
 .tweetText {
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .tweetAttachmentContainer {

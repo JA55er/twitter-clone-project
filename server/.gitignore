@@ -159,3 +159,5 @@ sketch
 env_variables.yaml
 
 .env
+
+gcloudDir

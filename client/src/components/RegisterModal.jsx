@@ -87,7 +87,7 @@ const RegisterModal = () => {
               </div>
               <div className='modalInputContainer'>
                 <input
-                  type='text'
+                  type='password'
                   className='modalInput'
                   placeholder='Password'
                   onChange={onPasswordChange}

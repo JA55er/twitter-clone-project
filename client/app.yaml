@@ -1,9 +1,9 @@
 runtime: nodejs16
 
 handlers:
-  - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|json))$
+  - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|json|svg))$
     static_files: dist/\1
-    upload: dist/(.*\.(js|css|png|jpg|jpeg|gif|ico|json))$
+    upload: dist/(.*\.(js|css|png|jpg|jpeg|gif|ico|json|svg))$
   
   - url: /.*
     static_files: dist/index.html

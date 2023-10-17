@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { useState, useEffect, createContext, useRef } from 'react';
+import { useEffect } from 'react';
 import Login from './components/Login';
 import SigninModal from './components/SigninModal';
 import RegisterModal from './components/RegisterModal';
@@ -20,13 +20,10 @@ import {
 import { saveUserAction } from './reducers/userSlice';
 import { setDetailedTweet } from './reducers/detailedTweetSlice';
 
-///////uncommentTokenLogin
 import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
 
 const App = () => {
-
-  const [peng, setPeng] = useState()
 
   console.log(process.env.NODE_ENV);
   const user = useSelector((state) => state.user.user);
@@ -105,9 +102,7 @@ const App = () => {
             <div className='appContainer'>
               <Header />
               <Content />
-              <div onClick={onSidebarClick}>
-                <Sidebar />
-              </div>
+              <Sidebar />
             </div>
           </div>
         }

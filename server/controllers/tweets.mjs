@@ -4,7 +4,25 @@ import axios from 'axios';
 import Tweet from '../models/tweet.mjs';
 import User from '../models/user.mjs';
 
+import { Storage } from '@google-cloud/storage';
+import multer from 'multer';
+
+import getTimestamp from '../utils/getTimestamp.mjs';
+
+const timestamp = getTimestamp();
+console.log(timestamp);
+
+const storage = new Storage();
+
+const bucketName = 'tweet-portfolio.appspot.com';
+
+const bucket = storage.bucket(bucketName);
+
 const tweetsRouter = express.Router();
+
+const multerStorage = multer.memoryStorage();
+
+const upload = multer({ storage: multerStorage });
 
 const getRandomArbitrary = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -24,6 +42,7 @@ tweetsRouter.get('/', async (req, res) => {
 
   res.send(reverseTweets);
 });
+
 tweetsRouter.get('/:id', async (req, res) => {
   // const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']).populate({path: 'comments', select: 'user', populate: 'user'});
   const tweet = await Tweet.findById(req.params.id)
@@ -35,29 +54,65 @@ tweetsRouter.get('/:id', async (req, res) => {
   res.send(tweet);
 });
 
-tweetsRouter.post('/newtweet', async (req, res) => {
+tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
   const user = req.user;
+  const file = req.file;
+  // console.log('file: ', req.file)
+  // console.log('req:   !!!',req)
   if (!user) {
     return res.status(404).send('token not found');
   }
+  if (!file && !req.body.tweetText) {
+    return res.status(404).send('must provide image or text');
+  }
   try {
     //get random generated image
-    const newImage = await axios.get('https://picsum.photos/680/510');
-    const imageURL = newImage.request.res.responseUrl;
+    // const newImage = await axios.get('https://picsum.photos/680/510');
+    // const imageURL = newImage.request.res.responseUrl;
     // const comments = Math.floor(getRandomArbitrary(2, 7));
-    const retweets = Math.floor(getRandomArbitrary(2, 7));
-    const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
-    const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
+    // const retweets = Math.floor(getRandomArbitrary(2, 7));
+    // const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
+    // const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
+    let imageURL = null;
     const tweetText = req.body.tweetText;
+
+    console.log('file: ', file);
+    if (file) {
+      try {
+        const timestamp = getTimestamp();
+        const blob = bucket.file(`${timestamp}${file.originalname}`);
+        const blobStream = blob.createWriteStream({
+          metadata: {
+            contentType: file.mimetype,
+          },
+        });
+
+        await new Promise((resolve, reject) => {
+          blobStream.on('error', (err) => {
+            console.error('Error uploading file !!');
+            reject(err);
+          });
+
+          blobStream.on('finish', () => {
+            console.log('file uploaded successfully !!');
+            imageURL = `https://storage.googleapis.com/tweet-portfolio.appspot.com/${timestamp}${file.originalname}`;
+            resolve();
+          });
+          blobStream.end(file.buffer);
+        });
+      } catch (err) {
+        console.log('error uploading file');
+      }
+    }
 
     const newTweet = new Tweet({
       text: tweetText,
       attachment: imageURL,
       stats: {
         comments: 0,
-        retweets,
-        likes,
-        views,
+        retweets: 0,
+        likes: 0,
+        views: 0,
       },
       parent: null,
       user: user._id.valueOf(),
