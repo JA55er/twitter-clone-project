@@ -30,12 +30,11 @@ const CreateTweet = () => {
 
   const [tweetText, setTweetText] = useState('');
 
-  const [attachment, setAttachment] = useState({});
+  const [attachment, setAttachment] = useState(null);
 
   const [selectedImage, setSelectedImage] = useState(null);
 
   const optionIconsArr = [
-    // { icon: optionIcons.image },
     { icon: optionIcons.gif },
     { icon: optionIcons.poll },
     { icon: optionIcons.emoji },
@@ -46,8 +45,12 @@ const CreateTweet = () => {
   const onFormSubmit = async (e) => {
     e.preventDefault();
     if (!token) {
-      console.log('must be logged in to comment');
+      console.log('must be logged in to tweet!');
       return;
+    }
+    if (!tweetText && !attachment) {
+      console.log('must input text or image to tweet!')
+      return
     }
     try {
       //
@@ -56,7 +59,6 @@ const CreateTweet = () => {
       formData.append('tweetText', tweetText);
       formData.append('token', token);
       const newTweet = await submitTweet(formData);
-      // const newTweet = await submitTweet({ tweetText, token });
       dispatch(addPosted(newTweet));
       dispatch(userCreateTweetAction(newTweet._id));
       setTweetText('');
@@ -70,7 +72,7 @@ const CreateTweet = () => {
     setTweetText(e.target.value);
   };
 
-  const onImageButtonClick = (e) => {
+  const onImageButtonClick = () => {
     document.getElementById('writeTweetAttachmentInput').click();
   };
 
@@ -79,20 +81,11 @@ const CreateTweet = () => {
     setAttachment(e.target.files[0]);
     if (file) {
       const reader = new FileReader();
-
       reader.onload = (event) => {
         setSelectedImage(event.target.result);
       };
-
       reader.readAsDataURL(file);
     }
-  };
-
-  const onUploadClick = async (e) => {
-    const formData = new FormData();
-    formData.append('file', attachment);
-    const response = await uploadAttachment({ formData });
-    console.log(response);
   };
 
   return (
@@ -142,15 +135,6 @@ const CreateTweet = () => {
             <div className='writeTweetButtonContainer'>
               <button className='writeTweetButton' type='submit'>
                 <span className='writeTweetButtonSpan'>Post</span>
-              </button>
-            </div>
-            <div className='writeTweetButtonContainer'>
-              <button
-                className='writeTweetButton'
-                type='button'
-                onClick={onUploadClick}
-              >
-                <span className='writeTweetButtonSpan'>Upload</span>
               </button>
             </div>
           </div>

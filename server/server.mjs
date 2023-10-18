@@ -10,20 +10,20 @@ import commentsRouter from './controllers/comments.mjs';
 import likesRouter from './controllers/likes.mjs';
 import pingRouter from './controllers/ping.mjs';
 
-import { Storage } from '@google-cloud/storage';
-import multer from 'multer';
+// import { Storage } from '@google-cloud/storage';
+// import multer from 'multer';
 
 const app = express();
 
-const storage = new Storage();
+// const storage = new Storage();
 
-const bucketName = 'tweet-portfolio.appspot.com';
+// const bucketName = 'tweet-portfolio.appspot.com';
 
-const bucket = storage.bucket(bucketName);
+// const bucket = storage.bucket(bucketName);
 
-const multerStorage = multer.memoryStorage();
+// const multerStorage = multer.memoryStorage();
 
-const upload = multer({ storage: multerStorage });
+// const upload = multer({ storage: multerStorage });
 
 mongoose.connect(config.MONGODB_URI);
 
@@ -44,13 +44,13 @@ app.get('/ping', (req, res) => {
   res.send('ping');
 });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  console.log('upload route');
-  console.log(req);
-  const file = req.file;
-  console.log('file: ', file);
-  res.status(200);
-});
+// app.post('/upload', upload.single('file'), (req, res) => {
+//   console.log('upload route');
+//   console.log(req);
+//   const file = req.file;
+//   console.log('file: ', file);
+//   res.status(200);
+// });
 // if(!file) {
 //   return res.status(400).send('No file uploaded')
 // }

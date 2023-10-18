@@ -1,5 +1,4 @@
 import express from 'express';
-import axios from 'axios';
 
 import Tweet from '../models/tweet.mjs';
 import User from '../models/user.mjs';
@@ -8,13 +7,11 @@ import { Storage } from '@google-cloud/storage';
 import multer from 'multer';
 
 import getTimestamp from '../utils/getTimestamp.mjs';
-
-const timestamp = getTimestamp();
-console.log(timestamp);
+import config from '../utils/config.mjs';
 
 const storage = new Storage();
 
-const bucketName = 'tweet-portfolio.appspot.com';
+const bucketName = config.BUCKET;
 
 const bucket = storage.bucket(bucketName);
 
@@ -57,8 +54,6 @@ tweetsRouter.get('/:id', async (req, res) => {
 tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
   const user = req.user;
   const file = req.file;
-  // console.log('file: ', req.file)
-  // console.log('req:   !!!',req)
   if (!user) {
     return res.status(404).send('token not found');
   }
@@ -70,13 +65,12 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     // const newImage = await axios.get('https://picsum.photos/680/510');
     // const imageURL = newImage.request.res.responseUrl;
     // const comments = Math.floor(getRandomArbitrary(2, 7));
-    // const retweets = Math.floor(getRandomArbitrary(2, 7));
-    // const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
-    // const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
+    const retweets = Math.floor(getRandomArbitrary(2, 7));
+    const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
+    const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
     let imageURL = null;
     const tweetText = req.body.tweetText;
 
-    console.log('file: ', file);
     if (file) {
       try {
         const timestamp = getTimestamp();
@@ -89,7 +83,7 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
 
         await new Promise((resolve, reject) => {
           blobStream.on('error', (err) => {
-            console.error('Error uploading file !!');
+            console.error('Error uploading file !!', err);
             reject(err);
           });
 
@@ -110,15 +104,14 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
       attachment: imageURL,
       stats: {
         comments: 0,
-        retweets: 0,
-        likes: 0,
-        views: 0,
+        retweets: retweets,
+        likes: likes,
+        views: views,
       },
       parent: null,
       user: user._id.valueOf(),
     });
 
-    // console.log('new tweet: Object before save: ', newTweet);
     const savedTweet = await newTweet.save();
 
     user.tweets = user.tweets.concat(savedTweet._id);

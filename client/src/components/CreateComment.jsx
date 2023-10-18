@@ -11,7 +11,7 @@ import { userCreateTweetAction } from '../reducers/userSlice';
 const CreateComment = ({ id }) => {
   const tweet = id;
 
-  const user = useSelector(state => state.user.user)
+  const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
 
@@ -22,6 +22,10 @@ const CreateComment = ({ id }) => {
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
+    if (!token) {
+      console.log('must be logged in to comment!');
+      return;
+    }
     try {
       const submittedComment = await submitComment({
         commentText,
@@ -29,8 +33,8 @@ const CreateComment = ({ id }) => {
         tweet,
       });
       dispatch(addComment(submittedComment));
-      dispatch(userCreateTweetAction(submittedComment._id))
-      setCommentText('')
+      dispatch(userCreateTweetAction(submittedComment._id));
+      setCommentText('');
       console.log(submittedComment);
     } catch (error) {
       console.log(error);
@@ -61,10 +65,7 @@ const CreateComment = ({ id }) => {
           alignItems: 'top',
         }}
       >
-        <div
-          className='writeTweetTextAreaContainer'
-          style={{ paddingTop: '0px', width: '80%' }}
-        >
+        <div className='writeTweetTextAreaContainer' style={{ width: '80%' }}>
           <TextareaAutosize
             className='writeTweetInput'
             placeholder='What is happening?!'
@@ -76,7 +77,7 @@ const CreateComment = ({ id }) => {
         </div>
         <div
           className='writeTweetButtonContainer'
-          style={{ margin: '0px', alignItems: 'start' }}
+          style={{ alignItems: 'start' }}
         >
           <button
             className='writeTweetButton'

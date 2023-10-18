@@ -11,5 +11,10 @@ handlers:
     static_files: dist/index.html
     upload: dist/index.html
 
+env_variables:
+  GOOGLE_CLOUD_PROJECT: tweet-portfolio
+  GCLOUD_STORAGE_BUCKET: tweet-portfolio.appspot.com
+  GOOGLE_APPLICATION_CREDENTIALS: ./gcloudDir/tweet-portfolio-642a45be6408.json
+
 includes:
   - env_variables.yaml
