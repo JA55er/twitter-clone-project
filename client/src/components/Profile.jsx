@@ -7,8 +7,7 @@ import ProfileStickyTop from './ProfileStickyTop';
 import getSingleUser from '../api/getSingleUser';
 
 const Profile = () => {
-
-  const [userProfile, setUserProfile] = useState({})
+  const [userProfile, setUserProfile] = useState({});
 
   const { id } = useParams();
 
@@ -16,17 +15,17 @@ const Profile = () => {
 
   useEffect(() => {
     const getProfile = async () => {
-      const profile = await getSingleUser(id)
-      setUserProfile(profile)
-    }
-    getProfile()
-  },[id])
+      const profile = await getSingleUser(id);
+      setUserProfile(profile);
+    };
+    getProfile();
+  }, [id]);
 
   // console.log(userProfile);
 
   const tweetsList = useSelector((state) => state.tweetsList.tweets);
 
-  const filteredTweets = tweetsList.filter((tweet) => tweet.user._id === id);
+  const filteredTweets = tweetsList.filter((tweet) => tweet?.user?._id === id);
 
   console.log(filteredTweets);
 
@@ -34,7 +33,7 @@ const Profile = () => {
     <div className='contentContainer'>
       <div className='homeTimelineContainer'>
         <ProfileStickyTop />
-        <ProfileTop userProfile={userProfile}/>
+        <ProfileTop userProfile={userProfile} />
         <TweetsList tweets={filteredTweets} />
         <div className='contentBottomBuffer'></div>
       </div>

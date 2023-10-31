@@ -5,23 +5,21 @@ import TrendsBar from './TrendsBar';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import googleLogin from '../api/googleLogin';
+import GoogleLoginButton from './GoogleLoginButton';
+import SidebarLogin from './SidebarLogin';
 
 const Sidebar = () => {
   const user = useSelector((state) => state.user.user);
 
+  // const loggedUser = sessionStorage.getItem('token');
 
-  const loggedUser = sessionStorage.getItem('token');
 
-  // if (!loggedUser ) {
-  if (!loggedUser || (user === null) ) {
+  if (user === null) {
     return (
       <div className='sidebarContainer'>
         <div className='sidebarContent'>
-          <div className='loginButtonContainer'>
-            <Link to={'/login'}>
-              <button className='loginButton'>Login</button>
-            </Link>
-          </div>
+          <SidebarLogin />
           <SearchBar />
           <FollowRecommend />
           <TrendsBar />

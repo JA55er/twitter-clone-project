@@ -6,7 +6,8 @@ const likesRouter = express.Router();
 
 likesRouter.post('/like', async (req, res) => {
   const user = req.user;
-
+  console.log('user from likes',user)
+  console.log('google user from likes: ', req.googleUser)
   if (user) {
     try {
       // res.sendStatus(200);

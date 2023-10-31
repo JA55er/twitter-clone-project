@@ -356,6 +356,27 @@ input[type='reset'] {
   outline: none;
 }
 
+.darkOverlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  cursor: default;
+}
+
+.overlayTweetImage {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .writeTweetAttachmentContainer {
   margin-left: 10px;
 }
@@ -524,13 +545,17 @@ ion-icon {
 .tweetMediaContainer {
   display: flex;
   max-height: 510px;
-  /* border-radius: 16px; */
   overflow: hidden;
+}
+
+.tweetMediaTop {
+  min-width: 100%;
 }
 
 .tweetImage {
   max-width: 100%;
   max-height: 100%;
+  min-width: 100%;
   border-radius: 16px;
 }
 
@@ -638,6 +663,47 @@ ion-icon {
   width: 350px;
   display: flex;
   justify-content: flex-end;
+}
+
+.homeLoginContainer {
+  position: sticky;
+  top: 0;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  border: rgb(239, 243, 244) solid 1px;
+  border-radius: 20px;
+  margin-top: 12px;
+}
+
+.homeLoginTopTextContainer {
+  padding: 12px 16px;
+}
+
+.homeLoginTopText {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.homeLoginCommentTextContainer {
+  padding: 0px 12px;
+}
+
+.homeLoginCommentText {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.homeLoginButtonsContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 12px 16px 12px;
+}
+
+.homeLoginCommentTextContainerBottom {
+  padding: 0px 12px;
+  margin-bottom: 16px;
 }
 
 .loginForm {
@@ -792,8 +858,8 @@ ion-icon {
   background-color: #f7f9f9;
   width: 100%;
   border-radius: 16px;
-  position: sticky;
-  top: 0;
+  /* position: sticky;
+  top: 0; */
 }
 
 .trendsBarLabelContainer {
@@ -933,6 +999,7 @@ ion-icon {
   height: 40px;
   border-radius: 20px;
   background-color: #1d9bf0;
+  margin-top: 12px;
 }
 
 .loginAreaCreateAccountContainer > span {
@@ -967,7 +1034,7 @@ ion-icon {
   text-decoration: none;
 }
 
-.modalContainer {
+.loginModalContainer {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -991,7 +1058,7 @@ ion-icon {
   z-index: -1;
 }
 
-.modal {
+.loginModal {
   /* display: flex;
   flex-direction: column;
   justify-content: start;
@@ -1006,14 +1073,14 @@ ion-icon {
   background-color: #fff;
 }
 
-.modalContent {
+.loginModalContent {
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
 }
 
-.modalTop {
+.loginModalTop {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1023,11 +1090,11 @@ ion-icon {
   padding: 0px 16px;
 }
 
-.modalLogo {
+.loginModalLogo {
   width: 30px;
 }
 
-.modalBottom {
+.loginModalBottom {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1037,18 +1104,18 @@ ion-icon {
   padding-bottom: 48px;
 }
 
-.modalTopTextContainer {
+.loginModalTopTextContainer {
   display: flex;
   width: 100%;
   margin: 20px 0px;
 }
 
-.modalTopText {
+.loginModalTopText {
   font-size: 31px;
   font-weight: 700;
 }
 
-.modalButtonContainer {
+.loginModalButtonContainer {
   margin: 12px 0px;
 }
 
@@ -1062,6 +1129,12 @@ ion-icon {
   font-size: 15px;
   font-weight: 700;
   /* border: #ccc solid 1px; */
+}
+
+.googleIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
 }
 
 .loginOptionsSeperator {
@@ -1084,12 +1157,12 @@ ion-icon {
   color: #141923;
 }
 
-.modalInputContainer {
+.loginModalInputContainer {
   padding: 12px 0px;
   width: 100%;
 }
 
-.modalInput {
+.loginModalInput {
   width: 100%;
   height: 56px;
   font-size: 17px;
@@ -1098,16 +1171,17 @@ ion-icon {
   border-radius: 4px;
 }
 
-.modalInput:focus {
+.loginModalInput:focus {
   outline: none;
   border-color: #1d9bf0;
 }
 
-.modalLoginButtonContainer {
+.loginModalLoginButtonContainer {
   margin-top: 20px;
 }
 
 .transparentOverlay {
+  z-index: 100;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -1366,3 +1440,24 @@ ion-icon {
   font-weight: 400;
   color: #666;
 }
+
+/* .progressContainer {
+  width: 100%;
+  background-color: #ccc;
+  height: 30px;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.progressBar {
+  width: 0;
+  height: 100%;
+  background-color: #1d9bf0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #fff;
+  transition: width 0.3s;
+} */

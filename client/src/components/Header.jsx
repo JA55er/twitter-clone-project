@@ -3,6 +3,7 @@ import HeaderLink from './HeaderLink';
 import TwitterLogo from './TwitterLogo';
 import headerIcons from '../utils/headerIcons';
 import HeaderAccountMenu from './HeaderAccountMenu';
+import BASE_URL from '../utils/baseUrl';
 
 const Header = () => {
   const headerLinks = [
@@ -59,11 +60,13 @@ const Header = () => {
   ];
 
   const onTwitterLogoClick = () => {
-    console.log(window.location.href)
-    if (window.location.href === `http://localhost:5173/`) {
-      window.scrollTo({top: 0})
+    if (
+      window.location.href === `http://localhost:5173/` ||
+      window.location.href === `https://twitter-6t.lm.r.appspot.com/`
+    ) {
+      window.scrollTo({ top: 0 });
     }
-  } 
+  };
 
   return (
     <div className='headerContainer'>

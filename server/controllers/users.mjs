@@ -79,6 +79,99 @@ usersRouter.post('/newuser', async (req, res) => {
   }
 });
 
+usersRouter.get('/profile', async (req, res) => {
+  console.log('profile route');
+  // if (req.googleUser) {
+  //   console.log('profile route req.googleUser: ',req.googleUser)
+  //   const googleAccount = await User.findOne({ googleId: req.googleUser.id });
+  //   console.log('profile route googleAccount: ',googleAccount)
+  //   if (googleAccount) {
+  //     const userForToken = {
+  //       username: googleAccount.username,
+  //       id: googleAccount._id.valueOf(),
+  //     };
+  if (req.user) {
+    console.log('profile route req.user: ', req.user);
+    const googleAccount = await User.findOne({ googleId: req.user.id });
+    console.log('profile route googleAccount: ', googleAccount);
+    if (googleAccount) {
+      const userForToken = {
+        username: googleAccount.username,
+        id: googleAccount._id.valueOf(),
+      };
+
+      // const SECRET = 'htrjtrjntdnjt'
+
+      // const token = jwb.sign(userForToken, SECRET);
+      const token = jwb.sign(userForToken, process.env.SECRET);
+
+      res.status(200).json({
+        token,
+        username: googleAccount.username,
+        name: googleAccount.name,
+        id: googleAccount._id.valueOf(),
+        icon: googleAccount.icon,
+        likes: googleAccount.likes,
+        follows: googleAccount.follows,
+        tweets: googleAccount.tweets,
+      });
+      return;
+    }
+    console.log('before creating new user');
+    const newBioText = await axios.get(
+      'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
+    );
+    const bioText = newBioText.data[0];
+    //get random generated image
+    const newCover = await axios.get(`https://picsum.photos/600/200`);
+    const coverUrl = newCover.request.res.responseUrl;
+    const following = Math.floor(getRandomArbitrary(2, 15));
+    const followers = Math.floor(getRandomArbitrary(2, 15));
+    const randomIcon = await axios.get('https://picsum.photos/200/200');
+    const icon = randomIcon.request.res.responseUrl;
+    const userToSave = new User({
+      username: req.googleUser.displayName,
+      icon,
+      googleId: req.googleUser.id,
+      info: {
+        cover: coverUrl,
+        bio: bioText,
+        following,
+        followers,
+      },
+    });
+
+    console.log(userToSave);
+
+    const savedUser = await userToSave.save();
+
+    const userForToken = {
+      username: savedUser.username,
+      id: savedUser._id.valueOf(),
+    };
+    const token = jwb.sign(userForToken, process.env.SECRET);
+
+    const newUser = {
+      token,
+      username: savedUser.username,
+      id: savedUser._id.valueOf(),
+      icon: savedUser.icon,
+      likes: savedUser.likes,
+      follow: savedUser.follows,
+      tweets: savedUser.tweets,
+      info: savedUser.info,
+    };
+
+    console.log('user sent from /profile: ', newUser);
+
+    res.json(newUser);
+  } else {
+    console.log('no user')
+    res.status(400);
+    return
+  }
+});
+
 usersRouter.get('/:id', async (req, res) => {
   try {
     const retrievedUser = await User.findById(req.params.id);

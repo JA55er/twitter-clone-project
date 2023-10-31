@@ -22,7 +22,7 @@ const Tweet = ({ tweet }) => {
     <>
       <div className='tweetContainer'>
         <div className='TweetProfileIconContainer' onClick={onProfileIconClick}>
-          <UserProfileIcon icon={icon} userId={tweet.user._id} />
+          <UserProfileIcon icon={icon} userId={tweet?.user?._id} />
         </div>
         <div className='tweetRightContainer'>
           <TweetProfileName username={username} />

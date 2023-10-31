@@ -3,6 +3,8 @@ import headerIcons from '../utils/headerIcons';
 import UserProfileIcon from './UserProfileIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../reducers/userSlice';
+import googleLogout from '../api/googleLogout';
+import BASE_URL from '../utils/baseUrl';
 
 const HeaderAccountMenu = () => {
   const user = useSelector((state) => state.user.user);
@@ -18,6 +20,8 @@ const HeaderAccountMenu = () => {
   const logOut = () => {
     dispatch(logoutUserAction());
     sessionStorage.clear();
+    // googleLogout()
+    window.open(`${BASE_URL}/logout`, '_self');
   };
 
   const userIcon = user?.icon;

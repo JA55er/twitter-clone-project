@@ -55,10 +55,16 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
   const user = req.user;
   const file = req.file;
   if (!user) {
+    console.log('token not found');
     return res.status(404).send('token not found');
   }
   if (!file && !req.body.tweetText) {
+    console.log('must provide image or text')
     return res.status(404).send('must provide image or text');
+  }
+  if (file && file.size > 1024 * 1024) {
+    console.log('file too large')
+    return res.status(413).send('file too large, max size 1MB')
   }
   try {
     //get random generated image
@@ -89,7 +95,7 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
 
           blobStream.on('finish', () => {
             console.log('file uploaded successfully !!');
-            imageURL = `https://storage.googleapis.com/tweet-portfolio.appspot.com/${timestamp}${file.originalname}`;
+            imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/${timestamp}${file.originalname}`;
             resolve();
           });
           blobStream.end(file.buffer);

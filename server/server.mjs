@@ -10,25 +10,26 @@ import commentsRouter from './controllers/comments.mjs';
 import likesRouter from './controllers/likes.mjs';
 import pingRouter from './controllers/ping.mjs';
 
-// import { Storage } from '@google-cloud/storage';
-// import multer from 'multer';
+import passport from 'passport';
+import passportGoole from 'passport-google-oauth20';
+import cookieSession from 'cookie-session';
+import User from './models/user.mjs';
+import googleRouter from './controllers/googleLogin.mjs';
+
+const GoogleStrategy = passportGoole.Strategy;
 
 const app = express();
 
-// const storage = new Storage();
-
-// const bucketName = 'tweet-portfolio.appspot.com';
-
-// const bucket = storage.bucket(bucketName);
-
-// const multerStorage = multer.memoryStorage();
-
-// const upload = multer({ storage: multerStorage });
-
 mongoose.connect(config.MONGODB_URI);
 
+console.log(process.env.NODE_ENV);
+
+// const CLIENT_URL = 'http://localhost:5173'
+const CLIENT_URL = config.URL;
+console.log(CLIENT_URL);
+
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://tweet-portfolio.lm.r.appspot.com'],
+  origin: ['http://localhost:5173', 'https://twitter-6t.lm.r.appspot.com'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders:
@@ -40,48 +41,129 @@ app.use(cors(corsOptions));
 app.options('*', cors());
 app.use(express.json());
 
-app.get('/ping', (req, res) => {
-  res.send('ping');
+app.use(
+  cookieSession({
+    name: 'session',
+    keys: ['cookieSessionKeys'],
+    maxAge: 60 * 60 * 1000,
+  })
+);
+
+app.use(passport.initialize());
+// app.use(passport.initialize({ userProperty: 'googleUser' }));
+app.use(passport.session());
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.clientID,
+      clientSecret: process.env.clientSecret,
+      callbackURL: '/google/callback',
+      // callbackURL: '/api/auth/google/callback',
+    },
+    (accessToken, refreshToken, profile, done) => {
+      console.log('google strategy profile: ', profile)
+      return done(null, profile);
+    }
+  )
+);
+
+passport.deserializeUser((obj, done) => {
+  console.log('deserialize');
+  console.log('deserialized object: ', obj);
+  done(null, obj);
 });
 
-// app.post('/upload', upload.single('file'), (req, res) => {
-//   console.log('upload route');
-//   console.log(req);
-//   const file = req.file;
-//   console.log('file: ', file);
-//   res.status(200);
+passport.serializeUser((user, done) => {
+  console.log('serialized!');
+  console.log('serialized user: ', user )
+  done(null, user);
+});
+
+// app.get('/auth/googlelogin', (req, res) => {
+//   req.session.returnTo = req.query.returnTo;
+//   console.log('req queries: ', req.query);
+//   console.log('return to query: ', req.query.returnTo);
+//   res.redirect('/auth/google');
 // });
-// if(!file) {
-//   return res.status(400).send('No file uploaded')
-// }
 
-// const blob = bucket.file(file.originalname)
+app.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+// app.get(
+//   '/auth/googlelogin',
+//   passport.authenticate('google', { scope: ['profile'] })
+// );
 
-// const blobStream = blob.createWriteStream({
-//   metadata: {
-//     contentType: file.mimetype
+app.get(
+  '/google/callback',
+  passport.authenticate('google', {
+    successRedirect: CLIENT_URL,
+    failureRedirect: '/login/failed',
+  })
+);
+
+app.get('/login/success', (req, res) => {
+  console.log('inside success');
+  console.log('req user: ', req.user);
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: 'successfull',
+      user: req.user,
+      //   cookies: req.cookies
+    });
+    return;
+  } else {
+    console.log('no user');
+    res.status(400).json({
+      message: 'No user found',
+    });
+  }
+});
+
+app.get('/login/failed', (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: 'failure',
+  });
+});
+// app.get(
+//   '/auth/google/callback',
+//   passport.authenticate('google', { failureRedirect: config.URL }),
+//   (req, res) => {
+//     const returnTo = req.session.returnTo || config.URL;
+//     console.log('callback return url: ', returnTo);
+//     res.redirect(returnTo);
 //   }
-// })
+// );
+// app.get(
+//   '/auth/google/callback',
+//   passport.authenticate('google', { failureRedirect: config.URL }),
+//   (req, res) => {
+//     const returnTo = req.session.returnTo || config.URL;
+//     console.log('callback return url: ', returnTo);
+//     res.redirect(returnTo);
+//   }
+// );
 
-// console.log('blob:  ',blob)
+app.get('/test', (req, res) => {
+  const a = req.query.a;
+  console.log(a);
+  res.send(a);
+});
 
-// console.log('blob stream: ',blobStream)
+console.log(config.URL);
 
-// blobStream.on('error', (err) => {
-//   console.error(err)
-//   res.status(500).send('Error uploading file !!')
-// })
+app.get('/logout', (req, res) => {
+  req.logout();
+  req.session = null;
+  res.redirect(config.URL);
+});
 
-// blobStream.on('finish', () => {
-//   console.log('finish callback');
-//   res.status(200).send('file uploaded successfully !!')
-// })
-
-// blobStream.end(file.buffer)
-
-// console.log(file)
-//   res.status(200)
-// })
+// app.get('/logout', (req, res) => {
+//   req.logout();
+//   delete req.session.returnTo;
+//   res.redirect(config.URL);
+// });
 
 app.use(middleware.tokenExtractor);
 app.use(middleware.userExtractor);
@@ -91,6 +173,7 @@ app.use('/api/tweets', tweetsRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/comments', commentsRouter);
 app.use('/api/likes', likesRouter);
+app.use('/api/auth', googleRouter);
 
 const PORT = process.env.PORT || 8080;
 

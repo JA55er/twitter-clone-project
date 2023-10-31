@@ -7,6 +7,8 @@ import utilityIcons from '../utils/utilityIcons';
 import register from '../api/register';
 import { useDispatch } from 'react-redux';
 import { saveUserAction } from '../reducers/userSlice';
+import GoogleLoginButton from './GoogleLoginButton';
+import BASE_URL from '../utils/baseUrl';
 
 const RegisterModal = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +17,11 @@ const RegisterModal = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  const onGoogleButtonClick = async () => {
+    window.open(`${BASE_URL}/google`, '_self');
+    // window.open('http://localhost:8080/auth/google', '_self');
+  };
 
   const onFormSubmit = async (e) => {
     e.preventDefault();
@@ -45,27 +52,30 @@ const RegisterModal = () => {
   };
 
   return (
-    <div className='modalContainer'>
+    <div className='loginModalContainer'>
       <Link to={'/login'}>
         <div className='overlay'></div>
       </Link>
-      <div className='modal'>
-        <div className='modalContent'>
-          <div className='modalTop'>
+      <div className='loginModal'>
+        <div className='loginModalContent'>
+          <div className='loginModalTop'>
             <Link to={'/login'}>
               <div className='writeTweetOptionsIconContainer'>
                 {utilityIcons.closeIcon}
               </div>
             </Link>
-            <div className='modalLogo'>{headerIcons.twitter}</div>
+            <div className='loginModalLogo'>{headerIcons.twitter}</div>
             <div className='modalTopRightSide'></div>
           </div>
-          <div className='modalBottom'>
-            <div className='modalTopTextContainer'>
-              <span className='modalTopText'>Sign in to Twitter</span>
+          <div className='loginModalBottom'>
+            <div className='loginModalTopTextContainer'>
+              <span className='loginModalTopText'>Register to Twitter</span>
             </div>
-            <div className='modalButtonContainer'>
-              <LoginButtons
+            <div
+              className='loginModalButtonContainer'
+              onClick={onGoogleButtonClick}
+            >
+              <GoogleLoginButton
                 textColor={'#000'}
                 border={'#ccc solid 1px'}
                 content={'Login with Google'}
@@ -77,24 +87,24 @@ const RegisterModal = () => {
               <div className='seperatorLine'></div>
             </div>
             <form action='post' onSubmit={onFormSubmit}>
-              <div className='modalInputContainer'>
+              <div className='loginModalInputContainer'>
                 <input
                   type='text'
-                  className='modalInput'
+                  className='loginModalInput'
                   placeholder='Username'
                   onChange={onUsernameChange}
                 />
               </div>
-              <div className='modalInputContainer'>
+              <div className='loginModalInputContainer'>
                 <input
                   type='password'
-                  className='modalInput'
+                  className='loginModalInput'
                   placeholder='Password'
                   onChange={onPasswordChange}
                 />
               </div>
-              <div className='modalLoginButtonContainer'>
-                <div className='modalButtonContainer'>
+              <div className='loginModalLoginButtonContainer'>
+                <div className='loginModalButtonContainer'>
                   <LoginButtons
                     textColor={'#FFF'}
                     backgroundColor={'#000'}

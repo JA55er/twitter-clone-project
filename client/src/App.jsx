@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Login from './components/Login';
 import SigninModal from './components/SigninModal';
 import RegisterModal from './components/RegisterModal';
@@ -22,10 +22,12 @@ import { setDetailedTweet } from './reducers/detailedTweetSlice';
 
 import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
+import googleLogin from './api/googleLogin';
 
 const App = () => {
 
-  console.log(process.env.NODE_ENV);
+  const [acc, setAcc] = useState(null)
+
   const user = useSelector((state) => state.user.user);
 
   const url = useLocation();
@@ -76,7 +78,8 @@ const App = () => {
       loginOnrefresh();
     }
   }, []);
-
+  
+  console.log(user)
   useEffect(() => {
     if (url.pathname === '/') {
       dispatch(setDetailedTweet({}));
@@ -92,6 +95,21 @@ const App = () => {
     };
     setFunc();
   }, []);
+
+//change to set user
+
+useEffect(() => {
+  const loginTroughGoogle = async () => {
+    console.log('before calling googleLogin');
+    const acc = await googleLogin()
+    console.log('acc: ', acc)
+    dispatch(saveUserAction(acc))
+  }
+  loginTroughGoogle()
+}, [])
+
+console.log(document.cookie);
+
 
   return (
     <Routes>

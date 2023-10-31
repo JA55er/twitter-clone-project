@@ -4,8 +4,15 @@ import headerIcons from '../utils/headerIcons';
 import { Link, Outlet, Route, Routes } from 'react-router-dom';
 import SigninModal from './SigninModal';
 import RegisterModal from './RegisterModal';
+import GoogleLoginButton from './GoogleLoginButton';
+import BASE_URL from '../utils/baseUrl';
 
 const Login = () => {
+  const onGoogleButtonClick = async () => {
+    // window.open(`${BASE_URL}/api/auth/google`, '_self');
+    window.open(`${BASE_URL}/google`, '_self');
+  };
+
   return (
     <Routes>
       <Route
@@ -18,6 +25,21 @@ const Login = () => {
             <div className='loginOptionsContainer'>
               <div className='loginOptionsAreaContainer'>
                 <span className='LoginAreaTextContainer'>JOIN NOW</span>
+                <div
+                  className='loginModalButtonContainer'
+                  onClick={onGoogleButtonClick}
+                >
+                  <GoogleLoginButton
+                    textColor={'#000'}
+                    border={'#ccc solid 1px'}
+                    content={'Login with Google'}
+                  />
+                </div>
+                <div className='loginOptionsSeperator'>
+                  <div className='seperatorLine'></div>
+                  <div className='seperatorText'>or</div>
+                  <div className='seperatorLine'></div>
+                </div>
                 <Link to={'/login/register'}>
                   <div className='loginAreaCreateAccountContainer'>
                     <span>Create account</span>

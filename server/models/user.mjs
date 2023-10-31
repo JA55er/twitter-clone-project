@@ -3,7 +3,8 @@ import uniqueValidator from 'mongoose-unique-validator';
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, minlength: 3 },
-  passwordHash: { type: String, required: true },
+  passwordHash: { type: String },
+  // passwordHash: { type: String, required: true },
   // name: {type: String, required: true, minlength: 3,},
   comments: [
     {
@@ -11,6 +12,7 @@ const userSchema = new mongoose.Schema({
       ref: 'Comment',
     },
   ],
+  googleId: String,
   tweets: [
     {
       type: mongoose.Schema.Types.ObjectId,

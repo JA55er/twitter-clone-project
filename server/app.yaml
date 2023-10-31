@@ -3,7 +3,7 @@ runtime: nodejs16
 service: api
 
 handlers:
-  - url: /api/.*
+  - url: /.*
     script: auto
     secure: always
 
@@ -12,9 +12,27 @@ handlers:
     upload: dist/index.html
 
 env_variables:
-  GOOGLE_CLOUD_PROJECT: tweet-portfolio
-  GCLOUD_STORAGE_BUCKET: tweet-portfolio.appspot.com
-  GOOGLE_APPLICATION_CREDENTIALS: ./gcloudDir/tweet-portfolio-642a45be6408.json
+  GOOGLE_CLOUD_PROJECT: twitter-6t
+  GCLOUD_STORAGE_BUCKET: twitter-6t.appspot.com
+  GOOGLE_APPLICATION_CREDENTIALS: ./gcloudDir/twitter-6t-10f6c5c86909.json
 
 includes:
   - env_variables.yaml
+# service: api
+
+# handlers:
+#   - url: /api/.*
+#     script: auto
+#     secure: always
+
+#   - url: /.*
+#     static_files: dist/index.html
+#     upload: dist/index.html
+
+# env_variables:
+#   GOOGLE_CLOUD_PROJECT: twitter-6t
+#   GCLOUD_STORAGE_BUCKET: twitter-6t.appspot.com
+#   GOOGLE_APPLICATION_CREDENTIALS: ./gcloudDir/twitter-6t-10f6c5c86909.json
+
+# includes:
+#   - env_variables.yaml
