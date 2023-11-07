@@ -2,24 +2,40 @@ import React from 'react';
 import GoogleLoginButton from './GoogleLoginButton';
 import { Link } from 'react-router-dom';
 import BASE_URL from '../utils/baseUrl';
+import googleLogin from '../api/googleLogin';
+import { saveUserAction } from '../reducers/userSlice';
+import { useDispatch } from 'react-redux';
 
 const SidebarLogin = () => {
+  const dispatch = useDispatch();
   const onGoogleButtonClick = async () => {
-    // console.log(`${BASE_URL}/api/auth/googlelogin?returnTo=${window.location.href}`);
-    // window.open(
-    //   `${BASE_URL}/api/auth/google?returnTo=${window.location.href}`,
-    //   '_self'
-    // );
-    window.open(
-      `${BASE_URL}/google`,
-      '_self'
+    const width = 600;
+    const height = 600;
+    const left = window.innerWidth / 2 - width / 2;
+    const top = window.innerHeight / 2 - height / 2;
+
+    const loginThroughGoogle = async () => {
+      console.log('before calling googleLogin');
+      const acc = await googleLogin();
+      console.log('acc: ', acc);
+      dispatch(saveUserAction(acc));
+    };
+
+    const popup = window.open(
+      `${BASE_URL}/api/google/?returnTo=${window.location.href}`,
+      'GoogleLogin',
+      `width=${width},height=${height},left=${left},top=${top}`
     );
-    // window.open(
-    //   `${BASE_URL}/auth/google?returnTo=${window.location.href}`,
-    //   '_self'
-    // );
-    // window.open(`http://localhost:8080/auth/google?returnTo=${window.location.href}`, '_self');
+    if (popup) {
+      const oauthPopup = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(oauthPopup);
+          loginThroughGoogle();
+        }
+      }, 1000);
+    }
   };
+
   return (
     <div className='homeLoginContainer'>
       <div className='homeLoginTopTextContainer'>

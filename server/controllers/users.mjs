@@ -52,10 +52,6 @@ usersRouter.post('/newuser', async (req, res) => {
         username: savedUser.username,
         id: savedUser._id.valueOf(),
       };
-
-      // const SECRET = 'htrjtrjntdnjt'
-
-      // const token = jwb.sign(userForToken, SECRET);
       const token = jwb.sign(userForToken, process.env.SECRET);
 
       const newUser = {
@@ -81,28 +77,15 @@ usersRouter.post('/newuser', async (req, res) => {
 
 usersRouter.get('/profile', async (req, res) => {
   console.log('profile route');
-  // if (req.googleUser) {
-  //   console.log('profile route req.googleUser: ',req.googleUser)
-  //   const googleAccount = await User.findOne({ googleId: req.googleUser.id });
-  //   console.log('profile route googleAccount: ',googleAccount)
-  //   if (googleAccount) {
-  //     const userForToken = {
-  //       username: googleAccount.username,
-  //       id: googleAccount._id.valueOf(),
-  //     };
-  if (req.user) {
-    console.log('profile route req.user: ', req.user);
-    const googleAccount = await User.findOne({ googleId: req.user.id });
+  if (req.googleUser) {
+    console.log('profile route req.googleUser: ', req.googleUser);
+    const googleAccount = await User.findOne({ googleId: req.googleUser.id });
     console.log('profile route googleAccount: ', googleAccount);
     if (googleAccount) {
       const userForToken = {
         username: googleAccount.username,
         id: googleAccount._id.valueOf(),
       };
-
-      // const SECRET = 'htrjtrjntdnjt'
-
-      // const token = jwb.sign(userForToken, SECRET);
       const token = jwb.sign(userForToken, process.env.SECRET);
 
       res.status(200).json({
@@ -115,6 +98,7 @@ usersRouter.get('/profile', async (req, res) => {
         follows: googleAccount.follows,
         tweets: googleAccount.tweets,
       });
+      console.log('before return ');
       return;
     }
     console.log('before creating new user');
@@ -128,10 +112,10 @@ usersRouter.get('/profile', async (req, res) => {
     const following = Math.floor(getRandomArbitrary(2, 15));
     const followers = Math.floor(getRandomArbitrary(2, 15));
     const randomIcon = await axios.get('https://picsum.photos/200/200');
-    const icon = randomIcon.request.res.responseUrl;
+    // const icon = randomIcon.request.res.responseUrl;
     const userToSave = new User({
       username: req.googleUser.displayName,
-      icon,
+      icon: req.googleUser.photos[0].value,
       googleId: req.googleUser.id,
       info: {
         cover: coverUrl,
@@ -165,8 +149,9 @@ usersRouter.get('/profile', async (req, res) => {
     console.log('user sent from /profile: ', newUser);
 
     res.json(newUser);
+    return
   } else {
-    console.log('no user')
+    console.log('no user');
     res.status(400);
     return
   }
@@ -190,11 +175,5 @@ usersRouter.get('/:id', async (req, res) => {
     res.send(error);
   }
 });
-
-// usersRouter.get('/', async (req, res) => {
-//   const user = await User.findOne({ username: 'waba' });
-//   console.log(user._id.valueOf());
-//   res.json(user);
-// });
 
 export default usersRouter;

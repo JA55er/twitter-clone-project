@@ -6,8 +6,8 @@ const MONGODB_URI = process.env.MONGODB_URI
 const BUCKET = process.env.GCLOUD_STORAGE_BUCKET
 const clientID = process.env.clientID
 const clientSecret = process.env.clientSecret
-const URL = process.env.NODE_ENV === 'production' ? 'https://twitter-6t.lm.r.appspot.com' : 'http://localhost:5173'
-
+const URL = process.env.NODE_ENV === 'production' ? 'https://twitter-6t.lm.r.appspot.com/' : 'http://localhost:5173/'
+const cookieSessionKey = process.env.cookieSessionKey
 
 const config = { 
   PORT,
@@ -15,7 +15,8 @@ const config = {
   BUCKET,
   clientID,
   clientSecret,
-  URL
+  URL,
+  cookieSessionKey
 }
 
 export default config

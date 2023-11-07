@@ -1,15 +1,19 @@
 import { Link, redirect, useNavigate } from 'react-router-dom';
 
 const UserProfileIcon = ({ icon, userId }) => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const onIconClick = () => {
     navigate(`/profile/${userId}`);
   };
 
   return (
     <>
-      <img className='accountIcon' src={icon} onClick={onIconClick}/>
+      <img
+        className='accountIcon'
+        src={icon}
+        onClick={onIconClick}
+        referrerpolicy='no-referrer'
+      />
     </>
   );
 };

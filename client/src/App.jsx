@@ -25,38 +25,11 @@ import Profile from './components/Profile';
 import googleLogin from './api/googleLogin';
 
 const App = () => {
-
-  const [acc, setAcc] = useState(null)
-
   const user = useSelector((state) => state.user.user);
 
   const url = useLocation();
 
   const dispatch = useDispatch();
-
-  // const scrolled = useSelector((state) => state.scroll.value);
-
-  // useEffect(() => {
-  //   console.log('triggered');
-  //   if (window.location.href === 'http://localhost:5173/') {
-  //     console.log('inside triggered');
-  //       window.scrollTo({ top: scrolled });
-  //   }
-  // }, [location]);
-
-  // const handleScroll = () => {
-  //   if (window.location.href === 'http://localhost:5173/') {
-  //     const position = window.scrollY;
-  //     dispatch(setScroll(position));
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener('scroll', handleScroll, { passive: true });
-
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
 
   const tweets = useSelector((state) => state.tweetsList.tweets);
 
@@ -78,8 +51,8 @@ const App = () => {
       loginOnrefresh();
     }
   }, []);
-  
-  console.log(user)
+
+  console.log(user);
   useEffect(() => {
     if (url.pathname === '/') {
       dispatch(setDetailedTweet({}));
@@ -96,20 +69,17 @@ const App = () => {
     setFunc();
   }, []);
 
-//change to set user
-
-useEffect(() => {
-  const loginTroughGoogle = async () => {
-    console.log('before calling googleLogin');
-    const acc = await googleLogin()
-    console.log('acc: ', acc)
-    dispatch(saveUserAction(acc))
-  }
-  loginTroughGoogle()
-}, [])
-
-console.log(document.cookie);
-
+  useEffect(() => {
+    const loginThroughGoogle = async () => {
+      console.log('before calling googleLogin');
+      const acc = await googleLogin();
+      console.log('acc: ', acc);
+      dispatch(saveUserAction(acc));
+    };
+    if (!user) {
+      loginThroughGoogle();
+    }
+  }, []);
 
   return (
     <Routes>

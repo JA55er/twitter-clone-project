@@ -21,7 +21,8 @@ const HeaderAccountMenu = () => {
     dispatch(logoutUserAction());
     sessionStorage.clear();
     // googleLogout()
-    window.open(`${BASE_URL}/logout`, '_self');
+    window.open(`${BASE_URL}/api/google/logout`, '_self');
+    // window.open(`${BASE_URL}/logout`, '_self');
   };
 
   const userIcon = user?.icon;

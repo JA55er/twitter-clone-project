@@ -10,6 +10,7 @@ handlers:
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html
+    secure: always
 
 env_variables:
   GOOGLE_CLOUD_PROJECT: twitter-6t
