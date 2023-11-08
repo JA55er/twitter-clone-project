@@ -3,17 +3,18 @@ import express from 'express';
 import Tweet from '../models/tweet.mjs';
 import User from '../models/user.mjs';
 
-import { Storage } from '@google-cloud/storage';
+// import { Storage } from '@google-cloud/storage';
 import multer from 'multer';
 
-import getTimestamp from '../utils/getTimestamp.mjs';
-import config from '../utils/config.mjs';
+// import getTimestamp from '../utils/getTimestamp.mjs';
+// import config from '../utils/config.mjs';
+import uploadImageToGoogle from '../utils/uploadImageToGoogle.mjs';
 
-const storage = new Storage();
+// const storage = new Storage();
 
-const bucketName = config.BUCKET;
+// const bucketName = config.BUCKET;
 
-const bucket = storage.bucket(bucketName);
+// const bucket = storage.bucket(bucketName);
 
 const tweetsRouter = express.Router();
 
@@ -78,31 +79,33 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     const tweetText = req.body.tweetText;
 
     if (file) {
-      try {
-        const timestamp = getTimestamp();
-        const blob = bucket.file(`${timestamp}${file.originalname}`);
-        const blobStream = blob.createWriteStream({
-          metadata: {
-            contentType: file.mimetype,
-          },
-        });
+      imageURL = await uploadImageToGoogle(file)
+      console.log(imageURL)
+      // try {
+      //   const timestamp = getTimestamp();
+      //   const blob = bucket.file(`${timestamp}${file.originalname}`);
+      //   const blobStream = blob.createWriteStream({
+      //     metadata: {
+      //       contentType: file.mimetype,
+      //     },
+      //   });
 
-        await new Promise((resolve, reject) => {
-          blobStream.on('error', (err) => {
-            console.error('Error uploading file !!', err);
-            reject(err);
-          });
+      //   await new Promise((resolve, reject) => {
+      //     blobStream.on('error', (err) => {
+      //       console.error('Error uploading file !!', err);
+      //       reject(err);
+      //     });
 
-          blobStream.on('finish', () => {
-            console.log('file uploaded successfully !!');
-            imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/${timestamp}${file.originalname}`;
-            resolve();
-          });
-          blobStream.end(file.buffer);
-        });
-      } catch (err) {
-        console.log('error uploading file');
-      }
+      //     blobStream.on('finish', () => {
+      //       console.log('file uploaded successfully !!');
+      //       imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/${timestamp}${file.originalname}`;
+      //       resolve();
+      //     });
+      //     blobStream.end(file.buffer);
+      //   });
+      // } catch (err) {
+      //   console.log('error uploading file');
+      // }
     }
 
     const newTweet = new Tweet({

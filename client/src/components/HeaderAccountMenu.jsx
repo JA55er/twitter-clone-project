@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logoutUserAction } from '../reducers/userSlice';
 import googleLogout from '../api/googleLogout';
 import BASE_URL from '../utils/baseUrl';
+import HeaderAccountIcon from './HeaderAccountIcon';
 
 const HeaderAccountMenu = () => {
   const user = useSelector((state) => state.user.user);
@@ -27,6 +28,7 @@ const HeaderAccountMenu = () => {
 
   const userIcon = user?.icon;
 
+
   // console.log(user);
 
   if (!user) return;
@@ -47,7 +49,7 @@ const HeaderAccountMenu = () => {
       {modal}
       <div className='headerAccountContainer'>
         <div className='headerAccount' onClick={toggleModal}>
-          <UserProfileIcon icon={userIcon} />
+          <HeaderAccountIcon icon={userIcon} />
           <div className='headerAccountName'>{user.username}</div>
           <div className='headerAccountOptionsIconContainer'>
             <div className='headerAccountOptionsIcon'>

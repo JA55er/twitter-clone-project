@@ -60,7 +60,6 @@ const CreateTweet = () => {
       return;
     }
     try {
-      //
       const formData = new FormData();
       formData.append('file', attachment);
       formData.append('tweetText', tweetText);
@@ -118,7 +117,7 @@ const CreateTweet = () => {
   // };
   const onImageInputChange = async (e) => {
     const file = e.target.files[0];
-    if (!file) return
+    if (!file) return;
     setSelectedImage(null);
     window.scrollTo({ top: 0 });
     console.log(`originalFile size ${file.size}`);
@@ -164,6 +163,7 @@ const CreateTweet = () => {
                 className='createTweetAttachmentImage'
                 src={selectedImage}
                 alt='selected image'
+                referrerPolicy='no-referrer'
               />
             )}
           </div>

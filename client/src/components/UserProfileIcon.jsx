@@ -12,7 +12,7 @@ const UserProfileIcon = ({ icon, userId }) => {
         className='accountIcon'
         src={icon}
         onClick={onIconClick}
-        referrerpolicy='no-referrer'
+        referrerPolicy='no-referrer'
       />
     </>
   );

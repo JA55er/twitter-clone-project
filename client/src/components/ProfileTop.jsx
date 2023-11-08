@@ -4,8 +4,7 @@ import optionIcons from '../utils/optionIcons';
 import utilityIcons from '../utils/utilityIcons';
 
 const ProfileTop = ({ userProfile }) => {
-
-  if (!userProfile.info) return
+  if (!userProfile.info) return;
 
   return (
     <div className='profileTopContainer'>
@@ -23,6 +22,7 @@ const ProfileTop = ({ userProfile }) => {
               className='profileTopIcon'
               src={userProfile.icon}
               alt=''
+              referrerPolicy="no-referrer"
             />
           </div>
           <div className='profileTopRightContainer'>
@@ -57,9 +57,7 @@ const ProfileTop = ({ userProfile }) => {
           <span className='profileNameText'>{userProfile.username}</span>
         </div>
         <div className='profileBioContainer'>
-          <div className='profileBioText'>
-            {userProfile.info.bio}
-          </div>
+          <div className='profileBioText'>{userProfile.info.bio}</div>
         </div>
         <div className='profileUserInfoContainer'>
           <div className='profileUserInfoItemContainer'>
@@ -77,11 +75,15 @@ const ProfileTop = ({ userProfile }) => {
         </div>
         <div className='profileUserFollowInfoContainer'>
           <div className='profileUserFollowContainer'>
-            <span className='profileUserFollowNumber'>{userProfile.info.following} </span>
+            <span className='profileUserFollowNumber'>
+              {userProfile.info.following}{' '}
+            </span>
             <span className='profileUserFollowText'>Following</span>
           </div>
           <div className='profileUserFollowContainer'>
-            <span className='profileUserFollowNumber'>{userProfile.info.followers} </span>
+            <span className='profileUserFollowNumber'>
+              {userProfile.info.followers}{' '}
+            </span>
             <span className='profileUserFollowText'>Followers</span>
           </div>
         </div>
