@@ -4,6 +4,7 @@ import tweetsListReducer from './reducers/tweetListSlice';
 import scrollReducer from './reducers/scrollSlice';
 import userReducer from './reducers/userSlice';
 import detailedTweetReducer from './reducers/detailedTweetSlice';
+import newTweetsReducer from './reducers/newTweetsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     scroll: scrollReducer,
     user: userReducer,
     detailedTweet: detailedTweetReducer,
+    newTweetsList: newTweetsReducer,
   },
 });

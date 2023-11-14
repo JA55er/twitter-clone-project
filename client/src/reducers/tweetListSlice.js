@@ -36,6 +36,9 @@ export const tweetsListSlice = createSlice({
         }
       });
     },
+    addNewTweets: (state, action) => {
+      state.tweets = [...action.payload, ...state.tweets];
+    },
   },
 });
 
@@ -44,6 +47,7 @@ export const {
   addPosted,
   updateDetailedInList,
   likePostFromList,
+  addNewTweets,
 } = tweetsListSlice.actions;
 
 export default tweetsListSlice.reducer;

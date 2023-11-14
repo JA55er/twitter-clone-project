@@ -1,8 +1,9 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Tweet from './Tweet';
 import { useSelector } from 'react-redux';
+import NewTweetsNumber from './NewTweetsNumber';
 
-const TweetsList = ({tweets}) => {
+const TweetsList = ({ tweets }) => {
   const navigate = useNavigate();
 
   const onTweetClick = (id) => {
@@ -14,6 +15,7 @@ const TweetsList = ({tweets}) => {
 
   return (
     <div>
+      <NewTweetsNumber />
       {tweets.map((tweet) => {
         return (
           <div

@@ -24,6 +24,7 @@ import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
 import googleLogin from './api/googleLogin';
 
+
 const App = () => {
   const user = useSelector((state) => state.user.user);
 
@@ -32,6 +33,26 @@ const App = () => {
   const dispatch = useDispatch();
 
   const tweets = useSelector((state) => state.tweetsList.tweets);
+
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+
+  // useEffect(() => {
+    // Listen for incoming messages
+
+  //   socket.on('new tweet', (tweet) => {
+  //     console.log('new tweet!', tweet)
+  //     dispatch(getNewTweets(tweet));
+  //     // dispatch(addPosted(tweet));
+  //     // dispatch(getNewTweets(tweet))
+  //   })
+
+  //   // Clean up event listeners on unmount
+  //   return () => {
+  //     socket.off('new tweet');
+  //   };
+  // }, []);
+
 
   const detailedTweet = useSelector(
     (state) => state.detailedTweet.detailedTweet
@@ -52,7 +73,7 @@ const App = () => {
     }
   }, []);
 
-  console.log(user);
+  // console.log(user);
   useEffect(() => {
     if (url.pathname === '/') {
       dispatch(setDetailedTweet({}));
@@ -71,9 +92,9 @@ const App = () => {
 
   useEffect(() => {
     const loginThroughGoogle = async () => {
-      console.log('before calling googleLogin');
+      // console.log('before calling googleLogin');
       const acc = await googleLogin();
-      console.log('acc: ', acc);
+      // console.log('acc: ', acc);
       dispatch(saveUserAction(acc));
     };
     if (!user) {

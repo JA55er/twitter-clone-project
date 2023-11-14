@@ -77,7 +77,7 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
     let imageURL = null;
     const tweetText = req.body.tweetText;
-
+    
     if (file) {
       imageURL = await uploadImageToGoogle(file)
       console.log(imageURL)

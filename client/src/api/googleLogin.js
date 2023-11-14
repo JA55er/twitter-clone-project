@@ -14,7 +14,7 @@ import BASE_URL from '../utils/baseUrl';
 //   return response.data.user;
 // };
 const googleLogin = async () => {
-  console.log('inside googleLogin');
+  // console.log('inside googleLogin');
   const response = await axios.get(`${BASE_URL}/api/users/profile`, {
     withCredentials: true,
     headers: {
@@ -22,7 +22,7 @@ const googleLogin = async () => {
       'Content-Type': 'application/json',
     },
   });
-  console.log('google login response: ',response.data)
+  // console.log('google login response: ',response.data)
   return response.data;
 };
 

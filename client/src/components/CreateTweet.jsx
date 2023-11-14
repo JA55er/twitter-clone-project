@@ -14,6 +14,7 @@ import uploadAttachment from '../api/uploadAttachment';
 
 import imageCompression from 'browser-image-compression';
 import Compressor from 'compressorjs';
+import socket from '../utils/websocket';
 
 const CreateTweet = () => {
   const user = useSelector((state) => state.user.user);
@@ -67,6 +68,8 @@ const CreateTweet = () => {
       const newTweet = await submitTweet(formData);
       dispatch(addPosted(newTweet));
       dispatch(userCreateTweetAction(newTweet._id));
+      console.log('tweet to be emitted: ', newTweet)
+      socket.emit('new tweet', newTweet)
       setTweetText('');
       navigate(`/tweet/${newTweet._id}`);
     } catch (error) {
@@ -82,39 +85,6 @@ const CreateTweet = () => {
     document.getElementById('writeTweetAttachmentInput').click();
   };
 
-  // const onImageInputChange = async (e) => {
-  //   const file = e.target.files[0];
-  //   if (!file) return;
-  //   setSelectedImage(null);
-  //   window.scrollTo({ top: 0 });
-  //   console.log(`originalFile size ${file.size}`);
-  //   console.log('file: ', file);
-  //   try {
-  //     const compressedBlob = await new Promise((resolve, reject) => {
-  //       new Compressor(file, {
-  //         quality: 0.6, // Adjust the desired image quality (0.0 - 1.0)
-  //         mimeType: 'image/jpeg', // Specify the output image format
-  //         success(result) {
-  //           resolve(result);
-  //         },
-  //         error(error) {
-  //           reject(error);
-  //         },
-  //       });
-  //     });
-
-  //     console.log(compressedBlob);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (event) => {
-  //       setSelectedImage(event.target.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
   const onImageInputChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;

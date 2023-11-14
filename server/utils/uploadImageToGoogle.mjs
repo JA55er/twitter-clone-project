@@ -10,12 +10,14 @@ const bucket = storage.bucket(bucketName);
 
 const uploadImageToGoogle = async (file) => {
   let imageURL = null;
+  // console.log('file: ', file);
   try {
     const timestamp = getTimestamp();
     const blob = bucket.file(`${timestamp}${file.originalname}`);
+    console.log(blob);
     const blobStream = blob.createWriteStream({
       metadata: {
-        contentType: file.mimetype,
+        contentType: 'image/jpeg',
       },
     });
 
@@ -28,6 +30,7 @@ const uploadImageToGoogle = async (file) => {
       blobStream.on('finish', () => {
         console.log('file uploaded successfully !!');
         imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/${timestamp}${file.originalname}`;
+        console.log(imageURL);
         resolve();
       });
       blobStream.end(file.buffer);

@@ -4,6 +4,15 @@ import axios from 'axios';
 import User from '../models/user.mjs';
 import bcrypt from 'bcrypt';
 import jwb from 'jsonwebtoken';
+import uploadImageToGoogle from '../utils/uploadImageToGoogle.mjs';
+import { Storage } from '@google-cloud/storage';
+import config from '../utils/config.mjs';
+import uploadGoogleIcon from '../utils/uploadGoogleIcon.mjs';
+import getTimestamp from '../utils/getTimestamp.mjs';
+
+const storage = new Storage();
+const bucketName = config.BUCKET;
+const bucket = storage.bucket(bucketName);
 
 const usersRouter = express.Router();
 
@@ -76,11 +85,14 @@ usersRouter.post('/newuser', async (req, res) => {
 });
 
 usersRouter.get('/profile', async (req, res) => {
-  console.log('profile route');
+  // console.log('profile route');
   if (req.googleUser) {
-    console.log('profile route req.googleUser: ', req.googleUser);
+    // console.log(req.googleUser);
+
+
+
     const googleAccount = await User.findOne({ googleId: req.googleUser.id });
-    console.log('profile route googleAccount: ', googleAccount);
+    // console.log('profile route googleAccount: ', googleAccount);
     if (googleAccount) {
       const userForToken = {
         username: googleAccount.username,
@@ -98,10 +110,10 @@ usersRouter.get('/profile', async (req, res) => {
         follows: googleAccount.follows,
         tweets: googleAccount.tweets,
       });
-      console.log('before return ');
+      // console.log('before return ');
       return;
     }
-    console.log('before creating new user');
+    // console.log('before creating new user');
     const newBioText = await axios.get(
       'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
     );
@@ -113,9 +125,27 @@ usersRouter.get('/profile', async (req, res) => {
     const followers = Math.floor(getRandomArbitrary(2, 15));
     const randomIcon = await axios.get('https://picsum.photos/200/200');
     // const icon = randomIcon.request.res.responseUrl;
+
+    // const googleIcon = req.googleUser.photos[0].value;
+
+    // console.log('google icon: ', googleIcon);
+    // const userIcon = await axios({
+    //   method: 'get',
+    //   url: googleIcon,
+    //   responseType: 'stream',
+    // });
+    // // console.log('response data: ', userIcon.data);
+    // userIcon.originalname = req.googleUser.displayName;
+    // const iconURL = await uploadImageToGoogle(userIcon);
+    // console.log(iconURL)
+
+    const googleIcon = await uploadGoogleIcon(req.googleUser)
+    console.log('icon: ',googleIcon)
+
     const userToSave = new User({
       username: req.googleUser.displayName,
-      icon: req.googleUser.photos[0].value,
+      // icon: req.googleUser.photos[0].value,
+      icon: googleIcon,
       googleId: req.googleUser.id,
       info: {
         cover: coverUrl,
@@ -125,7 +155,7 @@ usersRouter.get('/profile', async (req, res) => {
       },
     });
 
-    console.log(userToSave);
+    // console.log(userToSave);
 
     const savedUser = await userToSave.save();
 
@@ -146,14 +176,14 @@ usersRouter.get('/profile', async (req, res) => {
       info: savedUser.info,
     };
 
-    console.log('user sent from /profile: ', newUser);
+    // console.log('user sent from /profile: ', newUser);
 
     res.json(newUser);
-    return
+    return;
   } else {
     console.log('no user');
     res.status(400);
-    return
+    return;
   }
 });
 
