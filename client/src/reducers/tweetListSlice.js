@@ -39,6 +39,11 @@ export const tweetsListSlice = createSlice({
     addNewTweets: (state, action) => {
       state.tweets = [...action.payload, ...state.tweets];
     },
+    removeTweetFromList: (state, action) => {
+      state.tweets = state.tweets.filter((tweet) => {
+        return tweet._id !== action.payload;
+      });
+    },
   },
 });
 
@@ -48,6 +53,7 @@ export const {
   updateDetailedInList,
   likePostFromList,
   addNewTweets,
+  removeTweetFromList,
 } = tweetsListSlice.actions;
 
 export default tweetsListSlice.reducer;

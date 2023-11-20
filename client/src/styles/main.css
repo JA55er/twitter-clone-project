@@ -1213,7 +1213,7 @@ ion-icon {
 }
 
 .transparentOverlay {
-  z-index: 100;
+  z-index: 1;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -1231,7 +1231,7 @@ ion-icon {
     rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
 }
 
-.loggoutButton {
+.modalButton {
   padding: 12px 16px;
   cursor: pointer;
 }
@@ -1242,7 +1242,7 @@ ion-icon {
   user-select: none;
 }
 
-.loggoutButton:hover {
+.modalButton:hover {
   background-color: #f7f9f9;
 }
 
@@ -1493,3 +1493,25 @@ ion-icon {
   color: #fff;
   transition: width 0.3s;
 } */
+
+.optionsModal {
+  position: absolute;
+  background-color: #fff;
+  z-index: 200;
+  border-radius: 16px;
+}
+
+/* .accountModalContainer {
+  z-index: 300;
+} */
+
+.tweetOptionsOverlay {
+  z-index: -100;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}

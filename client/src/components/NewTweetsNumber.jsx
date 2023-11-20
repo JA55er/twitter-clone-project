@@ -14,14 +14,9 @@ const NewTweetsNumber = () => {
   console.log('new Tweets: ', newTweets);
 
   useEffect(() => {
-    // Listen for incoming messages
     socket.on('new tweet', (tweet) => {
-      // console.log('new tweet!', tweet);
-      // console.log(newTweets);
       dispatch(getNewTweets(tweet));
-      // console.log('new tweets length: ', newTweets.length);
     });
-    // Clean up event listeners on unmount
     return () => {
       socket.off('new tweet');
     };
@@ -35,8 +30,6 @@ const NewTweetsNumber = () => {
     dispatch(addNewTweets(newTweets));
     dispatch(clearNewTweets());
   };
-
-  console.log('new tweets number: ', newTweetsNumber);
 
   if (newTweetsNumber) {
     return (

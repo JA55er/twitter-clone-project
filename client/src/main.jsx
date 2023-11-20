@@ -9,11 +9,11 @@ import { Provider } from 'react-redux';
 // store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </Provider>
-  // </React.StrictMode>  
+  </React.StrictMode>
 );

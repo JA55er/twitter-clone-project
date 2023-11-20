@@ -18,6 +18,8 @@ const Tweet = ({ tweet }) => {
     e.stopPropagation();
   };
 
+  // console.log(tweet)
+
   return (
     <>
       <div className='tweetContainer'>
@@ -25,7 +27,7 @@ const Tweet = ({ tweet }) => {
           <UserProfileIcon icon={icon} userId={tweet?.user?._id} />
         </div>
         <div className='tweetRightContainer'>
-          <TweetProfileName username={username} />
+          <TweetProfileName username={username} tweet={tweet}/>
           <TweetText text={text} />
           <TweetAttachment attachment={attachment} />
           <TweetStats tweet={tweet} />

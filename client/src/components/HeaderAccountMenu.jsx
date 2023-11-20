@@ -21,13 +21,10 @@ const HeaderAccountMenu = () => {
   const logOut = () => {
     dispatch(logoutUserAction());
     sessionStorage.clear();
-    // googleLogout()
     window.open(`${BASE_URL}/api/google/logout`, '_self');
-    // window.open(`${BASE_URL}/logout`, '_self');
   };
 
   const userIcon = user?.icon;
-
 
   // console.log(user);
 
@@ -37,7 +34,7 @@ const HeaderAccountMenu = () => {
     <>
       <div className='transparentOverlay' onClick={toggleModal}></div>
       <div className='accountModalContainer'>
-        <div className='loggoutButton' onClick={logOut}>
+        <div className='modalButton' onClick={logOut}>
           <span className='loggoutButtonText'>Log out {user.username}</span>
         </div>
       </div>

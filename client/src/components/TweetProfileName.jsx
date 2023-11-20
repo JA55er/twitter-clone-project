@@ -1,16 +1,15 @@
 import React from 'react';
-import headerIcons from '../utils/headerIcons';
+import TweetOptionsButton from './TweetOptionsButton';
 
-const TweetProfileName = ({username}) => {
+const TweetProfileName = ({ username, tweet }) => {
+ 
   return (
-    <div className='tweetProfileNameContainer'>
-      <div className='tweetProfileName'>{username}</div>
-      <div className='tweetUserOptionsIconContainer'>
-        <div className='tweetUserOptionsIcon'>
-          {headerIcons.accountSettings}
-        </div>
+    <>
+      <div className='tweetProfileNameContainer'>
+        <div className='tweetProfileName'>{username}</div>
+        <TweetOptionsButton tweet={tweet}/>
       </div>
-    </div>
+    </>
   );
 };
 

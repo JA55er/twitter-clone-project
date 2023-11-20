@@ -60,52 +60,23 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     return res.status(404).send('token not found');
   }
   if (!file && !req.body.tweetText) {
-    console.log('must provide image or text')
+    console.log('must provide image or text');
     return res.status(404).send('must provide image or text');
   }
   if (file && file.size > 1024 * 1024) {
-    console.log('file too large')
-    return res.status(413).send('file too large, max size 1MB')
+    console.log('file too large');
+    return res.status(413).send('file too large, max size 1MB');
   }
   try {
-    //get random generated image
-    // const newImage = await axios.get('https://picsum.photos/680/510');
-    // const imageURL = newImage.request.res.responseUrl;
-    // const comments = Math.floor(getRandomArbitrary(2, 7));
     const retweets = Math.floor(getRandomArbitrary(2, 7));
     const likes = Math.floor(getRandomArbitrary(2 * 5, 5 * 10));
     const views = Math.floor(getRandomArbitrary(likes * 5, likes * 15));
     let imageURL = null;
     const tweetText = req.body.tweetText;
-    
+
     if (file) {
-      imageURL = await uploadImageToGoogle(file)
-      console.log(imageURL)
-      // try {
-      //   const timestamp = getTimestamp();
-      //   const blob = bucket.file(`${timestamp}${file.originalname}`);
-      //   const blobStream = blob.createWriteStream({
-      //     metadata: {
-      //       contentType: file.mimetype,
-      //     },
-      //   });
-
-      //   await new Promise((resolve, reject) => {
-      //     blobStream.on('error', (err) => {
-      //       console.error('Error uploading file !!', err);
-      //       reject(err);
-      //     });
-
-      //     blobStream.on('finish', () => {
-      //       console.log('file uploaded successfully !!');
-      //       imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/${timestamp}${file.originalname}`;
-      //       resolve();
-      //     });
-      //     blobStream.end(file.buffer);
-      //   });
-      // } catch (err) {
-      //   console.log('error uploading file');
-      // }
+      imageURL = await uploadImageToGoogle(file);
+      console.log(imageURL);
     }
 
     const newTweet = new Tweet({
@@ -138,6 +109,24 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     console.error(error);
     res.status(500);
   }
+});
+
+tweetsRouter.delete('/delete/:id', async (req, res) => {
+  const user = req.user;
+  const tweet = await Tweet.findById(req.params.id);
+  if (!user) {
+    console.log('token not found');
+    return res.status(404).send('token not found');
+  }
+  if (user._id.valueOf() === tweet.user.valueOf()) {
+    console.log('deleting');
+    const deletedTweet = await Tweet.findByIdAndDelete(req.params.id);
+    console.log(deletedTweet);
+  }
+  // console.log(tweet.user.valueOf())
+  // console.log(user)
+  // console.log(req.params.id)
+  res.status(200);
 });
 
 // tweetsRouter.delete('/deleteall', async (req, res) => {
