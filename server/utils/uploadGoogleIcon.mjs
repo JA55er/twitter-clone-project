@@ -22,16 +22,35 @@ const uploadGoogleIcon = async (googleUser) => {
     `profile-pictures/${googleUser.name.givenName}${timestamp}.jpg`
   );
 
-  response.data
-    .pipe(
-      file.createWriteStream({
-        metadata: {
-          contentType: 'image/jpeg',
-        },
+  await new Promise((resolve, reject) => {
+    response.data
+      .pipe(
+        file.createWriteStream({
+          metadata: {
+            contentType: 'image/jpeg',
+          },
+        })
+      )
+      .on('error', (err) => {
+        console.error(err);
+        reject(err);
       })
-    )
-    .on('error', (err) => console.error(err))
-    .on('finish', () => console.log('uploaded'));
+      .on('finish', () => {
+        console.log('uploaded');
+        resolve();
+      });
+  });
+
+  // await response.data
+  //   .pipe(
+  //     file.createWriteStream({
+  //       metadata: {
+  //         contentType: 'image/jpeg',
+  //       },
+  //     })
+  //   )
+  //   .on('error', (err) => console.error(err))
+  //   .on('finish', () => console.log('uploaded'));
 
   const imageURL = `https://storage.googleapis.com/twitter-6t.appspot.com/profile-pictures/${googleUser.name.givenName}${timestamp}.jpg`;
 

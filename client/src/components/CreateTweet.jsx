@@ -15,6 +15,7 @@ import uploadAttachment from '../api/uploadAttachment';
 import imageCompression from 'browser-image-compression';
 import Compressor from 'compressorjs';
 import socket from '../utils/websocket';
+import utilityIcons from '../utils/utilityIcons';
 
 const CreateTweet = () => {
   const user = useSelector((state) => state.user.user);
@@ -68,8 +69,8 @@ const CreateTweet = () => {
       const newTweet = await submitTweet(formData);
       dispatch(addPosted(newTweet));
       dispatch(userCreateTweetAction(newTweet._id));
-      console.log('tweet to be emitted: ', newTweet)
-      socket.emit('new tweet', newTweet)
+      console.log('tweet to be emitted: ', newTweet);
+      socket.emit('new tweet', newTweet);
       setTweetText('');
       navigate(`/tweet/${newTweet._id}`);
     } catch (error) {
@@ -112,6 +113,11 @@ const CreateTweet = () => {
     }
   };
 
+  const onCrossClick = () => {
+    setAttachment(null)
+    setSelectedImage(null)
+  }
+
   return (
     <div className='createTweetContainer'>
       <div className='createTweetProfileIconContainer'>{userIconContainer}</div>
@@ -129,12 +135,17 @@ const CreateTweet = () => {
           </div>
           <div className='writeTweetAttachmentContainer'>
             {selectedImage && (
-              <img
-                className='createTweetAttachmentImage'
-                src={selectedImage}
-                alt='selected image'
-                referrerPolicy='no-referrer'
-              />
+              <div className='tweetAttachmentContainer'>
+                <div className='crossIconContainer' onClick={onCrossClick}>
+                  <div className='crossIcon'>{utilityIcons.cross}</div>
+                </div>
+                <img
+                  className='createTweetAttachmentImage'
+                  src={selectedImage}
+                  alt='selected image'
+                  referrerPolicy='no-referrer'
+                />
+              </div>
             )}
           </div>
           <div className='writeTweetOptionsContainer'>

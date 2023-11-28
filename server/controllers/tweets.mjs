@@ -41,6 +41,32 @@ tweetsRouter.get('/', async (req, res) => {
   res.send(reverseTweets);
 });
 
+tweetsRouter.get('/paged', async (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const skipNew = parseInt(req.query.skip) || 0;
+
+  const limit = 10;
+  console.log('skipNew: ', skipNew);
+  console.log('page: ', page);
+  const skip = (page - 1) * limit + skipNew;
+
+  console.log('skipping: ', skip, ' tweets');
+
+  const tweets = await Tweet.find({ parent: null })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .populate('user', ['icon', 'username']);
+
+  if (!tweets) res.send('no tweets found');
+
+  const reverseTweets = [...tweets];
+
+  // reverseTweets.reverse();
+
+  res.send(reverseTweets);
+});
+
 tweetsRouter.get('/:id', async (req, res) => {
   // const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']).populate({path: 'comments', select: 'user', populate: 'user'});
   const tweet = await Tweet.findById(req.params.id)

@@ -9,8 +9,15 @@ export const tweetsListSlice = createSlice({
   initialState,
   reducers: {
     getTweetsFromServer: (state, action) => {
-      state.tweets = action.payload;
+      state.tweets = [...state.tweets, ...action.payload];
+      state.tweets = state.tweets.filter(
+        (obj, index) =>
+        state.tweets.findIndex((item) => item._id === obj._id) === index
+      );
     },
+    // getTweetsFromServer: (state, action) => {
+    //   state.tweets = action.payload;
+    // },
     addPosted: (state, action) => {
       const newPost = action.payload;
       state.tweets = [newPost, ...state.tweets];

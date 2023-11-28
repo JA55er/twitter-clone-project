@@ -19,11 +19,14 @@ import {
 // import { setScroll } from './reducers/scrollSlice';
 import { saveUserAction } from './reducers/userSlice';
 import { setDetailedTweet } from './reducers/detailedTweetSlice';
-
+import axios from 'axios';
+import BASE_URL from './utils/baseUrl';
 import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
 import googleLogin from './api/googleLogin';
+import { changePage } from './reducers/pageSlice';
 
+let didInit = false;
 
 const App = () => {
   const user = useSelector((state) => state.user.user);
@@ -32,27 +35,42 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const tweets = useSelector((state) => state.tweetsList.tweets);
+  const page = useSelector((state) => state.page.page);
 
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState('');
+  const newTweets = useSelector((state) => state.newTweetsList.newTweets);
 
-  // useEffect(() => {
-    // Listen for incoming messages
+  ///unoptimized
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [page, newTweets.length]);
 
-  //   socket.on('new tweet', (tweet) => {
-  //     console.log('new tweet!', tweet)
-  //     dispatch(getNewTweets(tweet));
-  //     // dispatch(addPosted(tweet));
-  //     // dispatch(getNewTweets(tweet))
-  //   })
+  const handleScroll = async () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      window.removeEventListener('scroll', handleScroll);
+      console.log('new tweets: ', newTweets.length);
+      const tweets = await getTweets(page, newTweets.length);
+      // const tweets = await getTweets(page);
+      dispatch(changePage(page + 1));
+      dispatch(getTweetsFromServer(tweets));
+    }
+  };
+  ///
 
-  //   // Clean up event listeners on unmount
-  //   return () => {
-  //     socket.off('new tweet');
-  //   };
-  // }, []);
-
+  useEffect(() => {
+    const getInitialTweets = async () => {
+      const tweetsResponse = await getTweets(page);
+      dispatch(changePage(page + 1));
+      dispatch(getTweetsFromServer(tweetsResponse));
+    };
+    if (!didInit) {
+      didInit = true;
+      getInitialTweets();
+    }
+  }, []);
 
   const detailedTweet = useSelector(
     (state) => state.detailedTweet.detailedTweet
@@ -73,28 +91,27 @@ const App = () => {
     }
   }, []);
 
-  // console.log(user);
   useEffect(() => {
     if (url.pathname === '/') {
       dispatch(setDetailedTweet({}));
     }
   }, [url.pathname]);
 
-  useEffect(() => {
-    const setFunc = async () => {
-      if (tweets.length === 0) {
-        const retrievedTweets = await getTweets();
-        dispatch(getTweetsFromServer(retrievedTweets));
-      }
-    };
-    setFunc();
-  }, []);
+  ///
+  // useEffect(() => {
+  //   const setFunc = async () => {
+  //     if (tweets.length === 0) {
+  //       const retrievedTweets = await getTweets();
+  //       dispatch(getTweetsFromServer(retrievedTweets));
+  //     }
+  //   };
+  //   setFunc();
+  // }, []);
+  ///
 
   useEffect(() => {
     const loginThroughGoogle = async () => {
-      // console.log('before calling googleLogin');
       const acc = await googleLogin();
-      // console.log('acc: ', acc);
       dispatch(saveUserAction(acc));
     };
     if (!user) {
@@ -109,6 +126,7 @@ const App = () => {
         element={
           <div>
             <div className='appContainer'>
+              {/* <div onClick={getPage} >aaaaaaaaaaaaaaaaaaaaaaa</div> */}
               <Header />
               <Content />
               <Sidebar />
@@ -140,10 +158,14 @@ const App = () => {
           </div>
         }
       ></Route>
-      <Route path='/login' element={<Login />}>
+      <Route path='/login/*' element={<Login />}>
+        {/* <Route path='signin' element={<SigninModal />}></Route>
+        <Route path='register' element={<RegisterModal />}></Route> */}
+      </Route>
+      {/* <Route path='/login' element={<Login />}>
         <Route path='signin' element={<SigninModal />}></Route>
         <Route path='register' element={<RegisterModal />}></Route>
-      </Route>
+      </Route> */}
     </Routes>
   );
 };

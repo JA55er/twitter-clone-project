@@ -11,7 +11,7 @@ const NewTweetsNumber = () => {
 
   const newTweets = useSelector((state) => state.newTweetsList.newTweets);
 
-  console.log('new Tweets: ', newTweets);
+  // console.log('new Tweets: ', newTweets);
 
   useEffect(() => {
     socket.on('new tweet', (tweet) => {

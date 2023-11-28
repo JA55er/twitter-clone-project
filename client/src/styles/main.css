@@ -387,10 +387,33 @@ input[type='reset'] {
   margin-left: 10px;
 }
 
+.tweetAttachmentContainer {
+  position: relative;
+}
+
 .createTweetAttachmentImage {
   width: 100%;
   height: 100%;
   border-radius: 16px;
+}
+
+.crossIconContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  background-color: rgba(15, 20, 25, 0.75);
+  right: 4px;
+  top: 4px;
+  border-radius: 16px;
+}
+
+.crossIcon {
+  width: 18px;
+  height: 18px;
+  color: #FFF;
 }
 
 .writeTweetOptionsContainer {
