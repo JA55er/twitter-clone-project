@@ -28,6 +28,9 @@ input[type='reset'] {
   outline: inherit;
 }
 
+#portal {
+}
+
 .appContainer {
   display: flex;
   margin: auto;
@@ -40,29 +43,43 @@ input[type='reset'] {
   flex: 1;
   height: 100%;
   justify-content: end;
+  max-width: 594px;
 }
 
 .headerContent {
   float: right;
-  width: 275px;
+  width: 269px;
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   justify-content: space-between;
+  padding-left: 8px;
+  padding-right: 8px;
+  overflow-x: hidden;
   height: 100%;
   position: fixed;
 }
 
 .headerTopContentContainer {
   float: right;
-  width: 275px;
-  overflow-y: auto;
-  padding-left: 8px;
-  padding-right: 8px;
+  /* width: 269px; */
+  /* overflow-y: auto; */
+  /* padding-left: 8px;
+  padding-right: 8px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.logoHeaderContainer {
+  margin-bottom: 4px;
 }
 
 .twitterLogoContainer {
   width: 100%;
-  height: 50.25px;
+  height: 56px;
+  padding: 2px 0px;
+  /* height: 50.25px; */
   display: flex;
   align-items: center;
 }
@@ -133,9 +150,22 @@ input[type='reset'] {
   user-select: none;
 }
 
-.button {
+/* .headerWriteTweetButtonContainer {
+  padding-top: 2px;
+  margin-bottom: 4px;
+} */
+
+.headerTweetButtonContainer {
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.headerTweetButton {
   width: 90%;
   height: 52px;
+  min-height: 52px;
+  min-width: 52px;
   border-radius: 26px;
   background-color: #1d9bf0;
   justify-content: center;
@@ -146,14 +176,20 @@ input[type='reset'] {
   border-radius: 26px;
 }
 
-.button:hover {
+.headerTweetButton:hover {
   background-color: #1a8cd8;
 }
 
-.buttonLabel {
+.headerTweetButtonLabel {
   font-size: 20px;
   color: white;
   font-weight: 700;
+}
+
+.writeTweetButtonIcon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
 }
 
 .mycon {
@@ -413,7 +449,7 @@ input[type='reset'] {
 .crossIcon {
   width: 18px;
   height: 18px;
-  color: #FFF;
+  color: #fff;
 }
 
 .writeTweetOptionsContainer {
@@ -705,7 +741,9 @@ ion-icon {
   flex-direction: column;
   flex: 1;
   align-self: stretch;
-  margin-right: 90px;
+  /* margin-right: 90px; */
+  /* margin-left: auto; */
+  margin-right: max(9px, calc((100vw - 100%) / 2));
 }
 
 .loginButtonContainer {
@@ -1523,6 +1561,47 @@ ion-icon {
   z-index: 200;
   border-radius: 16px;
 }
+.accountModal {
+  position: fixed;
+  background-color: #fff;
+  z-index: 3000;
+  border-radius: 16px;
+   /* height: 88px; */
+  width: 300px; 
+  /* padding: 0px 12px; */
+}
+
+/* .accountModal {
+  position: 'fixed';
+  top: '50%';
+  left: '50%';
+  transform: 'translate(-50%, -50%)';
+  background-color: '#FFF';
+  padding: '50px';
+  z-Index: 1000;
+} */
+
+
+/* .optionsModal {
+  position: absolute;
+  background-color: black;
+   width: 200px;
+  height: 200px; 
+  z-index: 3000;
+   bottom: 0px; 
+   left: 118px; 
+   left: 0px; 
+} */
+/* .accountModal {
+  position: absolute;
+  background-color: black;
+  width: 200px;
+  height: 200px;
+  z-index: 3000;
+  bottom: 0px;
+  left: 118px; 
+  left: 0px;
+} */
 
 /* .accountModalContainer {
   z-index: 300;
@@ -1538,3 +1617,76 @@ ion-icon {
   bottom: 0;
   position: fixed;
 }
+
+@media screen and (max-width: 1000px) {
+  .loginLogoContainer {
+    display: none;
+  }
+  .loginOptionsContainer {
+    align-items: center;
+  }
+}
+
+.loginContainer {
+}
+
+@media screen and (max-height: 500px) {
+  .loginContainer {
+    height: 500px;
+  }
+}
+
+@media screen and (max-height: 850px) {
+  .headerLinkContainer {
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .headerContainer {
+    max-width: 200px;
+    min-width: 100px;
+  }
+  .headerLinkLabel {
+    display: none;
+  }
+  .headerContent {
+    width: auto;
+    align-items: center;
+  }
+  .headerTopContentContainer {
+    width: auto;
+  }
+  .headerTweetButton {
+    max-width: 52px;
+  }
+  .headerAccount {
+    /* max-width: 64px; */
+  }
+  .headerAccountContainer {
+    max-width: 64px;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .sidebarContainer {
+    display: none;
+  }
+  .headerContainer {
+    flex-grow: 2;
+  }
+  .contentContainer {
+    flex-grow: 2;
+    margin-right: auto;
+  }
+  .homeTimelineContainer {
+    max-width: 600px;
+  }
+}
+
+/* @media screen and (max-width: 750px) {
+.contentContainer {
+  margin-right: auto;
+}
+} */

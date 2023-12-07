@@ -6,13 +6,18 @@ import { logoutUserAction } from '../reducers/userSlice';
 import googleLogout from '../api/googleLogout';
 import BASE_URL from '../utils/baseUrl';
 import HeaderAccountIcon from './HeaderAccountIcon';
+import OptionsModal from './OptionsModal';
+import HeaderAccountModal from './HeaderAccountModal';
 
-const HeaderAccountMenu = () => {
+const HeaderAccountMenu = ({ smallScreen }) => {
   const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
 
   const [showModal, setShowModal] = useState(null);
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
   const toggleModal = () => {
     setShowModal(!showModal);
@@ -41,18 +46,66 @@ const HeaderAccountMenu = () => {
     </>
   );
 
+  const headerContainer = document.getElementById('headerContent');
+  console.log(headerContainer.scrollTop);
+
+  const onHeaderClick = (e) => {
+    e.stopPropagation();
+
+    console.log('header clicked');
+    const rect = e.currentTarget.getBoundingClientRect();
+    console.log(rect);
+    console.log(rect.top + document.getElementById('headerContent').scrollTop);
+    // console.log(document.getElementById('headerContent').left)
+    // const clickedElement = e.currentTarget;
+
+    // Get the bounding box of the clicked element
+    // const rect2 = clickedElement.getBoundingClientRect();
+    // console.log(rect2)
+    setModalPosition({
+      bottom: window.innerHeight - rect.top,
+      // window.innerHeight - rect.top  - headerContainer.scrollTop,
+      // right: window.innerWidth - rect.right + headerContainer.scrollLeft,
+      left: rect.left + window.scrollX,
+    });
+
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+
   return (
     <>
       {modal}
+      {modalVisible && (
+        <HeaderAccountModal
+          onClose={handleCloseModal}
+          position={modalPosition}
+          user={user}
+        />
+      )}
       <div className='headerAccountContainer'>
-        <div className='headerAccount' onClick={toggleModal}>
+        <div className='headerAccount' onClick={onHeaderClick}>
+          {/* <div className='headerAccount' onClick={toggleModal}> */}
           <HeaderAccountIcon icon={userIcon} />
-          <div className='headerAccountName'>{user.username}</div>
+          {smallScreen ? null : (
+            <>
+              <div className='headerAccountName'>{user.username}</div>
+              <div className='headerAccountOptionsIconContainer'>
+                <div className='headerAccountOptionsIcon'>
+                  {headerIcons.accountSettings}
+                </div>
+              </div>
+            </>
+          )}
+          {/* <div className='headerAccountName'>{user.username}</div>
           <div className='headerAccountOptionsIconContainer'>
             <div className='headerAccountOptionsIcon'>
               {headerIcons.accountSettings}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
