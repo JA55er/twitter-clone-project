@@ -114,9 +114,13 @@ const CreateTweet = () => {
   };
 
   const onCrossClick = () => {
-    setAttachment(null)
-    setSelectedImage(null)
-  }
+    setAttachment(null);
+    setSelectedImage(null);
+  };
+
+  const postButtonColor = {
+    backgroundColor: tweetText || attachment ? '#1d9bf0' : '#8ecdf7',
+  };
 
   return (
     <div className='createTweetContainer'>
@@ -169,7 +173,11 @@ const CreateTweet = () => {
               })}
             </div>
             <div className='writeTweetButtonContainer'>
-              <button className='writeTweetButton' type='submit'>
+              <button
+                className='writeTweetButton'
+                type='submit'
+                style={postButtonColor}
+              >
                 <span className='writeTweetButtonSpan'>Post</span>
               </button>
             </div>

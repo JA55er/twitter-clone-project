@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import deleteTweet from '../api/deleteTweet';
 import { removeTweetFromList } from '../reducers/tweetListSlice';
 import ReactDom from 'react-dom';
+import { logoutUserAction } from '../reducers/userSlice';
+import BASE_URL from '../utils/baseUrl';
 
 const HeaderAccountModal = ({ onClose, position }) => {
   const user = useSelector((state) => state.user.user);
@@ -24,6 +26,12 @@ const HeaderAccountModal = ({ onClose, position }) => {
     console.log(modalStyle);
   };
 
+  const logOut = () => {
+    dispatch(logoutUserAction());
+    sessionStorage.clear();
+    window.open(`${BASE_URL}/api/google/logout`, '_self');
+  };
+
   console.log(modalStyle);
 
   return ReactDom.createPortal(
@@ -31,11 +39,10 @@ const HeaderAccountModal = ({ onClose, position }) => {
       {/* <div className='accountModal' onClick={onModalClick}> */}
       <div className='accountModal' style={modalStyle} onClick={onModalClick}>
         <div className='accountModalContainer'>
-          <div className='modalButton'>
-            <span className='loggoutButtonText'>Delete</span>
-          </div>
-          <div className='modalButton'>
-            <span className='loggoutButtonText'>Follow {user.username}</span>
+          <div className='modalButton' onClick={logOut}>
+            <div className='modalButtonTextContainer'>
+              <span className='loggoutButtonText'>Log out {user.username}</span>
+            </div>
           </div>
         </div>
         <div className='tweetOptionsOverlay' onClick={onClose}></div>

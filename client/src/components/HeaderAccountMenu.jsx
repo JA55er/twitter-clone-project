@@ -19,9 +19,9 @@ const HeaderAccountMenu = ({ smallScreen }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({ top: 0, left: 0 });
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  // const toggleModal = () => {
+  //   setShowModal(!showModal);
+  // };
 
   const logOut = () => {
     dispatch(logoutUserAction());
@@ -31,41 +31,26 @@ const HeaderAccountMenu = ({ smallScreen }) => {
 
   const userIcon = user?.icon;
 
-  // console.log(user);
-
   if (!user) return;
 
-  const modal = !showModal ? null : (
-    <>
-      <div className='transparentOverlay' onClick={toggleModal}></div>
-      <div className='accountModalContainer'>
-        <div className='modalButton' onClick={logOut}>
-          <span className='loggoutButtonText'>Log out {user.username}</span>
-        </div>
-      </div>
-    </>
-  );
+  const userTag = user.username + user.id.slice(0, 4);
 
-  const headerContainer = document.getElementById('headerContent');
-  console.log(headerContainer.scrollTop);
+  // const modal = !showModal ? null : (
+  //   <>
+  //     <div className='transparentOverlay' onClick={toggleModal}></div>
+  //     <div className='accountModalContainer'>
+  //       <div className='modalButton' onClick={logOut}>
+  //         <span className='loggoutButtonText'>Log out {user.username}</span>
+  //       </div>
+  //     </div>
+  //   </>
+  // );
 
   const onHeaderClick = (e) => {
     e.stopPropagation();
-
-    console.log('header clicked');
     const rect = e.currentTarget.getBoundingClientRect();
-    console.log(rect);
-    console.log(rect.top + document.getElementById('headerContent').scrollTop);
-    // console.log(document.getElementById('headerContent').left)
-    // const clickedElement = e.currentTarget;
-
-    // Get the bounding box of the clicked element
-    // const rect2 = clickedElement.getBoundingClientRect();
-    // console.log(rect2)
     setModalPosition({
       bottom: window.innerHeight - rect.top,
-      // window.innerHeight - rect.top  - headerContainer.scrollTop,
-      // right: window.innerWidth - rect.right + headerContainer.scrollLeft,
       left: rect.left + window.scrollX,
     });
 
@@ -78,7 +63,7 @@ const HeaderAccountMenu = ({ smallScreen }) => {
 
   return (
     <>
-      {modal}
+      {/* {modal} */}
       {modalVisible && (
         <HeaderAccountModal
           onClose={handleCloseModal}
@@ -88,11 +73,14 @@ const HeaderAccountMenu = ({ smallScreen }) => {
       )}
       <div className='headerAccountContainer'>
         <div className='headerAccount' onClick={onHeaderClick}>
-          {/* <div className='headerAccount' onClick={toggleModal}> */}
           <HeaderAccountIcon icon={userIcon} />
           {smallScreen ? null : (
             <>
-              <div className='headerAccountName'>{user.username}</div>
+              <div className='headerAccountNameContainer'>
+                <div className='headerAccountName'>{user.username}</div>
+                <div className='headerAccountNameTag'>@{userTag}</div>
+              </div>
+
               <div className='headerAccountOptionsIconContainer'>
                 <div className='headerAccountOptionsIcon'>
                   {headerIcons.accountSettings}
@@ -100,12 +88,6 @@ const HeaderAccountMenu = ({ smallScreen }) => {
               </div>
             </>
           )}
-          {/* <div className='headerAccountName'>{user.username}</div>
-          <div className='headerAccountOptionsIconContainer'>
-            <div className='headerAccountOptionsIcon'>
-              {headerIcons.accountSettings}
-            </div>
-          </div> */}
         </div>
       </div>
     </>
@@ -113,3 +95,4 @@ const HeaderAccountMenu = ({ smallScreen }) => {
 };
 
 export default HeaderAccountMenu;
+

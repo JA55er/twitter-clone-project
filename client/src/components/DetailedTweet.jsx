@@ -30,14 +30,13 @@ const DetailedTweet = () => {
     navigate(`/tweet/${id}`);
   };
 
-
   if (Object.keys(tweet).length === 0) {
     return (
       <div className='contentContainer'>
         <div className='homeTimelineContainer'>
           <DetailedTop />
-          <div className='contentBottomBuffer'></div>
         </div>
+        <div className='contentBottomBuffer'></div>
       </div>
     );
   }
@@ -61,8 +60,8 @@ const DetailedTweet = () => {
             </div>
           );
         })}
-        <div className='contentBottomBuffer'></div>
       </div>
+      <div className='contentBottomBuffer'></div>
     </div>
   );
 };

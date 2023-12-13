@@ -13,6 +13,8 @@ const Tweet = ({ tweet }) => {
   const attachment = tweet.attachment;
   // const stats = tweet.stats;
   const icon = tweet.user?.icon;
+  const userId = tweet.user?._id;
+
 
   const onProfileIconClick = (e) => {
     e.stopPropagation();
@@ -24,10 +26,11 @@ const Tweet = ({ tweet }) => {
     <>
       <div className='tweetContainer'>
         <div className='TweetProfileIconContainer' onClick={onProfileIconClick}>
-          <UserProfileIcon icon={icon} userId={tweet?.user?._id} />
+          <UserProfileIcon icon={icon} userId={userId} />
+          {/* <UserProfileIcon icon={icon} userId={tweet?.user?._id} /> */}
         </div>
         <div className='tweetRightContainer'>
-          <TweetProfileName username={username} tweet={tweet}/>
+          <TweetProfileName username={username} tweet={tweet} userId={userId} />
           <TweetText text={text} />
           <TweetAttachment attachment={attachment} />
           <TweetStats tweet={tweet} />

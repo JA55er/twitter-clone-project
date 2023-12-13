@@ -2,7 +2,7 @@ import React from 'react';
 import utilityIcons from '../utils/utilityIcons';
 import { Link } from 'react-router-dom';
 
-const ProfileStickyTop = () => {
+const ProfileStickyTop = ({username}) => {
 
   const onNameClick = () => {
     window.scrollTo({top: 0})
@@ -19,7 +19,7 @@ const ProfileStickyTop = () => {
           </Link>
         </div>
         <div className="profileStickyTopNameContainer" onClick={onNameClick}>
-          <span className="profileStickyTopNameText">JA55er</span>
+          <span className="profileStickyTopNameText">{username}</span>
         </div>
       </div>
     </div>

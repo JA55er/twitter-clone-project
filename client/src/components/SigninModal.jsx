@@ -61,53 +61,55 @@ const SigninModal = () => {
             <div className='loginModalLogo'>{headerIcons.twitter}</div>
             <div className='loginModalTopRightSide'></div>
           </div>
-          <div className='loginModalBottom'>
-            <div className='loginModalTopTextContainer'>
-              <span className='loginModalTopText'>Sign in to Twitter</span>
-            </div>
-            <div
-              className='loginModalButtonContainer'
-              onClick={onGoogleButtonClick}
-            >
-              <GoogleLoginButton
-                textColor={'#000'}
-                border={'#ccc solid 1px'}
-                content={'Login with Google'}
-              />
-            </div>
-            <div className='loginOptionsSeperator'>
-              <div className='seperatorLine'></div>
-              <div className='seperatorText'>or</div>
-              <div className='seperatorLine'></div>
-            </div>
-            <form action='post' onSubmit={(e) => onFormSubmit(e)}>
-              <div className='loginModalInputContainer'>
-                <input
-                  type='text'
-                  className='loginModalInput'
-                  placeholder='Username'
-                  onChange={(e) => onUsernameChange(e)}
+          <div className='loginModalBottomContainer'>
+            <div className='loginModalBottom'>
+              <div className='loginModalTopTextContainer'>
+                <span className='loginModalTopText'>Sign in to Twitter</span>
+              </div>
+              <div
+                className='loginModalButtonContainer'
+                onClick={onGoogleButtonClick}
+              >
+                <GoogleLoginButton
+                  textColor={'#000'}
+                  border={'#ccc solid 1px'}
+                  content={'Login with Google'}
                 />
               </div>
-              <div className='loginModalInputContainer'>
-                <input
-                  type='password'
-                  className='loginModalInput'
-                  placeholder='Password'
-                  onChange={(e) => onPasswordChange(e)}
-                />
+              <div className='loginOptionsSeperator'>
+                <div className='seperatorLine'></div>
+                <div className='seperatorText'>or</div>
+                <div className='seperatorLine'></div>
               </div>
-              {/* <div className='modalPasswordContainer'></div> */}
-              <div className='loginModalLoginButtonContainer'>
-                <div className='loginModalButtonContainer'>
-                  <LoginButtons
-                    textColor={'#FFF'}
-                    backgroundColor={'#000'}
-                    content={'Login'}
+              <form action='post' onSubmit={(e) => onFormSubmit(e)}>
+                <div className='loginModalInputContainer'>
+                  <input
+                    type='text'
+                    className='loginModalInput'
+                    placeholder='Username'
+                    onChange={(e) => onUsernameChange(e)}
                   />
                 </div>
-              </div>
-            </form>
+                <div className='loginModalInputContainer'>
+                  <input
+                    type='password'
+                    className='loginModalInput'
+                    placeholder='Password'
+                    onChange={(e) => onPasswordChange(e)}
+                  />
+                </div>
+                {/* <div className='modalPasswordContainer'></div> */}
+                <div className='loginModalLoginButtonContainer'>
+                  <div className='loginModalButtonContainer'>
+                    <LoginButtons
+                      textColor={'#FFF'}
+                      backgroundColor={'#000'}
+                      content={'Login'}
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

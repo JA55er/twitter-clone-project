@@ -5,6 +5,7 @@
   font-family: 'Roboto';
   /* user-drag: none; */
   -webkit-user-drag: none;
+  min-width: 0px;
 }
 
 a:-webkit-any-link {
@@ -232,12 +233,30 @@ input[type='reset'] {
   border-radius: 50%;
 }
 
+.headerAccountNameContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 150px;
+  overflow: hidden;
+}
+
 .headerAccountName {
   margin-left: 12px;
   margin-right: 12px;
   font-size: 15px;
   font-weight: 700;
   user-select: none;
+}
+
+.headerAccountNameTag {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(83, 100, 113);
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 12px;
 }
 
 .headerAccountOptionsIconContainer {
@@ -574,9 +593,10 @@ ion-icon {
   flex-direction: column;
   width: 100%;
   padding-bottom: 12px;
+  min-width: 0;
 }
 
-.tweetProfileNameContainer {
+.tweetProfileNameOptionsContainer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -584,11 +604,28 @@ ion-icon {
   margin-bottom: 7px;
 }
 
-.tweetProfileName {
+
+
+.tweetProfileNameContainer {
   display: flex;
-  align-items: center;
+  overflow: hidden;
+  max-width: 400px;
+  white-space: nowrap;
+}
+
+.tweetProfileName {
   font-size: 15px;
   font-weight: 700;
+}
+
+.tweetProfileNameTag {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(83, 100, 113);
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 4px;
 }
 
 .tweetProfileName:hover {
@@ -601,6 +638,8 @@ ion-icon {
   margin: -8px;
   width: 34.75px;
   height: 34.75px;
+  min-width: 34.75px;
+  min-height: 34.75px;
   border-radius: 50%;
   transition: background-color 0.2s ease;
 }
@@ -916,6 +955,11 @@ ion-icon {
   width: 40px;
 }
 
+.followRecommendAccountNameContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .followRecommendAccountName {
   font-size: 15px;
   font-weight: 700;
@@ -924,6 +968,17 @@ ion-icon {
 
 .followRecommendAccountName:hover {
   text-decoration: underline;
+}
+
+.followRecommendAccountNameTag {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgb(83, 100, 113);
+  font-size: 15px;
+  font-weight: 400;
+  /* margin-left: 4px; */
 }
 
 /* .followRecommendAccountRightSide {
@@ -1158,12 +1213,21 @@ ion-icon {
   align-items: center; */
   min-height: 400px;
   min-width: 500px;
+  max-width: 500px;
+  max-height: 500px;
   max-width: 80vw;
   max-height: 90vh;
   height: 550px;
   width: 600px;
   border-radius: 16px;
   background-color: #fff;
+  height: fit-content;
+  /* display: flex;
+  flex: 1; */
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* overflow: hidden; */
 }
 
 .loginModalContent {
@@ -1171,6 +1235,8 @@ ion-icon {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  /* overflow-y: auto; */
+  overflow-x: hidden;
 }
 
 .loginModalTop {
@@ -1187,6 +1253,15 @@ ion-icon {
   width: 30px;
 }
 
+.loginModalBottomContainer {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  /* height: 300px; */
+  /* min-height: 500px; */
+  overflow-y: auto;
+}
+
 .loginModalBottom {
   display: flex;
   flex-direction: column;
@@ -1195,6 +1270,8 @@ ion-icon {
   margin: 0px 118px;
   padding: 0px 32px;
   padding-bottom: 48px;
+  overflow-y: auto;
+  max-height: 500px;
 }
 
 .loginModalTopTextContainer {
@@ -1295,6 +1372,13 @@ ion-icon {
 .modalButton {
   padding: 12px 16px;
   cursor: pointer;
+}
+
+.modalButtonTextContainer {
+  display: flex;
+  max-width: 260px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .loggoutButtonText {
@@ -1566,8 +1650,8 @@ ion-icon {
   background-color: #fff;
   z-index: 3000;
   border-radius: 16px;
-   /* height: 88px; */
-  width: 300px; 
+  /* height: 88px; */
+  width: 300px;
   /* padding: 0px 12px; */
 }
 
@@ -1580,7 +1664,6 @@ ion-icon {
   padding: '50px';
   z-Index: 1000;
 } */
-
 
 /* .optionsModal {
   position: absolute;

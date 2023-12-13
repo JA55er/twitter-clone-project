@@ -11,14 +11,17 @@ const FollowRecommend = () => {
     {
       profileIcon: profileIcon1,
       profileName: 'Aurora',
+      profileNameTag: '@Aurora5960'
     },
     {
       profileIcon: profileIcon2,
       profileName: 'Gaia',
+      profileNameTag: '@Gaia8609'
     },
     {
       profileIcon: profileIcon3,
       profileName: 'Fuji',
+      profileNameTag: '@Fuji5486'
     }
   ]
   

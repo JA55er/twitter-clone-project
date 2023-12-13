@@ -123,7 +123,7 @@ usersRouter.get('/profile', async (req, res) => {
     const coverUrl = newCover.request.res.responseUrl;
     const following = Math.floor(getRandomArbitrary(2, 15));
     const followers = Math.floor(getRandomArbitrary(2, 15));
-    const randomIcon = await axios.get('https://picsum.photos/200/200');
+    // const randomIcon = await axios.get('https://picsum.photos/200/200');
     // const icon = randomIcon.request.res.responseUrl;
 
     // const googleIcon = req.googleUser.photos[0].value;
@@ -143,7 +143,7 @@ usersRouter.get('/profile', async (req, res) => {
     console.log('icon: ',googleIcon)
 
     const userToSave = new User({
-      username: req.googleUser.displayName,
+      username: req.googleUser.displayName.slice(0, 25),
       // icon: req.googleUser.photos[0].value,
       icon: googleIcon,
       googleId: req.googleUser.id,

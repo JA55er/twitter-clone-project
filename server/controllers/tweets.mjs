@@ -46,13 +46,41 @@ tweetsRouter.get('/paged', async (req, res) => {
   const skipNew = parseInt(req.query.skip) || 0;
 
   const limit = 10;
+  // console.log('skipNew: ', skipNew);
+  // console.log('page: ', page);
+  const skip = (page - 1) * limit + skipNew;
+
+  // console.log('skipping: ', skip, ' tweets');
+
+  const tweets = await Tweet.find({ parent: null })
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit)
+    .populate('user', ['icon', 'username']);
+
+  if (!tweets) res.send('no tweets found');
+
+  const reverseTweets = [...tweets];
+
+  // reverseTweets.reverse();
+
+  res.send(reverseTweets);
+});
+
+tweetsRouter.get('/usertweets', async (req, res) => {
+
+  const id = req.query.profile
+  const page = parseInt(req.query.page) || 1
+  const skipNew = parseInt(req.query.skip) || 0
+
+  const limit = 10;
   console.log('skipNew: ', skipNew);
   console.log('page: ', page);
   const skip = (page - 1) * limit + skipNew;
 
   console.log('skipping: ', skip, ' tweets');
 
-  const tweets = await Tweet.find({ parent: null })
+  const tweets = await Tweet.find({ parent: null, user: id })
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
@@ -100,9 +128,12 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     let imageURL = null;
     const tweetText = req.body.tweetText;
 
-    if (file) {
-      imageURL = await uploadImageToGoogle(file);
-      console.log(imageURL);
+    // disable image upload for production
+    if (process.env.NODE_ENV === 'development') {
+      if (file) {
+        imageURL = await uploadImageToGoogle(file);
+        console.log(imageURL);
+      }
     }
 
     const newTweet = new Tweet({
