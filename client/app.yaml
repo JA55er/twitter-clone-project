@@ -4,7 +4,10 @@ handlers:
   - url: /(.*\.(js|css|png|jpg|jpeg|gif|ico|json|svg))$
     static_files: dist/\1
     upload: dist/(.*\.(js|css|png|jpg|jpeg|gif|ico|json|svg))$
-  
+
   - url: /.*
     static_files: dist/index.html
     upload: dist/index.html
+
+env_variables:
+  REACT_APP_GAE_API_URL: 'https://twitter-6t.lm.r.appspot.com'

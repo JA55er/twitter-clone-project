@@ -5,7 +5,7 @@
   font-family: 'Roboto';
   /* user-drag: none; */
   -webkit-user-drag: none;
-  min-width: 0px;
+  /* min-width: 0px; */
 }
 
 a:-webkit-any-link {
@@ -32,10 +32,16 @@ input[type='reset'] {
 #portal {
 }
 
+body {
+  viewport-fit: contain; /* or auto or contain */
+}
+
 .appContainer {
   display: flex;
   margin: auto;
   /* height: 100vh; */
+  /* height: 100dvh; */
+  /*changed*/
   height: 100%;
 }
 
@@ -43,6 +49,8 @@ input[type='reset'] {
   display: flex;
   flex: 1;
   height: 100%;
+  /* height: 100vh; */
+  /* height: 100dvh; */
   justify-content: end;
   max-width: 594px;
 }
@@ -55,7 +63,7 @@ input[type='reset'] {
   flex-direction: column;
   justify-content: space-between;
   padding-left: 8px;
-  padding-right: 8px;
+  padding-right: 12px;
   overflow-x: hidden;
   height: 100%;
   position: fixed;
@@ -65,8 +73,8 @@ input[type='reset'] {
   float: right;
   /* width: 269px; */
   /* overflow-y: auto; */
-  /* padding-left: 8px;
-  padding-right: 8px; */
+  /* padding-left: 8px; */
+  /* padding-right: 8px;  */
   display: flex;
   flex-direction: column;
   /* align-items: center; */
@@ -219,6 +227,8 @@ input[type='reset'] {
 .accountIcon {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50%;
   transition: filter 0.2s ease;
 }
@@ -230,6 +240,8 @@ input[type='reset'] {
 .headerAccountIcon {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 50%;
 }
 
@@ -374,6 +386,54 @@ input[type='reset'] {
   width: 100%;
   text-align: center;
   font-weight: 700;
+}
+
+.contentTopLoginContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 53px;
+  margin: 0px 12px;
+}
+
+.contentTopLoginOptionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 100%;
+}
+
+.contentTopLoginOptionContainerRight {
+  margin-left: 12px;
+}
+
+.contentTopLoginButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 16px;
+}
+
+.contentTopLoginButtonText {
+  color: rgb(29, 155, 240);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.contentTopRegisterButtonContainer {
+  background-color: rgb(26, 140, 216);
+  border: none;
+}
+
+.contentTopRegisterButtonText {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFF;
 }
 
 .createTweetContainer {
@@ -604,18 +664,24 @@ ion-icon {
   margin-bottom: 7px;
 }
 
-
-
 .tweetProfileNameContainer {
   display: flex;
   overflow: hidden;
-  max-width: 400px;
+  min-width: 0px;
   white-space: nowrap;
+  width: 100%;
+  /* flex-shrink: 1; */
+  /* flex: 1; */
 }
 
 .tweetProfileName {
   font-size: 15px;
   font-weight: 700;
+  /* position: absolute; */
+  /* width: inherit;
+  overflow: hidden; */
+  width: 0;
+  min-width: 100%;
 }
 
 .tweetProfileNameTag {
@@ -626,6 +692,11 @@ ion-icon {
   font-size: 15px;
   font-weight: 400;
   margin-left: 4px;
+  /* position: absolute; */
+  /* width: inherit;
+  overflow: hidden; */
+  width: 0;
+  min-width: 100%;
 }
 
 .tweetProfileName:hover {
@@ -1729,23 +1800,26 @@ ion-icon {
 @media screen and (max-width: 1300px) {
   .headerContainer {
     max-width: 200px;
-    min-width: 100px;
+    min-width: 80px;
+    /* min-width: fit-content; */
+    /* padding-right: ; */
   }
   .headerLinkLabel {
     display: none;
   }
   .headerContent {
-    width: auto;
+    width: 80px;
     align-items: center;
+    padding-right: 4px;
   }
   .headerTopContentContainer {
-    width: auto;
+    /* width: auto; */
   }
   .headerTweetButton {
     max-width: 52px;
   }
   .headerAccount {
-    /* max-width: 64px; */
+    padding: 8px;
   }
   .headerAccountContainer {
     max-width: 64px;
@@ -1768,8 +1842,18 @@ ion-icon {
   }
 }
 
-/* @media screen and (max-width: 750px) {
-.contentContainer {
-  margin-right: auto;
+@media screen and (max-width: 750px) {
+  .tweetContainer {
+    padding-left: 8px;
+  }
+  .createTweetContainer {
+    padding-left: 8px;
+  }
+  .homeContainer {
+    padding-left: 8px;
+  }
+  .headerContent {
+    /* padding-left: 4px; */
+    /* padding-right: 4px; */
+  }
 }
-} */

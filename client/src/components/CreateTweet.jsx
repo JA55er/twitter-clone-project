@@ -16,6 +16,7 @@ import imageCompression from 'browser-image-compression';
 import Compressor from 'compressorjs';
 import socket from '../utils/websocket';
 import utilityIcons from '../utils/utilityIcons';
+import { useMediaQuery } from 'react-responsive';
 
 const CreateTweet = () => {
   const user = useSelector((state) => state.user.user);
@@ -39,13 +40,23 @@ const CreateTweet = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const optionIconsArr = [
+  let optionIconsArr = [
     { icon: optionIcons.gif },
     { icon: optionIcons.poll },
     { icon: optionIcons.emoji },
     { icon: optionIcons.calendar },
     { icon: optionIcons.location },
   ];
+
+  const removeOptions = useMediaQuery({maxWidth: 720})
+
+  if (removeOptions) {
+    optionIconsArr = [
+      { icon: optionIcons.gif },
+      { icon: optionIcons.emoji },
+      { icon: optionIcons.location },
+    ]
+  }
 
   const onFormSubmit = async (e) => {
     e.preventDefault();

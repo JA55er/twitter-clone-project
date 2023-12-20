@@ -40,22 +40,43 @@ const App = () => {
   const newTweets = useSelector((state) => state.newTweetsList.newTweets);
 
   ///unoptimized
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [page, newTweets.length]);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, [page, newTweets.length]);
 
+  // const handleScroll = async () => {
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop ===
+  //     document.documentElement.offsetHeight
+  //   ) {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     console.log('new tweets: ', newTweets.length);
+  //     const tweets = await getTweets(page, newTweets.length);
+  //     // const tweets = await getTweets(page);
+  //     dispatch(changePage(page + 1));
+  //     dispatch(getTweetsFromServer(tweets));
+  //   }
+  // };
+
+  console.log('b');
+
+  useEffect(() => {
+    window.onscroll = handleScroll;
+    return () => (window.onscroll = null);
+  }, [page, newTweets.length]);
+  
   const handleScroll = async () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
+      window.innerHeight + window.scrollY >= document.body.offsetHeight
     ) {
-      window.removeEventListener('scroll', handleScroll);
+      window.onscroll = null; // Remove the event listener temporarily
       console.log('new tweets: ', newTweets.length);
       const tweets = await getTweets(page, newTweets.length);
       // const tweets = await getTweets(page);
       dispatch(changePage(page + 1));
       dispatch(getTweetsFromServer(tweets));
+      window.onscroll = handleScroll; // Add the event listener back after processing
     }
   };
   ///

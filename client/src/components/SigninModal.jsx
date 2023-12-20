@@ -18,7 +18,7 @@ const SigninModal = () => {
   const dispatch = useDispatch();
 
   const onGoogleButtonClick = async () => {
-    window.open(`${BASE_URL}/google`, '_self');
+    window.open(`${BASE_URL}/api/google`, '_self');
     // window.open(`${BASE_URL}/api/auth/google`, '_self');
   };
 

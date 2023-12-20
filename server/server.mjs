@@ -34,7 +34,11 @@ const CLIENT_URL = config.URL;
 console.log('CLIENT URL: ', CLIENT_URL);
 
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://twitter-6t.lm.r.appspot.com'],
+  origin: [
+    'http://localhost:5173',
+    'https://twitter-6t.lm.r.appspot.com',
+    'http://192.168.0.179:5173',
+  ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   allowedHeaders:
