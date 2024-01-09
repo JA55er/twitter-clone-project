@@ -49,6 +49,7 @@ body {
   display: flex;
   flex: 1;
   height: 100%;
+  /**/
   /* height: 100vh; */
   /* height: 100dvh; */
   justify-content: end;
@@ -65,6 +66,7 @@ body {
   padding-left: 8px;
   padding-right: 12px;
   overflow-x: hidden;
+  /* height: 100vh; */
   height: 100%;
   position: fixed;
 }
@@ -433,7 +435,7 @@ body {
 .contentTopRegisterButtonText {
   font-size: 14px;
   font-weight: 700;
-  color: #FFF;
+  color: #fff;
 }
 
 .createTweetContainer {
@@ -670,6 +672,9 @@ ion-icon {
   min-width: 0px;
   white-space: nowrap;
   width: 100%;
+  width: 0;
+  min-width: 95%;
+  /* min-width: 100%; */
   /* flex-shrink: 1; */
   /* flex: 1; */
 }
@@ -680,12 +685,12 @@ ion-icon {
   /* position: absolute; */
   /* width: inherit;
   overflow: hidden; */
-  width: 0;
-  min-width: 100%;
+  /* width: 0;
+  min-width: 100%; */
 }
 
 .tweetProfileNameTag {
-  flex: 1;
+  /* flex: 1; */
   font-size: 15px;
   font-weight: 700;
   color: rgb(83, 100, 113);
@@ -695,8 +700,8 @@ ion-icon {
   /* position: absolute; */
   /* width: inherit;
   overflow: hidden; */
-  width: 0;
-  min-width: 100%;
+  /* width: 0;
+  min-width: 100%; */
 }
 
 .tweetProfileName:hover {
@@ -728,9 +733,16 @@ ion-icon {
   width: 18.75px;
 }
 
+.tweetTextContainer {
+  /* display: flex;
+  flex-wrap: wrap;
+  flex: 1; */
+}
+
 .tweetText {
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
+  /* white-space: pre-wrap; */
+  /* overflow-wrap: break-word; */
+  word-break: break-all;
 }
 
 .tweetAttachmentContainer {
@@ -1453,9 +1465,10 @@ ion-icon {
 }
 
 .loggoutButtonText {
-  font-size: 15;
+  font-size: 15px;
   font-weight: 700;
   user-select: none;
+  word-break: break-all;
 }
 
 .modalButton:hover {
@@ -1498,6 +1511,10 @@ ion-icon {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.profileStickyTopNameText {
+  overflow: hidden;
 }
 
 .profileTopContainer {
@@ -1627,6 +1644,7 @@ ion-icon {
 .profileNameText {
   font-size: 20px;
   font-weight: 800;
+  word-break: break-all;
 }
 
 .profileBioContainer {
@@ -1801,6 +1819,7 @@ ion-icon {
   .headerContainer {
     max-width: 200px;
     min-width: 80px;
+    /* max-height: 100vh; */
     /* min-width: fit-content; */
     /* padding-right: ; */
   }

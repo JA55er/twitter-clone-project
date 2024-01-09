@@ -22,7 +22,12 @@ googleRouter.get(
   (req, res) => {
     const returnTo = req.session.returnTo || config.URL;
     console.log('callback return url: ', returnTo);
-    res.send('<script>window.close();</script>')
+    if (req.session.returnTo) {
+      console.log('closing window');
+      res.send('<script>window.close();</script>');
+    } else {
+      res.redirect(returnTo);
+    }
     // res.redirect(returnTo);
   }
 );

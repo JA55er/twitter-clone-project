@@ -50,15 +50,41 @@ tweetsRouter.get('/paged', async (req, res) => {
   // console.log('page: ', page);
   const skip = (page - 1) * limit + skipNew;
 
-  // console.log('skipping: ', skip, ' tweets');
-
+  console.log('skipping: ', skip, ' tweets');
   const tweets = await Tweet.find({ parent: null })
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
     .populate('user', ['icon', 'username']);
 
+  //tweets with no deleted users without populate
+  // const unpopulatedTweets = await Tweet.find({
+  //   parent: null,
+  //   user: { $ne: null },
+  // })
+  //   .sort({ createdAt: -1 })
+  //   .skip(skip)
+  //   .limit(limit);
+  // .populate({
+  //   path: 'user',
+  //   select: ['icon', 'username'],
+  // });
+
+  // const userIds = unpopulatedTweets.map((tweet) => tweet.user._id);
+
+  // console.log(userIds)
+
+  // const tweets = await Tweet.find({
+  //   _id: { $in: unpopulatedTweets.map((tweet) => tweet._id) },
+  // }).populate({
+  //   path: 'user',
+  //   select: ['icon', 'username'],
+  //   match: { _id: { $in: userIds } },
+  // });
+
   if (!tweets) res.send('no tweets found');
+
+  // console.log(tweets);
 
   const reverseTweets = [...tweets];
 
@@ -68,10 +94,9 @@ tweetsRouter.get('/paged', async (req, res) => {
 });
 
 tweetsRouter.get('/usertweets', async (req, res) => {
-
-  const id = req.query.profile
-  const page = parseInt(req.query.page) || 1
-  const skipNew = parseInt(req.query.skip) || 0
+  const id = req.query.profile;
+  const page = parseInt(req.query.page) || 1;
+  const skipNew = parseInt(req.query.skip) || 0;
 
   const limit = 10;
   console.log('skipNew: ', skipNew);
@@ -80,30 +105,66 @@ tweetsRouter.get('/usertweets', async (req, res) => {
 
   console.log('skipping: ', skip, ' tweets');
 
-  const tweets = await Tweet.find({ parent: null, user: id })
-    .sort({ createdAt: -1 })
-    .skip(skip)
-    .limit(limit)
-    .populate('user', ['icon', 'username']);
+  try {
+    const tweets = await Tweet.find({ parent: null, user: id })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate('user', ['icon', 'username']);
 
-  if (!tweets) res.send('no tweets found');
+    if (!tweets) return res.status(404).json({ error: 'Tweets not found' });
 
-  const reverseTweets = [...tweets];
+    const reverseTweets = [...tweets];
 
-  // reverseTweets.reverse();
+    // reverseTweets.reverse();
 
-  res.send(reverseTweets);
+    res.send(reverseTweets);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+  // const tweets = await Tweet.find({ parent: null, user: id })
+  //   .sort({ createdAt: -1 })
+  //   .skip(skip)
+  //   .limit(limit)
+  //   .populate('user', ['icon', 'username']);
+
+  // if (!tweets) res.send('no tweets found');
+
+  // const reverseTweets = [...tweets];
+
+  // // reverseTweets.reverse();
+
+  // res.send(reverseTweets);
 });
 
 tweetsRouter.get('/:id', async (req, res) => {
   // const tweet = await Tweet.findById(req.params.id).populate('user', ['icon', 'username']).populate({path: 'comments', select: 'user', populate: 'user'});
-  const tweet = await Tweet.findById(req.params.id)
-    .populate('user', ['icon', 'username'])
-    .populate({
-      path: 'tweets',
-      populate: { path: 'user', select: 'username icon' },
-    });
-  res.send(tweet);
+  // const tweet = await Tweet.findById(req.params.id)
+  //   .populate('user', ['icon', 'username'])
+  //   .populate({
+  //     path: 'tweets',
+  //     populate: { path: 'user', select: 'username icon' },
+  //   });
+  // res.send(tweet);
+  try {
+    const tweet = await Tweet.findById(req.params.id)
+      .populate('user', ['icon', 'username'])
+      .populate({
+        path: 'tweets',
+        populate: { path: 'user', select: 'username icon' },
+      });
+
+    if (!tweet) {
+      // Tweet with the provided ID was not found
+      return res.status(404).send({ error: 'Tweet not found' });
+    }
+
+    res.send(tweet);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ error: 'Internal Server Error' });
+  }
 });
 
 tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {

@@ -76,7 +76,8 @@ const App = () => {
       // const tweets = await getTweets(page);
       dispatch(changePage(page + 1));
       dispatch(getTweetsFromServer(tweets));
-      window.onscroll = handleScroll; // Add the event listener back after processing
+      console.log(page, tweets);
+      window.onscroll = handleScroll; // Add the event listener back
     }
   };
   ///
@@ -86,6 +87,7 @@ const App = () => {
       const tweetsResponse = await getTweets(page);
       dispatch(changePage(page + 1));
       dispatch(getTweetsFromServer(tweetsResponse));
+      console.log('initiated tweets');
     };
     if (!didInit) {
       didInit = true;

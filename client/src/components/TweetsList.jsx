@@ -4,12 +4,22 @@ import { useSelector } from 'react-redux';
 import NewTweetsNumber from './NewTweetsNumber';
 
 const TweetsList = ({ tweets }) => {
+
+  // console.log(tweets)
   const navigate = useNavigate();
 
   const onTweetClick = (id) => {
     console.log(id);
     navigate(`/tweet/${id}`);
   };
+
+  //
+  tweets = tweets.filter(
+    (obj, index) => tweets.findIndex((item) => item._id === obj._id) === index
+  );
+  //
+
+  console.log(tweets)
 
   // const tweets = useSelector((state) => state.tweetsList.tweets);
 

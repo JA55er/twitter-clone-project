@@ -1,2 +1,2 @@
-POST http://localhost:3000/api/tweets/newtweet
+POST http://localhost:8080/api/tweets/newtweet
 

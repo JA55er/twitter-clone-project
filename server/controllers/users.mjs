@@ -9,6 +9,7 @@ import { Storage } from '@google-cloud/storage';
 import config from '../utils/config.mjs';
 import uploadGoogleIcon from '../utils/uploadGoogleIcon.mjs';
 import getTimestamp from '../utils/getTimestamp.mjs';
+import Tweet from '../models/tweet.mjs';
 
 const storage = new Storage();
 const bucketName = config.BUCKET;
@@ -89,8 +90,6 @@ usersRouter.get('/profile', async (req, res) => {
   if (req.googleUser) {
     // console.log(req.googleUser);
 
-
-
     const googleAccount = await User.findOne({ googleId: req.googleUser.id });
     // console.log('profile route googleAccount: ', googleAccount);
     if (googleAccount) {
@@ -139,8 +138,8 @@ usersRouter.get('/profile', async (req, res) => {
     // const iconURL = await uploadImageToGoogle(userIcon);
     // console.log(iconURL)
 
-    const googleIcon = await uploadGoogleIcon(req.googleUser)
-    console.log('icon: ',googleIcon)
+    const googleIcon = await uploadGoogleIcon(req.googleUser);
+    console.log('icon: ', googleIcon);
 
     const userToSave = new User({
       username: req.googleUser.displayName.slice(0, 25),
@@ -190,6 +189,9 @@ usersRouter.get('/profile', async (req, res) => {
 usersRouter.get('/:id', async (req, res) => {
   try {
     const retrievedUser = await User.findById(req.params.id);
+    if (!retrievedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
     const user = {
       username: retrievedUser.username,
       id: retrievedUser._id.valueOf(),
@@ -202,7 +204,32 @@ usersRouter.get('/:id', async (req, res) => {
     res.send(user);
   } catch (error) {
     console.log(error);
-    res.send(error);
+    res.status(500).send(error);
+  }
+});
+
+usersRouter.delete('/delete/:id', async (req, res) => {
+  try {
+    // Find the user by ID and delete
+    const dbUser = await User.findByIdAndDelete(req.params.id);
+
+    // Check if the user was found and deleted
+    if (!dbUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Delete tweets associated with the user
+    await Tweet.deleteMany({ user: dbUser._id });
+
+    // Log deleted user
+    console.log('Deleted user:', dbUser);
+
+    res
+      .status(200)
+      .json({ message: 'User and associated tweets deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

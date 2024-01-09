@@ -9,7 +9,6 @@ import BASE_URL from '../utils/baseUrl';
 
 const Login = () => {
   const onGoogleButtonClick = async () => {
-    // window.open(`${BASE_URL}/api/auth/google`, '_self');
     window.open(`${BASE_URL}/api/google`, '_self');
   };
 

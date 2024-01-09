@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { saveUserAction } from '../reducers/userSlice';
 import GoogleLoginButton from './GoogleLoginButton';
 import BASE_URL from '../utils/baseUrl';
+import googleLogin from '../api/googleLogin';
 
 const SigninModal = () => {
   const [username, setUsername] = useState('');
@@ -19,7 +20,6 @@ const SigninModal = () => {
 
   const onGoogleButtonClick = async () => {
     window.open(`${BASE_URL}/api/google`, '_self');
-    // window.open(`${BASE_URL}/api/auth/google`, '_self');
   };
 
   const onFormSubmit = async (e) => {
