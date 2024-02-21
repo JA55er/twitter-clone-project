@@ -1,12 +1,13 @@
 import React from 'react';
 import utilityIcons from '../utils/utilityIcons';
 import { Link } from 'react-router-dom';
+import ThemeComponent from './ThemeComponent';
 
 const DetailedTop = () => {
 
-  const onPostClick = () => {
-    window.scrollTo({top: 0})
-  }
+  // const onPostClick = () => {
+  //   window.scrollTo({top: 0})
+  // }
 
   // fix: html naming
 
@@ -20,9 +21,10 @@ const DetailedTop = () => {
             </div>
           </Link>
         </div>
-        <div className='homeButton' onClick={onPostClick}>
+        {/* <div className='homeButton' onClick={onPostClick}>
           <span className='homeSpan'>Post</span>
-        </div>
+        </div> */}
+        <ThemeComponent />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const ProfileTop = ({ userProfile }) => {
               className='profileTopIcon'
               src={userProfile.icon}
               alt=''
-              referrerPolicy="no-referrer"
+              referrerPolicy='no-referrer'
             />
           </div>
           <div className='profileTopRightContainer'>
@@ -89,30 +89,30 @@ const ProfileTop = ({ userProfile }) => {
         </div>
       </div>
       {/*fix: change css naming */}
-      <div className='contentTopContainer'>
-        <div className='foryouFollowingContainer'>
-          <div className='foryouContainer'>
-            <div></div>
-            <span className='foryouSpan'>Posts</span>
-            <div className='foryouContainerActive'></div>
-          </div>
-          <div className='foryouContainer'>
-            <div></div>
-            <span className='foryouSpan'>Replies</span>
-            <div></div>
-          </div>
-          <div className='foryouContainer'>
-            <div></div>
-            <span className='foryouSpan'>Media</span>
-            <div></div>
-          </div>
-          <div className='foryouContainer'>
-            <div></div>
-            <span className='foryouSpan'>Likes</span>
-            <div></div>
-          </div>
+      {/* <div className='contentTopContainer'> */}
+      <div className='foryouFollowingContainer'>
+        <div className='foryouContainer'>
+          <div></div>
+          <span className='foryouSpan'>Posts</span>
+          <div className='foryouContainerActive'></div>
+        </div>
+        <div className='foryouContainer'>
+          <div></div>
+          <span className='foryouSpan'>Replies</span>
+          <div></div>
+        </div>
+        <div className='foryouContainer'>
+          <div></div>
+          <span className='foryouSpan'>Media</span>
+          <div></div>
+        </div>
+        <div className='foryouContainer'>
+          <div></div>
+          <span className='foryouSpan'>Likes</span>
+          <div></div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };

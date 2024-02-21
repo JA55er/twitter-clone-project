@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { Link, NavLink } from 'react-router-dom';
 import { changeTheme } from '../reducers/themeSlice';
+import utilityIcons from '../utils/utilityIcons';
+import ThemeComponent from './ThemeComponent';
 
 const ContentTop = () => {
   const onHomeClick = (e) => {
@@ -9,15 +11,20 @@ const ContentTop = () => {
     window.scrollTo({ top: 0 });
   };
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.user);
 
+  const theme = useSelector((state) => state.theme.theme);
+
   const smallScreen = useMediaQuery({ maxWidth: 1100 });
 
+  const themeIcon =
+    theme === 'light' ? utilityIcons.lightModeIcon : utilityIcons.darkModeIcon;
+
   const onThemeClick = () => {
-    dispatch(changeTheme())
-  }
+    dispatch(changeTheme());
+  };
 
   // console.log(user);
 
@@ -27,7 +34,10 @@ const ContentTop = () => {
         <div className='homeButton' onClick={(e) => onHomeClick(e)}>
           <span className='homeSpan'>Home</span>
         </div>
-        <div className='changeThemeContainer' onClick={onThemeClick}>Theme</div>
+        {/* <div className='themeIconContainer' onClick={onThemeClick}>
+          <div className='themeIcon'>{themeIcon}</div>
+        </div> */}
+        <ThemeComponent />
       </div>
       {user ? (
         <div className='foryouFollowingContainer'>

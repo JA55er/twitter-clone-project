@@ -59,7 +59,7 @@ body #dark {
 .appContainer {
   display: flex;
   margin: auto;
-  /* height: 100vh; */
+  min-height: 100vh;
   /* height: 100dvh; */
   /*changed*/
   height: 100%;
@@ -360,6 +360,7 @@ body #dark {
 
 .homeContainer {
   display: flex;
+  flex-direction: row;
   padding-left: 16px;
   padding-right: 16px;
   justify-content: space-between;
@@ -368,6 +369,11 @@ body #dark {
   height: 53px;
 
   /* cursor: pointer; */
+}
+
+.profileArrowNameContainer {
+  display: flex;
+  flex-direction: row;
 }
 
 .homeButton {
@@ -383,11 +389,16 @@ body #dark {
   font-weight: 700;
 }
 
-.changeThemeContainer {
+.themeIconContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.themeIcon {
+  width: 30px;
+  height: 30px;
 }
 
 .foryouFollowingContainer {
