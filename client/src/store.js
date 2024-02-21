@@ -6,6 +6,7 @@ import userReducer from './reducers/userSlice';
 import detailedTweetReducer from './reducers/detailedTweetSlice';
 import newTweetsReducer from './reducers/newTweetsSlice';
 import pageReducer from './reducers/pageSlice';
+import themeReducer from './reducers/themeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     detailedTweet: detailedTweetReducer,
     newTweetsList: newTweetsReducer,
     page: pageReducer,
+    theme: themeReducer,
   },
 });

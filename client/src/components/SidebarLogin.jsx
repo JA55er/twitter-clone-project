@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import BASE_URL from '../utils/baseUrl';
 import googleLogin from '../api/googleLogin';
 import { saveUserAction } from '../reducers/userSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const SidebarLogin = () => {
+  const theme = useSelector((state) => state.theme.theme);
   const dispatch = useDispatch();
   const onGoogleButtonClick = async () => {
     const width = 600;
@@ -51,11 +52,7 @@ const SidebarLogin = () => {
           className='loginModalButtonContainer'
           onClick={onGoogleButtonClick}
         >
-          <GoogleLoginButton
-            textColor={'#000'}
-            border={'#ccc solid 1px'}
-            content={'Login with Google'}
-          />
+          <GoogleLoginButton content={'Login with Google'} />
         </div>
         <Link to={'/login'}>
           <div

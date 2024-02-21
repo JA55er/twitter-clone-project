@@ -25,6 +25,7 @@ import tokenLogin from './api/tokenLogin';
 import Profile from './components/Profile';
 import googleLogin from './api/googleLogin';
 import { changePage } from './reducers/pageSlice';
+import { setInitialTheme } from './reducers/themeSlice';
 
 let didInit = false;
 
@@ -38,6 +39,18 @@ const App = () => {
   const page = useSelector((state) => state.page.page);
 
   const newTweets = useSelector((state) => state.newTweetsList.newTweets);
+
+  const theme = useSelector((state) => state.theme.theme);
+
+  const storedTheme = localStorage.getItem('theme')
+
+  console.log('stored theme: ', storedTheme)
+
+  if (!storedTheme) { console.log(typeof(storedTheme));}
+
+  // const [initialTheme, setInitialTheme]
+
+  console.log(theme);
 
   ///unoptimized
   // useEffect(() => {
@@ -59,24 +72,22 @@ const App = () => {
   //   }
   // };
 
-  console.log('b');
+  // console.log('b');
 
   useEffect(() => {
     window.onscroll = handleScroll;
     return () => (window.onscroll = null);
   }, [page, newTweets.length]);
-  
+
   const handleScroll = async () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight
-    ) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       window.onscroll = null; // Remove the event listener temporarily
       console.log('new tweets: ', newTweets.length);
       const tweets = await getTweets(page, newTweets.length);
       // const tweets = await getTweets(page);
       dispatch(changePage(page + 1));
       dispatch(getTweetsFromServer(tweets));
-      console.log(page, tweets);
+      console.log('page: ', page, 'tweets: ', tweets);
       window.onscroll = handleScroll; // Add the event listener back
     }
   };
@@ -142,54 +153,37 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    dispatch(setInitialTheme(storedTheme))
+  }, [])
+
+  useEffect(() => {
+    console.log('theme: ',theme);
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={
-          <div>
-            <div className='appContainer'>
-              {/* <div onClick={getPage} >aaaaaaaaaaaaaaaaaaaaaaa</div> */}
-              <Header />
-              <Content />
-              <Sidebar />
+    <div id={theme}>
+      <Routes>
+        <Route
+          path='*'
+          element={
+            <div>
+              <div id='app' className='appContainer'>
+                <Header />
+                <Routes>
+                  <Route path='/' element={<Content />} />
+                  <Route path='tweet/:id' element={<DetailedTweet />} />
+                  <Route path='profile/:id' element={<Profile />} />
+                </Routes>
+                <Sidebar />
+              </div>
             </div>
-          </div>
-        }
-      ></Route>
-      <Route
-        path='/tweet/:id'
-        element={
-          <div>
-            <div className='appContainer'>
-              <Header />
-              <DetailedTweet />
-              <Sidebar />
-            </div>
-          </div>
-        }
-      ></Route>
-      <Route
-        path='/profile/:id'
-        element={
-          <div>
-            <div className='appContainer'>
-              <Header />
-              <Profile />
-              <Sidebar />
-            </div>
-          </div>
-        }
-      ></Route>
-      <Route path='/login/*' element={<Login />}>
-        {/* <Route path='signin' element={<SigninModal />}></Route>
-        <Route path='register' element={<RegisterModal />}></Route> */}
-      </Route>
-      {/* <Route path='/login' element={<Login />}>
-        <Route path='signin' element={<SigninModal />}></Route>
-        <Route path='register' element={<RegisterModal />}></Route>
-      </Route> */}
-    </Routes>
+          }
+        ></Route>
+        <Route path='/login/*' element={<Login />}></Route>
+      </Routes>
+    </div>
   );
 };
 

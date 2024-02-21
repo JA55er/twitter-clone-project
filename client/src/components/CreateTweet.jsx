@@ -21,6 +21,7 @@ import { useMediaQuery } from 'react-responsive';
 const CreateTweet = () => {
   const user = useSelector((state) => state.user.user);
 
+  const theme = useSelector((state) => state.theme.theme);
   const token = user?.token;
   const userIcon = user?.icon;
 
@@ -48,14 +49,14 @@ const CreateTweet = () => {
     { icon: optionIcons.location },
   ];
 
-  const removeOptions = useMediaQuery({maxWidth: 720})
+  const removeOptions = useMediaQuery({ maxWidth: 720 });
 
   if (removeOptions) {
     optionIconsArr = [
       { icon: optionIcons.gif },
       { icon: optionIcons.emoji },
       { icon: optionIcons.location },
-    ]
+    ];
   }
 
   const onFormSubmit = async (e) => {
@@ -128,10 +129,16 @@ const CreateTweet = () => {
     setAttachment(null);
     setSelectedImage(null);
   };
-
-  const postButtonColor = {
-    backgroundColor: tweetText || attachment ? '#1d9bf0' : '#8ecdf7',
-  };
+  let postButtonColor;
+  if (theme === 'light') {
+    postButtonColor = {
+      backgroundColor: tweetText || attachment ? '#1d9bf0' : '#8ecdf7',
+    };
+  } else {
+    postButtonColor = {
+      backgroundColor: tweetText || attachment ? '#1d9bf0' : 'rgb(25,94,141)',
+    };
+  }
 
   return (
     <div className='createTweetContainer'>

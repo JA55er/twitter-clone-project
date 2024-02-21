@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Tweet = ({ tweet }) => {
   if (!tweet) return <></>;
 
-  console.log(tweet)
+  // console.log(tweet)
 
   const username = tweet.user?.username;
   const text = tweet.text;

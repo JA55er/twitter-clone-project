@@ -16,6 +16,8 @@ const CreateComment = ({ id }) => {
 
   const user = useSelector((state) => state.user.user);
 
+  const theme = useSelector((state) => state.theme.theme);
+
   const dispatch = useDispatch();
 
   const token = user?.token;
@@ -53,8 +55,8 @@ const CreateComment = ({ id }) => {
       formData.append('file', attachment);
       formData.append('commentText', commentText);
       formData.append('token', token);
-      formData.append('tweet', tweet)
-      const submittedComment = await submitComment(formData)
+      formData.append('tweet', tweet);
+      const submittedComment = await submitComment(formData);
       // const submittedComment = await submitComment({
       //   commentText,
       //   token,
@@ -63,8 +65,8 @@ const CreateComment = ({ id }) => {
       dispatch(addComment(submittedComment));
       dispatch(userCreateTweetAction(submittedComment._id));
       setCommentText('');
-      setAttachment(null)
-      setSelectedImage(null)
+      setAttachment(null);
+      setSelectedImage(null);
       console.log(submittedComment);
     } catch (error) {
       console.log(error);
@@ -106,13 +108,24 @@ const CreateComment = ({ id }) => {
     }
   };
 
-  console.log(userId);
+  // console.log(userId);
 
   const userIconContainer = userIcon ? (
     <UserProfileIcon icon={userIcon} userId={userId} />
   ) : (
     <div className='container' style={{ width: `40px` }}></div>
   );
+
+  let postButtonColor;
+  if (theme === 'light') {
+    postButtonColor = {
+      backgroundColor: commentText || attachment ? '#1d9bf0' : '#8ecdf7',
+    };
+  } else {
+    postButtonColor = {
+      backgroundColor: commentText || attachment ? '#1d9bf0' : 'rgb(25,94,141)',
+    };
+  }
 
   // return (
   //   <div
@@ -217,6 +230,7 @@ const CreateComment = ({ id }) => {
               <button
                 className='writeTweetButton'
                 type='submit'
+                style={postButtonColor}
                 // onClick={onFormSubmit}
               >
                 <span className='writeTweetButtonSpan'>Reply</span>

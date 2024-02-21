@@ -52,6 +52,8 @@ app.use(express.json());
 
 app.enable('trust proxy');
 
+console.log('ENV: ', process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(
     cookieSession({
@@ -67,10 +69,13 @@ if (process.env.NODE_ENV === 'production') {
     cookieSession({
       name: 'session',
       secret: config.cookieSessionKey,
+      // maxAge: 60 * 1000,
       maxAge: 24 * 60 * 60 * 1000,
     })
   );
 }
+
+console.log('production: ', process.env.NODE_ENV === 'production');
 
 app.use(passport.initialize({ userProperty: 'googleUser' }));
 app.use(passport.session());

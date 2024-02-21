@@ -8,11 +8,23 @@ import BASE_URL from '../utils/baseUrl';
 
 const HeaderAccountModal = ({ onClose, position }) => {
   const user = useSelector((state) => state.user.user);
+  const theme = useSelector((state) => state.theme.theme);
 
   console.log(user);
 
   const dispatch = useDispatch();
 
+  let modalThemes = {
+    light: {
+      backgroundColor: '#FFF',
+      color: '#000',
+    },
+    dark: {
+      backgroundColor: 'rgb(21, 32, 43)',
+      color: '#FFF',
+    },
+  };
+  const modalThemeStyle = modalThemes[theme] || modalThemes.light;
   const modalStyle = {
     bottom: position.bottom + 'px',
     // top: position.top + 'px',
@@ -32,14 +44,18 @@ const HeaderAccountModal = ({ onClose, position }) => {
     window.open(`${BASE_URL}/api/google/logout`, '_self');
   };
 
-  console.log(modalStyle);
+  console.log('styles: ',{ ...modalStyle, ...modalThemeStyle });
 
   return ReactDom.createPortal(
     <>
       {/* <div className='accountModal' onClick={onModalClick}> */}
-      <div className='accountModal' style={modalStyle} onClick={onModalClick}>
+      <div
+        className='accountModal'
+        style={{ ...modalStyle, ...modalThemeStyle }}
+        onClick={onModalClick}
+      >
         <div className='accountModalContainer'>
-          <div className='modalButton' onClick={logOut}>
+          <div className={`${theme}ModalButton modalButton`} onClick={logOut}>
             <div className='modalButtonTextContainer'>
               <span className='loggoutButtonText'>Log out {user.username}</span>
             </div>

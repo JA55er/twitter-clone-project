@@ -28,11 +28,7 @@ const Login = () => {
                   className='loginModalButtonContainer'
                   onClick={onGoogleButtonClick}
                 >
-                  <GoogleLoginButton
-                    textColor={'#000'}
-                    border={'#ccc solid 1px'}
-                    content={'Login with Google'}
-                  />
+                  <GoogleLoginButton content={'Login with Google'} />
                 </div>
                 <div className='loginOptionsSeperator'>
                   <div className='seperatorLine'></div>

@@ -19,7 +19,7 @@ const TweetsList = ({ tweets }) => {
   );
   //
 
-  console.log(tweets)
+  // console.log(tweets)
 
   // const tweets = useSelector((state) => state.tweetsList.tweets);
 

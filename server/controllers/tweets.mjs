@@ -190,12 +190,13 @@ tweetsRouter.post('/newtweet', upload.single('file'), async (req, res) => {
     const tweetText = req.body.tweetText;
 
     // disable image upload for production
-    if (process.env.NODE_ENV === 'development') {
-      if (file) {
-        imageURL = await uploadImageToGoogle(file);
-        console.log(imageURL);
-      }
+    // if (process.env.NODE_ENV !== 'production') {
+    if (file) {
+      console.log('file: ', file);
+      imageURL = await uploadImageToGoogle(file);
+      console.log('url: ', imageURL);
     }
+    // }
 
     const newTweet = new Tweet({
       text: tweetText,

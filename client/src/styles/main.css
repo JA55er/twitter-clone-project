@@ -29,13 +29,33 @@ input[type='reset'] {
   outline: inherit;
 }
 
+body {
+  viewport-fit: contain; /* or auto */
+}
+
+body #dark {
+  scrollbar-color: rgb(92, 110, 126) rgb(30, 39, 50);
+}
+
 #portal {
 }
 
-body {
-  viewport-fit: contain; /* or auto or contain */
+#dark {
+  background-color: rgb(21, 32, 43);
+  color: rgb(247, 249, 249);
+  /* rgb(56,68,77) border color */
+  /* rgb(30,39,50) sidebar and whole scroll background */
+  /* rgb(28,39,50) tweet hightlight color  */
+  /* rgb(39,51,64) search bar background */
+  /* rgb(79,96,109) icon border color  */
+  /* rgb(92,110,126) scroll bar background */
+  /* rgb(36,45,56) sidebar hover color  */
+  /* rgb(26,48,54) tweet comment like etc. button background-color;  */
+  /* rgb(25,94,141) empty new tweet button color */
+  /* rgb(44,54,64) header link and for you following hover color */
+  /* rgb(28, 51, 69) tweet options, create tweet buttons background  */
+  /* rgb(83,100,113) profile options, bell border*/
 }
-
 .appContainer {
   display: flex;
   margin: auto;
@@ -102,8 +122,11 @@ body {
   border-radius: 50%;
 }
 
-.twitterLogoHover:hover {
+#light .twitterLogoHover:hover {
   background-color: #e7e7e8;
+}
+#dark .twitterLogoHover:hover {
+  background-color: rgb(44, 54, 64);
 }
 
 .twitterLogoIconContainer {
@@ -144,8 +167,11 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.headerLinkAnchor:hover > .headerLink {
+#light .headerLinkAnchor:hover > .headerLink {
   background-color: #e7e7e8;
+}
+#dark .headerLinkAnchor:hover > .headerLink {
+  background-color: rgb(44, 54, 64);
 }
 
 .headerLinkIcon {
@@ -215,8 +241,11 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.headerAccountContainer:hover {
+#light .headerAccountContainer:hover {
   background-color: #e7e7e8;
+}
+#dark .headerAccountContainer:hover {
+  background-color: rgb(44, 54, 64);
 }
 
 .headerAccount {
@@ -233,6 +262,7 @@ body {
   min-height: 40px;
   border-radius: 50%;
   transition: filter 0.2s ease;
+  cursor: pointer;
 }
 
 .accountIcon:hover {
@@ -293,8 +323,18 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* border-left: 1px solid #eff3f4;
+  border-right: 1px solid #eff3f4; */
+}
+
+#light .homeTimelineContainer {
   border-left: 1px solid #eff3f4;
   border-right: 1px solid #eff3f4;
+}
+
+#dark .homeTimelineContainer {
+  border-left: 1px solid rgb(56, 68, 77);
+  border-right: 1px solid rgb(56, 68, 77);
 }
 
 .contentTopContainer {
@@ -303,34 +343,51 @@ body {
   backdrop-filter: blur(12px);
   backface-visibility: hidden;
   flex-direction: column;
-  border-bottom: 1px solid #eff3f4;
+  /* border-bottom: 1px solid #eff3f4; */
   position: sticky;
   top: 0px;
+}
+
+#light .contentTopContainer {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #eff3f4;
+}
+
+#dark .contentTopContainer {
+  background-color: rgba(21, 32, 43, 0.85);
+  border-bottom: 1px solid rgb(56, 68, 77);
 }
 
 .homeContainer {
   display: flex;
   padding-left: 16px;
   padding-right: 16px;
-  /* justify-content: center; */
+  justify-content: space-between;
   /* max-width: fit-content; */
   flex-shrink: 1;
   height: 53px;
 
-  /* align-items: center; */
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .homeButton {
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .homeSpan {
   font-size: 20px;
   font-weight: 700;
+}
+
+.changeThemeContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .foryouFollowingContainer {
@@ -358,8 +415,12 @@ body {
   background-color: #1a8cd8;
 }
 
-.foryouContainer:hover {
+#light .foryouContainer:hover {
   background-color: rgb(231, 231, 232, 0.5);
+  /* opacity: 0.85; */
+}
+#dark .foryouContainer:hover {
+  background-color: rgb(44, 54, 64);
   /* opacity: 0.85; */
 }
 
@@ -443,7 +504,15 @@ body {
   padding-top: 4px;
   padding-left: 16px;
   padding-right: 16px;
+  /* border-bottom: 1px solid #eff3f4; */
+}
+
+#light .createTweetContainer {
   border-bottom: 1px solid #eff3f4;
+}
+
+#dark .createTweetContainer {
+  border-bottom: 1px solid rgb(56, 68, 77);
 }
 
 .createTweetProfileIconContainer {
@@ -466,6 +535,7 @@ body {
 }
 
 .writeTweetInput {
+  /* background-color: #00ba7c; */
   font-size: 20px;
   border: none;
   resize: none;
@@ -477,6 +547,14 @@ body {
 
 .writeTweetInput:focus {
   outline: none;
+}
+
+#light .writeTweetInput {
+  background-color: rgb(255, 255, 255);
+}
+
+#dark .writeTweetInput {
+  background-color: rgb(21, 32, 43);
 }
 
 .darkOverlay {
@@ -505,7 +583,7 @@ body {
 }
 
 .tweetAttachmentContainer {
-  position: relative;
+  /* position: relative; */
 }
 
 .createTweetAttachmentImage {
@@ -555,8 +633,11 @@ body {
   transition: background-color 0.2s ease;
 }
 
-.writeTweetOptionsIconContainer:hover {
+#light .writeTweetOptionsIconContainer:hover {
   background-color: #e8f5fd;
+}
+#dark .writeTweetOptionsIconContainer:hover {
+  background-color: rgb(28, 51, 69);
 }
 
 .tweetOptionsIcon {
@@ -598,9 +679,17 @@ ion-icon {
   height: 50px;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #eff3f4;
+  /* border-bottom: 1px solid #eff3f4; */
   cursor: pointer;
   transition: background-color 0.2s ease;
+}
+
+#light .newTweetContainer {
+  border-bottom: 1px solid #eff3f4;
+}
+
+#dark .newTweetContainer {
+  border-bottom: 1px solid rgb(56, 68, 77);
 }
 
 .newTweetContainer:hover {
@@ -618,8 +707,12 @@ ion-icon {
   transition: background-color 0.2s ease;
 }
 
-.tweetLinkHover:hover {
+#light .tweetLinkHover:hover {
   background-color: #f7f7f7;
+}
+
+#dark .tweetLinkHover:hover {
+  background-color: rgb(28, 39, 50);
 }
 
 .tweetOptionsIcon {
@@ -637,6 +730,14 @@ ion-icon {
   padding-left: 16px;
   padding-right: 16px;
   /* transition: background-color 0.2s ease; */
+}
+
+#light .tweetContainer {
+  border-bottom: #eff3f4 solid 1px;
+}
+
+#dark .tweetContainer {
+  border-bottom: rgb(56, 68, 77) solid 1px;
 }
 
 /* .tweetContainer:hover {
@@ -664,6 +765,7 @@ ion-icon {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 7px;
+  cursor: pointer;
 }
 
 .tweetProfileNameContainer {
@@ -720,8 +822,11 @@ ion-icon {
   transition: background-color 0.2s ease;
 }
 
-.tweetUserOptionsIconContainer:hover {
+#light .tweetUserOptionsIconContainer:hover {
   background-color: #e1eef6;
+}
+#dark .tweetUserOptionsIconContainer:hover {
+  background-color: rgb(28, 51, 69);
 }
 
 .tweetUserOptionsIconContainer:hover > .tweetUserOptionsIcon {
@@ -753,6 +858,7 @@ ion-icon {
   display: flex;
   max-height: 510px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .tweetMediaTop {
@@ -790,33 +896,49 @@ ion-icon {
   transition: background-color 0.2s ease;
 }
 
-.commentsStats > .tweetStatsIconContainer:hover {
+#light .commentsStats > .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
 }
-.retweetsStats > .tweetStatsIconContainer:hover {
+#dark .commentsStats > .tweetStatsIconContainer:hover {
+  background-color: rgb(28, 49, 67);
+}
+#light .retweetsStats > .tweetStatsIconContainer:hover {
   background-color: #e6f3ef;
 }
-.likesStats > .tweetStatsIconContainer:hover {
+#dark .retweetsStats > .tweetStatsIconContainer:hover {
+  background-color: rgb(25, 54, 58);
+}
+#light .likesStats > .tweetStatsIconContainer:hover {
   background-color: #f7e2ec;
 }
-.viewsStats > .tweetStatsIconContainer:hover {
+#dark .likesStats > .tweetStatsIconContainer:hover {
+  background-color: rgb(50, 37, 58);
+}
+#light .viewsStats > .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
 }
+#dark .viewsStats > .tweetStatsIconContainer:hover {
+  background-color: rgb(28, 51, 69);
+}
 
-.commentsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+.commentsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon,
+.commentsStats > .tweetStatsIconContainer:hover + .tweetStatsNumber {
   color: #35a6f1;
 }
-.retweetsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+.retweetsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon,
+.retweetsStats > .tweetStatsIconContainer:hover + .tweetStatsNumber {
   color: #00ba7c;
 }
-.likesStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+.likesStats > .tweetStatsIconContainer:hover > .tweetStatsIcon,
+.likesStats > .tweetStatsIconContainer:hover + .tweetStatsNumber {
   color: #f84a9b;
 }
-.viewsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon {
+.viewsStats > .tweetStatsIconContainer:hover > .tweetStatsIcon,
+.viewsStats > .tweetStatsIconContainer:hover + .tweetStatsNumber {
   color: #35a6f1;
 }
 
-.commentsStats > .tweetStatsIconContainer:hover {
+/* .commentsStats > .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
 }
 .retweetsStats > .tweetStatsIconContainer:hover {
@@ -827,11 +949,19 @@ ion-icon {
 }
 .viewsStats > .tweetStatsIconContainer:hover {
   background-color: #e1eef6;
-}
+} */
 
 /* .likesIconHover > .tweetStatsIcon:hover {
   color: #f44336;
 } */
+
+.tweetStatsNumber {
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 400;
+  user-select: none;
+  color: #5d6d79;
+}
 
 .writeCommentBottomContainer {
   display: flex;
@@ -843,14 +973,6 @@ ion-icon {
   width: 18.75px;
   display: flex;
   justify-content: center;
-  color: #5d6d79;
-}
-
-.tweetStatsNumber {
-  padding: 0 12px;
-  font-size: 13px;
-  font-weight: 400;
-  user-select: none;
   color: #5d6d79;
 }
 
@@ -883,13 +1005,23 @@ ion-icon {
 .homeLoginContainer {
   position: sticky;
   top: 0;
-  background-color: #fff;
+  /* background-color: #fff; */
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: rgb(239, 243, 244) solid 1px;
+  /* border: rgb(239, 243, 244) solid 1px; */
   border-radius: 20px;
   margin-top: 12px;
+}
+
+#light .homeLoginContainer {
+  background-color: #fff;
+  border: rgb(239, 243, 244) solid 1px;
+}
+
+#dark .homeLoginContainer {
+  background-color: rgb(21, 32, 43);
+  border: rgb(56, 68, 77) solid 1px;
 }
 
 .homeLoginTopTextContainer {
@@ -967,6 +1099,14 @@ ion-icon {
   margin-bottom: 12px;
 }
 
+#light .searchBarContainer {
+  background-color: #eff3f4;
+}
+
+#dark .searchBarContainer {
+  background-color: rgb(39, 51, 64);
+}
+
 .searchBar {
   display: flex;
   flex-direction: row;
@@ -1003,6 +1143,14 @@ ion-icon {
   padding-bottom: 12px;
 }
 
+#light .followRecommendContainer {
+  background-color: #f7f9f9;
+}
+
+#dark .followRecommendContainer {
+  background-color: rgb(30, 39, 50);
+}
+
 .followRecommendLabel {
   padding: 12px 16px;
   font-size: 20px;
@@ -1023,8 +1171,12 @@ ion-icon {
   align-items: center;
 }
 
-.followRecommendAccountContainer:hover {
+#light .followRecommendAccountContainer:hover {
   background-color: #eff1f1;
+}
+
+#dark .followRecommendAccountContainer:hover {
+  background-color: rgb(36, 45, 56);
 }
 
 .followRecommendAccountLeftSide {
@@ -1093,6 +1245,14 @@ ion-icon {
   top: 0; */
 }
 
+#light .trendsBarContainer {
+  background-color: #f7f9f9;
+}
+
+#dark .trendsBarContainer {
+  background-color: rgb(30, 39, 50);
+}
+
 .trendsBarLabelContainer {
   padding: 12px 16px;
   font-size: 20px;
@@ -1117,8 +1277,12 @@ ion-icon {
   transition: background-color 0.2s ease;
 }
 
-.trendItemContainer:hover {
+#light .trendItemContainer:hover {
   background-color: #eff1f1;
+}
+
+#dark .trendItemContainer:hover {
+  background-color: rgb(36, 45, 56);
 }
 
 .trendItem {
@@ -1258,6 +1422,14 @@ ion-icon {
   border: #ccc solid 1px;
 }
 
+#light .loginAreaSignInContainer {
+  border: #ccc solid 1px;
+}
+
+#dark .loginAreaSignInContainer {
+  border: rgb(56, 68, 77) solid 1px;
+}
+
 .loginAreaSignInContainer > span {
   font-size: 15px;
   font-weight: 700;
@@ -1311,6 +1483,14 @@ ion-icon {
   overflow-x: hidden;
   overflow-y: auto;
   /* overflow: hidden; */
+}
+
+#light .loginModal {
+  background-color: #fff;
+}
+
+#dark .loginModal {
+  background-color: rgb(21, 32, 43);
 }
 
 .loginModalContent {
@@ -1475,6 +1655,13 @@ ion-icon {
   background-color: #f7f9f9;
 }
 
+.lightModalButton:hover {
+  background-color: #f7f9f9;
+}
+.darkModalButton:hover {
+  background-color: rgb(28, 39, 50);
+}
+
 .backArrowContainer {
   width: 56px;
   height: 56px;
@@ -1493,8 +1680,11 @@ ion-icon {
   margin-left: -9px;
 }
 
-.backArrowLogoContainer:hover {
+#light .backArrowLogoContainer:hover {
   background-color: #e7e7e8;
+}
+#dark .backArrowLogoContainer:hover {
+  background-color: rgb(44, 54, 64);
 }
 
 .backArrow {
@@ -1562,6 +1752,14 @@ ion-icon {
   border: #fff solid 4px;
 }
 
+#light .profileTopMenuIconContainer {
+  border: #fff solid 4px;
+}
+
+#dark .profileTopMenuIconContainer {
+  border: rgb(21, 32, 43) solid 4px;
+}
+
 .profileTopIcon {
   width: 100%;
   height: 100%;
@@ -1586,15 +1784,32 @@ ion-icon {
 .profileTopRightButtonCircle {
   height: 36px;
   width: 36px;
-  border: #cfd9de solid 1px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+#light .profileTopRightButtonCircle {
+  border: #cfd9de solid 1px;
+}
+
+#dark .profileTopRightButtonCircle {
+  border: rgb(83, 100, 113) solid 1px;
+}
+
 .profileTopRightButtonCircle:hover {
+  /* background-color: rgba(15, 20, 25, 0.1);
+  cursor: pointer; */
+}
+
+#light .profileTopRightButtonCircle:hover {
   background-color: rgba(15, 20, 25, 0.1);
+  cursor: pointer;
+}
+
+#dark .profileTopRightButtonCircle:hover {
+  background-color: rgb(44, 54, 64);
   cursor: pointer;
 }
 
@@ -1618,7 +1833,6 @@ ion-icon {
 }
 
 .profileTopRightFollowButtonCircle {
-  border: #cfd9de solid 1px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1626,6 +1840,14 @@ ion-icon {
   border-radius: 18px;
   padding-left: 16px;
   padding-right: 16px;
+}
+
+#light .profileTopRightFollowButtonCircle {
+  border: #cfd9de solid 1px;
+}
+
+#dark .profileTopRightFollowButtonCircle {
+  border: rgb(83, 100, 113) solid 1px;
 }
 
 .profileTopRightFollowButtonCircle:hover {
@@ -1730,9 +1952,17 @@ ion-icon {
 
 .optionsModal {
   position: absolute;
-  background-color: #fff;
+
   z-index: 200;
   border-radius: 16px;
+}
+
+#light .optionsModal {
+  background-color: #fff;
+}
+
+#dark .optionsModal {
+  background-color: rgb(21, 32, 43);
 }
 .accountModal {
   position: fixed;
