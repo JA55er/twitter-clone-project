@@ -131,7 +131,7 @@ const App = () => {
     }
   }, [url.pathname]);
 
-  ///
+  //
   // useEffect(() => {
   //   const setFunc = async () => {
   //     if (tweets.length === 0) {
@@ -141,7 +141,7 @@ const App = () => {
   //   };
   //   setFunc();
   // }, []);
-  ///
+  //
 
   useEffect(() => {
     const loginThroughGoogle = async () => {
