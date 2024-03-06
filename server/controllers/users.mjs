@@ -62,6 +62,7 @@ usersRouter.post('/newuser', async (req, res) => {
         username: savedUser.username,
         id: savedUser._id.valueOf(),
       };
+
       const token = jwb.sign(userForToken, process.env.SECRET);
 
       const newUser = {
@@ -162,7 +163,12 @@ usersRouter.get('/profile', async (req, res) => {
       username: savedUser.username,
       id: savedUser._id.valueOf(),
     };
-    const token = jwb.sign(userForToken, process.env.SECRET);
+
+    // const tokenDuration = 60;
+
+    const token = jwb.sign(userForToken, process.env.SECRET, {
+      // expiresIn: tokenDuration,
+    });
 
     const newUser = {
       token,

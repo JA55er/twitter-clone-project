@@ -12,8 +12,18 @@ const tokenExtractor = (req, res, next) => {
 const userExtractor = async (req, res, next) => {
   const token = req.token;
   if (token) {
-    const decodedToken = jwb.verify(token, process.env.SECRET);
-    req.user = await User.findById(decodedToken.id);
+    try {
+      const decodedToken = jwb.verify(token, process.env.SECRET);
+      req.user = await User.findById(decodedToken.id);
+    } catch (error) {
+      if (error.name === 'TokenExpiredError') {
+        // Token has expired
+        return next(new Error('Token expired'))
+      } else {
+        // Other token verification errors
+        return next(error)
+      }
+    }
   }
 
   next();

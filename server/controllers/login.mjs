@@ -29,7 +29,11 @@ loginRouter.post('/', async (req, res) => {
   // const SECRET = 'htrjtrjntdnjt'
 
   // const token = jwb.sign(userForToken, SECRET);
-  const token = jwb.sign(userForToken, process.env.SECRET);
+  // const tokenDuration = 60;
+
+  const token = jwb.sign(userForToken, process.env.SECRET, {
+    // expiresIn: tokenDuration,
+  });
 
   res.status(200).json({
     token,

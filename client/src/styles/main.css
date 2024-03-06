@@ -282,6 +282,7 @@ body #dark {
   flex-direction: column;
   max-width: 150px;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .headerAccountName {
@@ -307,6 +308,7 @@ body #dark {
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
+  padding-left: 10px;
 }
 
 .headerAccountOptionsIcon {
@@ -562,10 +564,12 @@ body #dark {
 
 #light .writeTweetInput {
   background-color: rgb(255, 255, 255);
+  color: #000;
 }
 
 #dark .writeTweetInput {
   background-color: rgb(21, 32, 43);
+  color: #FFF;
 }
 
 .darkOverlay {

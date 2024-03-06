@@ -97,7 +97,6 @@ tweetsRouter.get('/usertweets', async (req, res) => {
   const id = req.query.profile;
   const page = parseInt(req.query.page) || 1;
   const skipNew = parseInt(req.query.skip) || 0;
-
   const limit = 10;
   console.log('skipNew: ', skipNew);
   console.log('page: ', page);
