@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import getSingleTweet from '../api/getSingleTweet';
 import Tweet from './Tweet';
@@ -6,6 +6,7 @@ import DetailedTop from './DetailedTop';
 import CreateComment from './CreateComment';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDetailedTweet } from '../reducers/detailedTweetSlice';
+import ErrorComponent from './ErrorComponent';
 
 const DetailedTweet = () => {
   const { id } = useParams();
@@ -14,11 +15,25 @@ const DetailedTweet = () => {
 
   const tweet = useSelector((state) => state.detailedTweet.detailedTweet);
 
+  const [errorMessage, setErrorMessage] = useState(null);
+
   useEffect(() => {
     const getTweet = async () => {
       window.scrollTo({ top: 0 });
-      const retrievedTweet = await getSingleTweet(id);
-      dispatch(setDetailedTweet(retrievedTweet));
+      try {
+        const retrievedTweet = await getSingleTweet(id);
+        console.log('retrieved tweet: ', retrievedTweet);
+        dispatch(setDetailedTweet(retrievedTweet));
+      } catch (err) {
+        console.log(err);
+        if (err.response.status === 404) {
+          setErrorMessage(
+            'Hmm...this page doesn’t exist. Try searching for something else.'
+          );
+        } else {
+          setErrorMessage('Unexpected error occured.');
+        }
+      }
     };
     getTweet();
   }, [id]);
@@ -29,6 +44,10 @@ const DetailedTweet = () => {
     console.log(id);
     navigate(`/tweet/${id}`);
   };
+
+  if (errorMessage) {
+    return <ErrorComponent errorMessage={errorMessage} />;
+  }
 
   if (Object.keys(tweet).length === 0) {
     return (

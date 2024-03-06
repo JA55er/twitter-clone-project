@@ -6,6 +6,7 @@ import ProfileTop from './ProfileTop';
 import ProfileStickyTop from './ProfileStickyTop';
 import getSingleUser from '../api/getSingleUser';
 import getProfileTweets from '../api/getProfileTweets';
+import ErrorComponent from './ErrorComponent';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,27 @@ const Profile = () => {
 
   const [tweets, setTweets] = useState([]);
 
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const { id } = useParams();
 
   // console.log(id);
 
   useEffect(() => {
     const getProfile = async () => {
-      const profile = await getSingleUser(id);
-      setUserProfile(profile);
+      try {
+        const profile = await getSingleUser(id);
+        setUserProfile(profile);
+      } catch (err) {
+        console.log(err);
+        if (err.response.status === 404) {
+          setErrorMessage(
+            'Hmm...this page doesn’t exist. Try searching for something else.'
+          );
+        } else {
+          setErrorMessage('Unexpected error occured.');
+        }
+      }
     };
     getProfile();
   }, [id]);
@@ -73,6 +87,10 @@ const Profile = () => {
   // const filteredTweets = tweetsList.filter((tweet) => tweet?.user?._id === id);
 
   // console.log(filteredTweets);
+
+  if (errorMessage) {
+    return <ErrorComponent errorMessage={errorMessage} />;
+  }
 
   return (
     <div className='contentContainer'>
