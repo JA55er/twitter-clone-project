@@ -192,25 +192,15 @@ usersRouter.get('/profile', async (req, res) => {
   }
 });
 
-usersRouter.get('/:id', async (req, res) => {
+usersRouter.get('/search/:searchText', async (req, res) => {
   try {
-    const retrievedUser = await User.findById(req.params.id);
-    if (!retrievedUser) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-    const user = {
-      username: retrievedUser.username,
-      id: retrievedUser._id.valueOf(),
-      icon: retrievedUser.icon,
-      likes: retrievedUser.likes,
-      follow: retrievedUser.follows,
-      tweets: retrievedUser.tweets,
-      info: retrievedUser.info,
-    };
-    res.send(user);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error);
+    const searchText = req.params.searchText;
+    const regex = new RegExp(searchText, 'i');
+    const users = await User.find({ username: { $regex: regex } });
+    console.log(searchText);
+    res.json(users);
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -236,6 +226,28 @@ usersRouter.delete('/delete/:id', async (req, res) => {
   } catch (error) {
     console.error('Error deleting user:', error);
     res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+usersRouter.get('/:id', async (req, res) => {
+  try {
+    const retrievedUser = await User.findById(req.params.id);
+    if (!retrievedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const user = {
+      username: retrievedUser.username,
+      id: retrievedUser._id.valueOf(),
+      icon: retrievedUser.icon,
+      likes: retrievedUser.likes,
+      follow: retrievedUser.follows,
+      tweets: retrievedUser.tweets,
+      info: retrievedUser.info,
+    };
+    res.send(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
   }
 });
 

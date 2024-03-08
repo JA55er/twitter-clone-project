@@ -1027,6 +1027,7 @@ ion-icon {
   /* border: rgb(239, 243, 244) solid 1px; */
   border-radius: 20px;
   margin-top: 12px;
+  z-index: 3;
 }
 
 #light .homeLoginContainer {
@@ -1108,6 +1109,7 @@ ion-icon {
 
 .searchBarContainer {
   display: flex;
+  flex-direction: column;
   background-color: #eff3f4;
   border-radius: 22px;
   margin-top: 12px;
@@ -1120,6 +1122,10 @@ ion-icon {
 
 #dark .searchBarContainer {
   background-color: rgb(39, 51, 64);
+}
+
+.focusedSearchBarContainer {
+  outline: 1px solid rgb(29, 155, 240);
 }
 
 .searchBar {
@@ -1141,11 +1147,105 @@ ion-icon {
 
 .searchBarIcon {
   width: 18.75px;
+  height: 18.75px;
+}
+
+.focusedSearchBarIcon {
+  color: rgb(29, 155, 240);
 }
 
 .searchBarTextConainer {
   padding: 12px;
+  padding-right: 24px;
   flex: 1;
+}
+
+.searchBarText {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 18.75px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#light .searchBarText {
+  background-color: #eff3f4;
+}
+
+#dark .searchBarText {
+  background-color: rgb(39, 51, 64);
+  color: #fff;
+}
+
+.profileListContainer {
+  display: flex;
+  position: absolute;
+  /* top: 56px; */
+  margin-top: 44px;
+  width: 100%;
+  max-width: 340px;
+  z-index: 2;
+
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px,
+    rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+}
+
+#light .profileListContainer {
+  background-color: #fff;
+}
+#dark .profileListContainer {
+  background-color: rgb(21, 32, 43);
+}
+
+.profileListItemContainer {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  cursor: pointer;
+}
+
+#light .profileListItemContainer:hover {
+  background-color: #eff1f1;
+}
+
+#dark .profileListItemContainer:hover {
+  background-color: rgb(36, 45, 56);
+}
+
+.profileListItemIconContainer {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+}
+
+.accountIconimagePlaceholder {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 50%;
+  background: gray;
+  cursor: pointer;
+}
+
+.profileListItemRightContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.profileListItemName {
+}
+.profileListItemNickname {
+  font-weight: 400;
+}
+
+#dark .profileListItemNickname {
+  color: rgb(83, 100, 113);
 }
 
 .followRecommendContainer {
@@ -1726,6 +1826,10 @@ ion-icon {
   display: flex;
   flex-direction: column;
   border-bottom: #eff3f4 solid 1px;
+}
+
+#dark .profileTopContainer {
+  border-color: rgb(56, 68, 77);
 }
 
 .profileCoverContainer {
